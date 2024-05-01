@@ -29,6 +29,9 @@
 
             <!-- Page Content -->
             <main>
+                @auth
+                {{ $slot }}
+                @endauth
                 @yield('content')
             </main>
         </div>

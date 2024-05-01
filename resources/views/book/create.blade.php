@@ -62,4 +62,4 @@ function fileUploaded() {
 }
 </script>
 
-{{-- @endsection --}}
+@endsection
