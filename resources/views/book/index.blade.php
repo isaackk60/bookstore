@@ -57,10 +57,10 @@
                     {{ $book->title }}
                 </h2>
 
-                <span class="text-gray-500">
+                {{-- <span class="text-gray-500">
                     By <span class="font-bold italic text-gray-800">{{ $book->user->name }}</span>, Created on
                     {{ date('jS M Y', strtotime($book->updated_at)) }}
-                </span>
+                </span> --}}
 
                 {{-- <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light">
             {{ $book->description }}
