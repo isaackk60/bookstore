@@ -31,21 +31,31 @@ class BooksController extends Controller
             'stock'=> 'required',
             'image' => 'required|mimes:jpg,png,jpeg|max:5048'
         ]);
+        // if ($request->hasFile('image') && $request->file('image')->isValid()) {
+        //     try {
+                $newImageName = uniqid() . '-' . $request->bookName . '.' . $request->image->extension();
+                $request->image->move(public_path('images'), $newImageName);
+        //     } catch (\Exception $e) {
+        //         return back()->withErrors('Failed to save the image. Please try again.');
+        //     }
+        // } else if(!$request->hasFile('image')){
+        //     return back()->withErrors('Not have image. Please upload a valid image.');
+        // }else if($request->hasFile('image')&& !$request->file('image')->isValid()){
+        //     return back()->withErrors('Invalid image file. Please upload a valid image.');
+        // }
+        
 
-        $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
-
-        $request->image->move(public_path('images'), $newImageName);
 
         Book::create([
             'bookName' => $request->input('bookName'),
             'type' => $request->input('type'),
             'pages' => $request->input('pages'),
             'description' => $request->input('description'),
-            'publishTime' => date('d-m-Y', strtotime($request->input('publishTime'))),
+            'publishTime' => date('Y-m-d', strtotime($request->input('publishTime'))),
             'author'=> $request->input('author'),
             'stock'=> $request->input('stock'),
             'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
-            'image_path' => $newImageName,
+            'image_path' => $newImageName
             // 'user_id' => auth()->user()->id
 
             //,'like'=>0
@@ -86,12 +96,43 @@ class BooksController extends Controller
                     'type' => $request->input('type'),
                     'pages' => $request->input('pages'),
                     'description' => $request->input('description'),
-                    'publishTime' => date('d-m-Y', strtotime($request->input('publishTime'))),
+                    'publishTime' => date('Y-m-d', strtotime($request->input('publishTime'))),
                     'author'=> $request->input('author'),
                     'stock'=> $request->input('stock'),
                     'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
                     // 'user_id' => auth()->user()->id,
                 ]);
+            // Book::create([
+            //     'bookName' => $request->input('bookName'),
+            //     'type' => $request->input('type'),
+            //     'pages' => $request->input('pages'),
+            //     'description' => $request->input('description'),
+            //     'publishTime' => date('Y-m-d', strtotime($request->input('publishTime'))),
+            //     'author' => $request->input('author'),
+            //     'stock' => $request->input('stock'),
+            //     'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
+            //     'image_path' => $newImageName,
+            // ]);
+            
+        // if ($request->hasFile('image') && $request->file('image')->isValid()) {
+        //     $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
+        //     $request->image->move(public_path('images'), $newImageName);
+        
+        //     Book::create([
+        //         'bookName' => $request->input('bookName'),
+        //             'type' => $request->input('type'),
+        //             'pages' => $request->input('pages'),
+        //             'description' => $request->input('description'),
+        //             'publishTime' => date('Y-m-d', strtotime($request->input('publishTime'))),
+        //             'author'=> $request->input('author'),
+        //             'stock'=> $request->input('stock'),
+        //             'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
+        //         // your existing fields
+        //         'image_path' => $newImageName,
+        //     ]);
+        
+        //     return redirect()->route('book.index')->with('success', 'Book has been created successfully.');
+        
         } else {
             Book::where('slug', $slug)
                 ->update([
@@ -99,7 +140,7 @@ class BooksController extends Controller
                     'type' => $request->input('type'),
                     'pages' => $request->input('pages'),
                     'description' => $request->input('description'),
-                    'publishTime' => date('d-m-Y', strtotime($request->input('publishTime'))),
+                    'publishTime' => date('Y-m-d', strtotime($request->input('publishTime'))),
                     'author'=> $request->input('author'),
                     'stock'=> $request->input('stock'),
                     'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),

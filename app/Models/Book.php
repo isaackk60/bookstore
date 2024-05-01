@@ -11,7 +11,9 @@ class Book extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable = ['title', 'subtitle', 'slug', 'description', 'image_path', 'user_id'];//'like','commits'
+    protected $fillable = [
+        'bookName', 'type', 'pages', 'description', 'publishTime', 'author', 'stock', 'slug', 'image_path'
+    ];
 
     public function user()
     {
@@ -22,7 +24,7 @@ class Book extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'bookName'
             ]
         ];
     }
