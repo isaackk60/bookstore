@@ -1,6 +1,6 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
-@section('content') --}}
+@section('content')
     {{-- <div class="w-4/5 m-auto text-left">
         <div class="py-15">
             <h1 class="text-6xl">
@@ -39,5 +39,5 @@
         </form>
     </div>
 
-{{-- 
-@endsection --}}
+
+@endsection

@@ -1,6 +1,6 @@
-{{-- @extends('layouts.app')--}}
+@extends('layouts.app')
 
-{{-- @section('content')  --}}
+ @section('content') 
 
 @if ($errors->any())
 <div class="w-4/5 m-auto mt-10 pl-2">
@@ -60,4 +60,4 @@ function fileUploaded() {
 }
 </script>
 
-{{-- @endsection --}}
+@endsection

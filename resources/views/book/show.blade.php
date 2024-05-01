@@ -1,7 +1,7 @@
 
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
-@section('content') --}}
+@section('content')
 @if (session()->has('message'))
 <div class="w-4/5 m-auto mt-10 pl-2">
     <p class="px-5 w-2/6 text-gray-50 bg-green-500 rounded-2xl py-4">
@@ -236,4 +236,4 @@ commentContent.addEventListener('input', () => {
     }
 });
 </script>
-{{-- @endsection --}}
+@endsection

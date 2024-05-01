@@ -1,6 +1,6 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
-@section('content') --}}
+@section('content')
 <div class="w-4/5 m-auto text-center">
     <div class="py-15 border-b border-gray-200">
         <h1 class="text-6xl uppercase text-blue-800 font-semibold">
@@ -86,7 +86,7 @@
                         </a>
                     </div>
 
-                    @if (isset(Auth::user()->id) && Auth::user()->id == $book->user_id)
+                    {{-- @if (isset(Auth::user()->id) && Auth::user()->id == $book->user_id)
                         <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <a href="/book/{{ $book->slug }}/edit"
@@ -106,10 +106,10 @@
                                 </form>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </div>
     @endforeach
 </div>
-{{-- @endsection --}}
+@endsection
