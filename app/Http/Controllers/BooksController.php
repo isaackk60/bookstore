@@ -26,6 +26,9 @@ class BooksController extends Controller
             'type' => 'required',
             'pages' => 'required',
             'description' => 'required',
+            'publishTime'=> 'required|date',
+            'author'=> 'required',
+            'stock'=> 'required',
             'image' => 'required|mimes:jpg,png,jpeg|max:5048'
         ]);
 
@@ -38,6 +41,9 @@ class BooksController extends Controller
             'type' => $request->input('type'),
             'pages' => $request->input('pages'),
             'description' => $request->input('description'),
+            'publishTime' => date('d-m-Y', strtotime($request->input('publishTime'))),
+            'author'=> $request->input('author'),
+            'stock'=> $request->input('stock'),
             'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
             'image_path' => $newImageName,
             // 'user_id' => auth()->user()->id
@@ -66,6 +72,9 @@ class BooksController extends Controller
             'type' => 'required',
             'pages' => 'required',
             'description' => 'required',
+            'publishTime'=> 'required|date',
+            'author'=> 'required',
+            'stock'=> 'required',
             'image' => 'nullable|mimes:jpg,png,jpeg|max:5048'
         ]);
         if ($request->hasFile('image')) {
@@ -77,6 +86,9 @@ class BooksController extends Controller
                     'type' => $request->input('type'),
                     'pages' => $request->input('pages'),
                     'description' => $request->input('description'),
+                    'publishTime' => date('d-m-Y', strtotime($request->input('publishTime'))),
+                    'author'=> $request->input('author'),
+                    'stock'=> $request->input('stock'),
                     'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
                     // 'user_id' => auth()->user()->id,
                 ]);
@@ -87,6 +99,9 @@ class BooksController extends Controller
                     'type' => $request->input('type'),
                     'pages' => $request->input('pages'),
                     'description' => $request->input('description'),
+                    'publishTime' => date('d-m-Y', strtotime($request->input('publishTime'))),
+                    'author'=> $request->input('author'),
+                    'stock'=> $request->input('stock'),
                     'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
                     // 'user_id' => auth()->user()->id,
                 ]);
