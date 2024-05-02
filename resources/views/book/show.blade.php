@@ -58,14 +58,17 @@
     </div>
 </div>
 <div>
-    <h3 class="text-2xl font-semibold pb-7 text-gray-600">
-        {{ $book->author}}
-    </h3>
-    <p>{{ $book->publishTime }}</p>
-    <p>{{ $book->stock }}</p>
-    <p>{{ $book->type}}</p>
-    <p>{{ $book->pages}}</p>
-    <p>{{ $book->price}}</p>
+    <span class="text-2xl font-semibold pb-7 text-gray-600">
+        Authored by {{ $book->author}}, published on {{ $book->publishTime }}
+    </span>
+    <p>Type: {{ $book->type}}</p>
+    <p>Page: {{ $book->pages}}</p>
+    <p>Price: {{ $book->price}}</p>
+    <select name="quantity" class="form-select w-full mb-8 text-xl">
+        @for ($availableStock = 1; $availableStock <= min(10, $book->stock); $availableStock++)
+            <option value="{{ $availableStock }}">{{ $availableStock }}</option>
+        @endfor
+    </select>
 
 
 </div>

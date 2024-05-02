@@ -72,9 +72,10 @@ class BooksController extends Controller
             ->with('book', Book::where('slug', $slug)->first());
     }
 
-    public function edit(Book $book)
+    public function edit($slug)
     {
-        return view('book.edit', compact('book'));
+        return view('book.edit')
+            ->with('book', Book::where('slug', $slug)->first());
     }
 
     public function update(Request $request, $slug)
