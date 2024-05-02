@@ -23,7 +23,8 @@
         {{-- <input type="text" name="slug" placeholder="Slug..." class="form-input w-full mb-8 text-xl"> --}}
         <input type="text" name="bookName" placeholder="Book Name" class="form-input w-full mb-8 text-xl">
         <input type="text" name="author" placeholder="Author" class="form-input w-full mb-8 text-xl">
-        <input type="date" name="publishTime" placeholder="Publish Date" class="form-input w-full mb-8 text-xl">
+        <input type="date" name="publishTime" placeholder="Publish Date" class="form-input w-full mb-8 text-xl"
+        max="{{ now()->toDateString() }}">
         <input type="number" name="stock" placeholder="Stock" class="form-input w-full mb-8 text-xl">
         <input type="text" name="type" placeholder="Type" class="form-input w-full mb-8 text-xl">
         <input type="number" name="pages" placeholder="Pages" class="form-input w-full mb-8 text-xl">
