@@ -12,7 +12,7 @@ class Book extends Model
     use Sluggable;
 
     protected $fillable = [
-        'bookName', 'type', 'pages', 'description', 'publishTime', 'author', 'stock', 'slug', 'image_path'
+        'bookName', 'type', 'pages','price', 'description', 'publishTime', 'author', 'stock', 'slug', 'image_path'
     ];
 
     public function user()
