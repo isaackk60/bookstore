@@ -46,7 +46,7 @@
                                         @method('PUT')
                                         <label>Quantity: </label>
                                         <select name="quantity" class="form-select w-full mb-8 text-xl"
-                                            onchange="updateTotalPrice();submitForm()" id="quantity">
+                                            onchange="updateTotalPrice(this, {{ $cartItem->book->price }});submitForm();" id="quantity">
                                             @for ($availableStock = 1; $availableStock <= min(10, $cartItem->book->stock); $availableStock++)
                                                 <option value="{{ $availableStock }}"
                                                     {{ $cartItem->quantity == $availableStock ? 'selected' : '' }}>
@@ -56,7 +56,6 @@
                                         </select>
                                         <input type="hidden" name="total_price" id="total_price"
                                             value="{{ $cartItem->book->price * $cartItem->quantity }}">
-                                        <!-- Removed the Update button -->
                                     </form>
                                     <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
                                         Total Price: {{ $cartItem->book->price * $cartItem->quantity }}
@@ -86,9 +85,8 @@
     function submitForm() {
         document.getElementById('updateForm').submit();
     }
-    function updateTotalPrice() {
-        let quantity = document.getElementById('quantity').value;
-        let price = {{ $cartItem->book->price }};
+    function updateTotalPrice(selectedQuantity, price) {
+        let quantity = selectedQuantity.value;
         let totalPrice = quantity * price;
         document.getElementById('total_price').value = totalPrice;
     }
