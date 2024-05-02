@@ -66,7 +66,6 @@ class BooksController extends Controller
         return redirect()->route('book.index')
             ->with('success', 'Book has been created successfully.');
     }
-    
     public function show($slug)
     {
         return view('book.show')
