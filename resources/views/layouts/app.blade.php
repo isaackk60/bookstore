@@ -34,6 +34,11 @@
                 @endauth
                 @yield('content')
             </main>
+            {{-- <main>
+                @auth
+                @yield('content')
+                @endauth
+            </main> --}}
         </div>
     </body>
 </html>
