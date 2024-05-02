@@ -64,12 +64,20 @@
     <p>Type: {{ $book->type}}</p>
     <p>Page: {{ $book->pages}}</p>
     <p>Price: {{ $book->price}}</p>
+    <form action="/cart" method="POST">
+        @csrf
+        <input type="hidden" name="book_id" value="{{ $book->id }}">
+        <input type="hidden" name="total_price" value="{{ $book->price }}">
+
     <select name="quantity" class="form-select w-full mb-8 text-xl">
         @for ($availableStock = 1; $availableStock <= min(10, $book->stock); $availableStock++)
             <option value="{{ $availableStock }}">{{ $availableStock }}</option>
         @endfor
     </select>
-
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        add to cart
+    </button>
+</form>
 
 </div>
 <div class="w-4/5 m-auto pt-10">
@@ -179,6 +187,19 @@ enctype="multipart/form-data">
 </button>
 </form> --}}
 {{-- @endif --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const quantityNumber = document.querySelector('[name="quantity"]')
+        const BookPrice = document.querySelector('[name="total_price"]')
+        const unitPrice = {{ $book->price }}
+
+        quantitySelector.addEventListener('change', function () {
+        const quantity = this.value;
+        priceInput.value = (unitPrice * quantity).toFixed(2);
+    })
+    })
+
+</script>
 
 <script>
 const likeForm = document.getElementById('likeForm');
