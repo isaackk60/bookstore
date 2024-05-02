@@ -41,12 +41,12 @@
                         @if (auth()->user()->id == $cartItem->user_id)
                             <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
                                 <div>
-                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" id="updateForm" onsubmit="submitForm()">
+                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" id="updateForm">
                                         @csrf
                                         @method('PUT')
                                         <label>Quantity: </label>
                                         <select name="quantity" class="form-select w-full mb-8 text-xl"
-                                            onchange="updateTotalPrice()" id="quantity">
+                                            onchange="updateTotalPrice();submitForm()" id="quantity">
                                             @for ($availableStock = 1; $availableStock <= min(10, $cartItem->book->stock); $availableStock++)
                                                 <option value="{{ $availableStock }}"
                                                     {{ $cartItem->quantity == $availableStock ? 'selected' : '' }}>
@@ -83,14 +83,13 @@
 @endsection
 
 <script>
+    function submitForm() {
+        document.getElementById('updateForm').submit();
+    }
     function updateTotalPrice() {
         let quantity = document.getElementById('quantity').value;
         let price = {{ $cartItem->book->price }};
         let totalPrice = quantity * price;
         document.getElementById('total_price').value = totalPrice;
-    }
-
-    function submitForm() {
-        document.getElementById('updateForm').submit();
     }
 </script>
