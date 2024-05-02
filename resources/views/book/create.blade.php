@@ -1,6 +1,6 @@
-{{-- @extends('layouts.app')--}}
+@extends('layouts.app')
 
-{{-- @section('content')  --}}
+ @section('content') 
 
 @if ($errors->any())
 <div class="w-4/5 m-auto mt-10 pl-2">
@@ -27,6 +27,7 @@
         <input type="number" name="stock" placeholder="Stock" class="form-input w-full mb-8 text-xl">
         <input type="text" name="type" placeholder="Type" class="form-input w-full mb-8 text-xl">
         <input type="number" name="pages" placeholder="Pages" class="form-input w-full mb-8 text-xl">
+        <input type="number" name="price" placeholder="Price" class="form-input w-full mb-8 text-xl">
         <textarea name="description" placeholder="Description" class="form-textarea w-full h-60"></textarea>
 
         <div class="bg-grey-lighter pt-15">
@@ -62,4 +63,4 @@ function fileUploaded() {
 }
 </script>
 
-{{-- @endsection --}}
+@endsection

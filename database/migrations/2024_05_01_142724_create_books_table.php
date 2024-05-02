@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('type');
             $table->integer('pages');
             $table->longText('description');
+            $table->double('price');
             $table->string('image_path');
             $table->timestamps();
         });
