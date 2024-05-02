@@ -64,7 +64,7 @@ class BooksController extends Controller
         ]);
 
         return redirect()->route('book.index')
-            ->with('success', 'Book has been created successfully.');
+            ->with('message', 'Book has been created successfully.');
     }
     public function show($slug)
     {
@@ -137,7 +137,7 @@ class BooksController extends Controller
         //         'image_path' => $newImageName,
         //     ]);
         
-        //     return redirect()->route('book.index')->with('success', 'Book has been created successfully.');
+        //     return redirect()->route('book.index')->with('message', 'Book has been created successfully.');
         
         } else {
             Book::where('slug', $slug)
@@ -164,6 +164,6 @@ class BooksController extends Controller
         $book = Book::where('slug', $slug);
         $book->delete();
         return redirect()->route('book.index')
-            ->with('success', 'Book has been deleted successfully');
+            ->with('message', 'Book has been deleted successfully');
     }
 }

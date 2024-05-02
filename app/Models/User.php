@@ -48,5 +48,9 @@ class User extends Authenticatable
     {
         return $this->email === 'admin@admin.com';
     }
+    public function cartItems()
+    {
+        return $this->hasMany(Cart::class);
+    }
 
 }

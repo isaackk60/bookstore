@@ -33,8 +33,7 @@
                     class="form-input w-full mb-8 text-xl">
                 <input type="text" name="author" value="{{ $book->author }}" placeholder="Author"
                     class="form-input w-full mb-8 text-xl">
-                {{-- <input type="date" name="publishTime" value="{{ $book->publishTime }}" --}}
-                <input type="date" name="publishTime" placeholder="Publish Date" max="{{ now()->toDateString() }}" 
+                <input type="date" name="publishTime" value="{{ $book->publishTime }}" max="{{ now()->toDateString() }}"
                     class="form-input w-full mb-8 text-xl">
                 <input type="number" name="stock" value="{{ $book->stock }}" placeholder="Stock"
                     class="form-input w-full mb-8 text-xl">

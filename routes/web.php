@@ -2,12 +2,17 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('/book', BooksController::class);
+Route::resource('/cart', CartController::class);
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+
 
 Route::get('/book', [BooksController::class, 'index'])->name('book.index');
 Route::get('/dashboard', function () {
