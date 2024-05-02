@@ -66,10 +66,10 @@ class BooksController extends Controller
         return redirect()->route('book.index')
             ->with('success', 'Book has been created successfully.');
     }
-
-    public function show(Book $book)
+    public function show($slug)
     {
-        return view('book.show', compact('book'));
+        return view('book.show')
+            ->with('book', Book::where('slug', $slug)->first());
     }
 
     public function edit(Book $book)

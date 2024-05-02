@@ -4,7 +4,7 @@
 <div class="w-4/5 m-auto text-center">
     <div class="py-15 border-b border-gray-200">
         <h1 class="text-6xl uppercase text-blue-800 font-semibold">
-            tech news
+            Book
         </h1>
     </div>
 </div>
@@ -17,16 +17,16 @@
     </div>
 @endif
 
-@if (Auth::check())
+@if (isset(Auth::user()->id) && Auth::user()->isAdmin())
     <div class="pt-15 w-4/5 m-auto">
         <a href="/book/create"
-            class="button-color uppercase bg-transparent text-gray-100 text-xs font-extrabold py-3 px-5 rounded-3xl">
-            Create post
+            class="uppercase bg-transparent text-red-500 text-xs font-extrabold py-3 px-5 rounded-3xl">
+            Create Book
         </a>
     </div>
 @endif
 
-<div class="w-4/5 mx-auto pt-15">
+{{-- <div class="w-4/5 mx-auto pt-15">
     <form action="/book" method="GET">
         <label for="sort">Sort by</label>
         <select name="sort" onchange="this.form.submit()"
@@ -45,26 +45,26 @@
             } ?>>Least Liked</option>
         </select>
     </form>
-</div>
+</div> --}}
 <div class="mb-20">
     @foreach ($books as $book)
+    @if($book->stock>0)
         <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
             <div class="image-padding">
                 <img src="{{ asset('images/' . $book->image_path) }}" alt="">
             </div>
             <div>
                 <h2 class="text-gray-700 font-bold text-2xl pb-4">
-                    {{ $book->title }}
+                    {{ $book->bookName }}
                 </h2>
 
-                {{-- <span class="text-gray-500">
-                    By <span class="font-bold italic text-gray-800">{{ $book->user->name }}</span>, Created on
-                    {{ date('jS M Y', strtotime($book->updated_at)) }}
-                </span> --}}
-
-                {{-- <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light">
-            {{ $book->description }}
-        </p> --}}
+                <span class="text-gray-500">
+                    Authored By <span class="font-bold italic text-gray-800">{{ $book->author }}</span>, published on
+                    {{ date('jS M Y', strtotime($book->publishTime)) }}
+                </span>
+                <div class="text-gray-500">
+                    Type: <span class="font-bold italic text-gray-800">{{ $book->type }}</span>
+                </div>
                 <?php
                 $wordCount = str_word_count($book->description);
                 
@@ -78,19 +78,23 @@
                 
                 echo "<p class='text-base text-gray-700 pt-2 mb-3 leading-6 font-light'>$shortDescription</p>";
                 ?>
+                <div class="text-gray-500">
+                    Price: €<span class="font-bold italic text-gray-800">{{ $book->price }}</span>
+                </div>
+
                 <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <a href="/book/{{ $book->slug }}"
-                            class="uppercase button-color text-gray-100 text-lg font-extrabold py-3.5 px-8 rounded-2xl">
+                            class="uppercase bg-transparent text-red-500 text-xs font-extrabold py-3 px-5 rounded-3xl">
                             Read More
                         </a>
                     </div>
 
-                    {{-- @if (isset(Auth::user()->id) && Auth::user()->id == $book->user_id)
+                    @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
                         <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <a href="/book/{{ $book->slug }}/edit"
-                                    class="text-white mr-3 edit-button-color px-3 py-2.5 rounded">
+                                    class="uppercase bg-transparent text-red-500 text-xs font-extrabold py-3 px-5 rounded-3xl">
                                     Edit
                                 </a>
                             </div>
@@ -99,17 +103,18 @@
                                     @csrf
                                     @method('delete')
 
-                                    <button class="text-white delete-button-color p-3 rounded" type="submit">
+                                    <button class="uppercase bg-transparent text-red-500 text-xs font-extrabold py-3 px-5 rounded-3xl" type="submit">
                                         Delete
                                     </button>
 
                                 </form>
                             </div>
                         </div>
-                    @endif --}}
+                    @endif
                 </div>
             </div>
         </div>
+        @endif
     @endforeach
 </div>
 @endsection

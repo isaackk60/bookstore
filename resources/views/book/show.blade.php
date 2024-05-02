@@ -12,25 +12,25 @@
 
 <div class="w-4/5 m-auto text-left">
 <div class="sm:grid grid-cols-2 mx-auto pt-15 pb-7 ">
-    <h1 class="titleInReadMore">
-        {{ $post->title }}
-    </h1>
+    {{-- <h1 class="titleInReadMore">
+        {{ $book->title }}
+    </h1> --}}
 
-    {{-- /blog/{{ $post->slug }}/dislike --}}
-    <div class="sm:flex sm:flex-wrap items-center gap-4 mx-auto">
-        {{-- <form action="/blog/{{ $post->slug }}/dislike" method="POST" enctype="multipart/form-data">
+    {{-- /blog/{{ $book->slug }}/dislike --}}
+    {{-- <div class="sm:flex sm:flex-wrap items-center gap-4 mx-auto">
+        <form action="/blog/{{ $book->slug }}/dislike" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <button type="submit"
                 class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-3 px-6 rounded-3xl">
                 <i class="fas fa-thumbs-down"></i>
             </button>
-        </form> --}}
-        <div class="loveOnSlugs"> ♥ {{ $post->like }}</div>
-        <form id="likeForm" action="/blog/{{ $post->slug }}/like" method="POST" enctype="multipart/form-data">
+        </form>
+        <div class="loveOnSlugs"> ♥ {{ $book->like }}</div>
+        <form id="likeForm" action="/blog/{{ $book->slug }}/like" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            @if (Auth::check() && $post->likedByUser(Auth::user()))
+            @if (Auth::check() && $book->likedByUser(Auth::user()))
                 <button id="likeButton" type="submit"
                     class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-3 px-6 rounded-3xl">
                     <i class="fas fa-thumbs-up"></i>
@@ -44,29 +44,41 @@
         </form>
         <div>
         </div>
-    </div>
+    </div> --}}
 </div>
 <div>
     <h2 class="text-2xl font-semibold pb-7 text-gray-600">
-        {{ $post->subtitle }}
+        {{ $book->bookName }}
     </h2>
 </div>
 {{-- // can try to use class="w-4/5 m-auto" ---they are same meaning --}}
 <div class="imageInReadMore">
     <div>
-        <img src="{{ asset('images/' . $post->image_path) }}" alt="">
+        <img src="{{ asset('images/' . $book->image_path) }}" alt="">
     </div>
 </div>
+<div>
+    <h3 class="text-2xl font-semibold pb-7 text-gray-600">
+        {{ $book->author}}
+    </h3>
+    <p>{{ $book->publishTime }}</p>
+    <p>{{ $book->stock }}</p>
+    <p>{{ $book->type}}</p>
+    <p>{{ $book->pages}}</p>
+    <p>{{ $book->price}}</p>
+
+
+</div>
 <div class="w-4/5 m-auto pt-10">
-    <span class="text-gray-500">
-        By <span class="font-bold italic text-gray-800">{{ $post->user->name }}</span>, Created on
-        {{ date('jS M Y', strtotime($post->updated_at)) }}
-    </span>
+    {{-- <span class="text-gray-500">
+        By <span class="font-bold italic text-gray-800">{{ $book->user->name }}</span>, Created on
+        {{ date('jS M Y', strtotime($book->updated_at)) }}
+    </span> --}}
 
     {{-- <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light"> --}}
-    {{-- {{ $post->description }} --}}
-    {{-- {!! nl2br(e($post->description)) !!} --}}
-    @foreach (explode("\n", $post->description) as $paragraph)
+    {{-- {{ $book->description }} --}}
+    {{-- {!! nl2br(e($book->description)) !!} --}}
+    @foreach (explode("\n", $book->description) as $paragraph)
         @if (!empty(trim($paragraph)))
             <p class="text-xl text-gray-700 pt-8 leading-8 font-normal">{{ $paragraph }}</p>
         @endif
@@ -76,13 +88,12 @@
 
 
 </div>
-<div class="about-background-color">
+{{-- <div class="about-background-color">
 <div class="w-4/5 m-auto text-left py-7 mt-14">
     <div class="w-4/5 m-auto mb-7">
         <h2 class="text-3xl font-semibold">Comments</h2>
 
-        @foreach ($post->comments as $comment)
-            {{-- ->take(3) if need --}}
+        @foreach ($book->comments as $comment)
             <div class="comment-container">
                 <p class="editCommentContent text-xl text-gray-700 pt-8 leading-8 font-normal pb-2">
                     {{ $comment->content }}</p>
@@ -121,7 +132,7 @@
                 </div>
             </div>
         @endforeach
-        @if ($post->comments->isEmpty())
+        @if ($book->comments->isEmpty())
             <div class="mx-auto py-5">
                 <h3 class="text-2xl font-medium text-center">There are no comments yet</h3>
             </div>
@@ -130,7 +141,7 @@
         @if (Auth::check())
             <form action="{{ route('comments.store') }}" method="POST">
                 @csrf
-                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                <input type="hidden" name="post_id" value="{{ $book->id }}">
                 <textarea id="commentContent" name="content" placeholder="Add a Comment..."
                     class="p-2 leading-7 bg-transparent block border-2 w-full h-20 text-xl outline-none mt-9 mb-5 bg-gray-100"></textarea>
                 <button id="commentButton" type="submit"
@@ -139,13 +150,13 @@
         @endif
     </div>
 </div>
-</div>
+</div> --}}
 
 
 
 {{-- @if (isset(Auth::user()->id)) --}}
 {{-- <form 
-action="{{ route('posts.updateLike', $post->slug) }}"
+action="{{ route('posts.updateLike', $book->slug) }}"
 
 method="POST"
 enctype="multipart/form-data">
@@ -155,7 +166,7 @@ enctype="multipart/form-data">
 <input 
     type="text"
     name="like"
-    value="{{ $post->like }}"
+    value="{{ $book->like }}"
     class="px-2 bg-transparent block border-b-2 w-full h-20 text-5xl outline-none">
 
 <button    
@@ -211,8 +222,8 @@ cancelButtons.forEach(cancelButton => {
 likeForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const actionUrl = likeButton.classList.contains('liked') ? '/blog/{{ $post->slug }}/dislike' :
-        '/blog/{{ $post->slug }}/like';
+    const actionUrl = likeButton.classList.contains('liked') ? '/blog/{{ $book->slug }}/dislike' :
+        '/blog/{{ $book->slug }}/like';
 
     likeForm.action = actionUrl;
 
@@ -237,3 +248,4 @@ commentContent.addEventListener('input', () => {
 });
 </script>
 @endsection
+
