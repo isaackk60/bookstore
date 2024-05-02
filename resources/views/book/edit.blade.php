@@ -33,25 +33,25 @@
                     class="form-input w-full mb-8 text-xl">
                 <input type="text" name="author" value="{{ $book->author }}" placeholder="Author"
                     class="form-input w-full mb-8 text-xl">
-                <input type="date" name="publishTime" value="{{ $book->publishTime->format('Y-m-d') }}" placeholder="Publish Date"
+                <input type="date" name="publishTime" value="{{ $book->publishTime }}"
                     class="form-input w-full mb-8 text-xl">
                 <input type="number" name="stock" value="{{ $book->stock }}" placeholder="Stock"
                     class="form-input w-full mb-8 text-xl">
-                    <input type="number" name="price" value="{{ $book->price }}" placeholder="Price"
+                    <input type="number" name="price" step="0.01" value="{{ $book->price }}" placeholder="Price"
                     class="form-input w-full mb-8 text-xl">
                 <input type="text" name="type" value="{{ $book->type }}" placeholder="Type"
                     class="form-input w-full mb-8 text-xl">
                 <input type="number" name="pages" value="{{ $book->pages }}" placeholder="Pages"
                     class="form-input w-full mb-8 text-xl">
                 <textarea name="description" placeholder="Description" class="form-textarea w-full h-60">{{ $book->description }}</textarea>
-                <div class="bg-grey-lighter pt-15">
+                {{-- <div class="bg-grey-lighter pt-15">
                     <label class="w-44 flex flex-col items-center px-2 py-3 bg-gray-100 rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
                         <span class="text-base leading-normal">
                             Change Image
                         </span>
                         <input type="file" name="image_path" class="hidden">
                     </label>
-                </div>
+                </div> --}}
                 <button type="submit"
                     class="mt-10 w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4 mb-8">Update</button>
             </div>
