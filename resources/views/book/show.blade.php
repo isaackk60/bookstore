@@ -67,7 +67,7 @@
     <form action="/cart" method="POST">
         @csrf
         <input type="hidden" name="book_id" value="{{ $book->id }}">
-        <input type="hidden" name="total_price" value="{{ $book->price }}">
+        <input type="hidden" name="total_price" value="{{ $book->price}}">
 
     <select name="quantity" class="form-select w-full mb-8 text-xl">
         @for ($availableStock = 1; $availableStock <= min(10, $book->stock); $availableStock++)
@@ -188,16 +188,11 @@ enctype="multipart/form-data">
 </form> --}}
 {{-- @endif --}}
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const quantityNumber = document.querySelector('[name="quantity"]')
-        const BookPrice = document.querySelector('[name="total_price"]')
-        const unitPrice = {{ $book->price }}
-
-        quantitySelector.addEventListener('change', function () {
-        const quantity = this.value;
-        priceInput.value = (unitPrice * quantity).toFixed(2);
-    })
-    })
+    document.getElementById('quantity').addEventListener('change', function() {
+        let quantity = this.value;
+        let totalPrice = quantity * {{ $book->price }};
+        document.getElementById('total_price').value = totalPrice;
+    });
 
 </script>
 

@@ -33,6 +33,7 @@
                     <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
                         Price: {{ $cartItem->book->price }}
                     </p>
+                    <br>
                     {{-- <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
                         Quantity: {{ $cartItem->quantity }}
                     </p> --}}
@@ -40,22 +41,26 @@
                         @if (auth()->user()->id == $cartItem->user_id)
                             <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
                                 <div>
-                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" id="updateForm">
+                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" id="updateForm" onsubmit="submitForm()">
                                         @csrf
                                         @method('PUT')
+                                        <label>Quantity: </label>
                                         <select name="quantity" class="form-select w-full mb-8 text-xl"
-                                            onchange="submitForm()">
+                                            onchange="updateTotalPrice()" id="quantity">
                                             @for ($availableStock = 1; $availableStock <= min(10, $cartItem->book->stock); $availableStock++)
                                                 <option value="{{ $availableStock }}"
                                                     {{ $cartItem->quantity == $availableStock ? 'selected' : '' }}>
-                                                    {{ $availableStock === $cartItem->quantity ? 'Quantity: ' . $cartItem->quantity : $availableStock }}
+                                                    {{ $availableStock }}
                                                 </option>
                                             @endfor
                                         </select>
-                                        <input type="hidden" name="total_price"
+                                        <input type="hidden" name="total_price" id="total_price"
                                             value="{{ $cartItem->book->price * $cartItem->quantity }}">
                                         <!-- Removed the Update button -->
                                     </form>
+                                    <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
+                                        Total Price: {{ $cartItem->book->price * $cartItem->quantity }}
+                                    </p>
                                 </div>
                                 <div>
                                     <form action="{{ route('cart.destroy', $cartItem->id) }}" method="POST">
@@ -78,6 +83,13 @@
 @endsection
 
 <script>
+    function updateTotalPrice() {
+        let quantity = document.getElementById('quantity').value;
+        let price = {{ $cartItem->book->price }};
+        let totalPrice = quantity * price;
+        document.getElementById('total_price').value = totalPrice;
+    }
+
     function submitForm() {
         document.getElementById('updateForm').submit();
     }
