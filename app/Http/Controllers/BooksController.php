@@ -29,6 +29,7 @@ class BooksController extends Controller
             'publishTime'=> 'required|date',
             'author'=> 'required',
             'stock'=> 'required',
+            'price'=> 'required',
             'image' => 'required|mimes:jpg,png,jpeg|max:5048'
         ]);
         // if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -54,6 +55,7 @@ class BooksController extends Controller
             'publishTime' => date('Y-m-d', strtotime($request->input('publishTime'))),
             'author'=> $request->input('author'),
             'stock'=> $request->input('stock'),
+            'price'=> $request->input('price'),
             'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
             'image_path' => $newImageName
             // 'user_id' => auth()->user()->id
@@ -85,6 +87,7 @@ class BooksController extends Controller
             'publishTime'=> 'required|date',
             'author'=> 'required',
             'stock'=> 'required',
+            'price'=> 'required',
             'image' => 'nullable|mimes:jpg,png,jpeg|max:5048'
         ]);
         if ($request->hasFile('image')) {
@@ -99,6 +102,7 @@ class BooksController extends Controller
                     'publishTime' => date('Y-m-d', strtotime($request->input('publishTime'))),
                     'author'=> $request->input('author'),
                     'stock'=> $request->input('stock'),
+                    'price'=> $request->input('price'),
                     'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
                     // 'user_id' => auth()->user()->id,
                 ]);
@@ -126,6 +130,7 @@ class BooksController extends Controller
         //             'publishTime' => date('Y-m-d', strtotime($request->input('publishTime'))),
         //             'author'=> $request->input('author'),
         //             'stock'=> $request->input('stock'),
+        //'price'=> $request->input('price'),
         //             'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
         //         // your existing fields
         //         'image_path' => $newImageName,
@@ -143,6 +148,7 @@ class BooksController extends Controller
                     'publishTime' => date('Y-m-d', strtotime($request->input('publishTime'))),
                     'author'=> $request->input('author'),
                     'stock'=> $request->input('stock'),
+                    'price'=> $request->input('price'),
                     'slug' => SlugService::createSlug(Book::class, 'slug', $request->bookName),
                     // 'user_id' => auth()->user()->id,
                 ]);
