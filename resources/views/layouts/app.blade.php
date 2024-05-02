@@ -30,7 +30,10 @@
             <!-- Page Content -->
             <main>
                 @auth
-                {{ $slot }}
+                @if (isset($slot))
+                     {{ $slot }}
+                
+                @endif
                 @endauth
                 @yield('content')
             </main>
