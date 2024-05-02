@@ -10,8 +10,8 @@ Route::get('/', function () {
 });
 Route::resource('/book', BooksController::class);
 Route::resource('/cart', CartController::class);
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
+Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
 
 
 Route::get('/book', [BooksController::class, 'index'])->name('book.index');
