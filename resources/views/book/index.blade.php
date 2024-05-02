@@ -17,11 +17,11 @@
     </div>
 @endif
 
-@if (Auth::check())
+@if (isset(Auth::user()->id) && Auth::user()->isAdmin())
     <div class="pt-15 w-4/5 m-auto">
         <a href="/book/create"
-            class="button-color uppercase bg-transparent text-gray-100 text-xs font-extrabold py-3 px-5 rounded-3xl">
-            Create post
+            class="button-color uppercase bg-transparent text-red-500 text-xs font-extrabold py-3 px-5 rounded-3xl">
+            Create Book
         </a>
     </div>
 @endif
@@ -45,8 +45,10 @@
             } ?>>Least Liked</option>
         </select>
     </form>
+    
 </div>
-<div class="mb-20">
+
+
     @foreach ($books as $book)
         <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
             <div class="image-padding">
@@ -76,21 +78,21 @@
                     $shortDescription = $book->description;
                 }
                 
-                echo "<p class='text-base text-gray-700 pt-2 mb-3 leading-6 font-light'>$shortDescription</p>";
+                echo "<p class='text-base text-red-700 pt-2 mb-3 leading-6 font-light'>$shortDescription</p>";
                 ?>
                 <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <a href="/book/{{ $book->slug }}"
-                            class="uppercase button-color text-gray-100 text-lg font-extrabold py-3.5 px-8 rounded-2xl">
+                            class="uppercase button-color text-red-700 text-lg font-extrabold py-3.5 px-8 rounded-2xl">
                             Read More
                         </a>
                     </div>
 
-                    {{-- @if (isset(Auth::user()->id) && Auth::user()->id == $book->user_id)
+                    @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
                         <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <a href="/book/{{ $book->slug }}/edit"
-                                    class="text-white mr-3 edit-button-color px-3 py-2.5 rounded">
+                                    class="text-red mr-3 edit-button-color px-3 py-2.5 rounded">
                                     Edit
                                 </a>
                             </div>
@@ -99,14 +101,14 @@
                                     @csrf
                                     @method('delete')
 
-                                    <button class="text-white delete-button-color p-3 rounded" type="submit">
+                                    <button class="text-red delete-button-color p-3 rounded" type="submit">
                                         Delete
                                     </button>
 
                                 </form>
                             </div>
                         </div>
-                    @endif --}}
+                    @endif
                 </div>
             </div>
         </div>
