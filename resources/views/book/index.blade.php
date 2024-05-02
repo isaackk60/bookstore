@@ -76,7 +76,7 @@
                     $shortDescription = $book->description;
                 }
                 
-                echo "<p class='text-base text-gray-700 pt-2 mb-3 leading-6 font-light'>$shortDescription</p>";
+                echo "<p class='text-base text-red-700 pt-2 mb-3 leading-6 font-light'>$shortDescription</p>";
                 ?>
                 <div class="text-gray-500">
                     Price: €<span class="font-bold italic text-gray-800">{{ $book->price }}</span>
