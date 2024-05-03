@@ -1,105 +1,105 @@
-
 @extends('layouts.app')
 
 @section('content')
-@if (session()->has('message'))
-<div class="w-4/5 m-auto mt-10 pl-2">
-    <p class="px-5 w-2/6 text-gray-50 bg-green-500 rounded-2xl py-4">
-        {{ session()->get('message') }}
-    </p>
-</div>
-@endif
-
-<div class="w-4/5 m-auto text-left">
-<div class="sm:grid grid-cols-2 mx-auto pt-15 pb-7 ">
-    {{-- <h1 class="titleInReadMore">
-        {{ $book->title }}
-    </h1> --}}
-
-    {{-- /blog/{{ $book->slug }}/dislike --}}
-    {{-- <div class="sm:flex sm:flex-wrap items-center gap-4 mx-auto">
-        <form action="/blog/{{ $book->slug }}/dislike" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <button type="submit"
-                class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-3 px-6 rounded-3xl">
-                <i class="fas fa-thumbs-down"></i>
-            </button>
-        </form>
-        <div class="loveOnSlugs"> ♥ {{ $book->like }}</div>
-        <form id="likeForm" action="/blog/{{ $book->slug }}/like" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            @if (Auth::check() && $book->likedByUser(Auth::user()))
-                <button id="likeButton" type="submit"
-                    class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-3 px-6 rounded-3xl">
-                    <i class="fas fa-thumbs-up"></i>
-                </button>
-            @else
-                <button id="likeButton" type="submit"
-                    class="uppercase bg-gray-500 text-gray-100 text-lg font-extrabold py-3 px-6 rounded-3xl">
-                    <i class="fas fa-thumbs-up"></i>
-                </button>
-            @endif
-        </form>
-        <div>
+    @if (session()->has('message'))
+        <div class="w-4/5 m-auto mt-10 pl-2">
+            <p class="px-5 w-2/6 text-gray-50 bg-green-500 rounded-2xl py-4">
+                {{ session()->get('message') }}
+            </p>
         </div>
-    </div> --}}
-</div>
-<div>
-    <h2 class="text-2xl font-semibold pb-7 text-gray-600">
-        {{ $book->bookName }}
-    </h2>
-</div>
-{{-- // can try to use class="w-4/5 m-auto" ---they are same meaning --}}
-<div class="imageInReadMore">
-    <div>
-        <img src="{{ asset('images/' . $book->image_path) }}" alt="">
-    </div>
-</div>
-<div>
-    <span class="text-2xl font-semibold pb-7 text-gray-600">
-        Authored by {{ $book->author}}, published on {{ $book->publishTime }}
-    </span>
-    <p>Type: {{ $book->type}}</p>
-    <p>Page: {{ $book->pages}}</p>
-    <p>Price: {{ $book->price}}</p>
-    <form action="/cart" method="POST">
-        @csrf
-        <input type="hidden" name="book_id" value="{{ $book->id }}">
-        <input type="hidden" name="total_price" value="{{ $book->price}}">
+    @endif
 
-    <select name="quantity" class="form-select w-full mb-8 text-xl">
-        @for ($availableStock = 1; $availableStock <= min(10, $book->stock); $availableStock++)
-            <option value="{{ $availableStock }}">{{ $availableStock }}</option>
-        @endfor
-    </select>
-    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        add to cart
-    </button>
-</form>
+    <div class="w-4/5 m-auto text-left">
+        {{-- <div class="sm:grid grid-cols-2 mx-auto pt-12 pb-7 ">
+            <h1 class="titleInReadMore">
+                {{ $book->title }}
+            </h1> --}}
 
-</div>
-<div class="w-4/5 m-auto pt-10">
-    {{-- <span class="text-gray-500">
+        {{-- /blog/{{ $book->slug }}/dislike --}}
+        {{-- <div class="sm:flex sm:flex-wrap items-center gap-4 mx-auto">
+                <form action="/blog/{{ $book->slug }}/dislike" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit"
+                        class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-3 px-6 rounded-3xl">
+                        <i class="fas fa-thumbs-down"></i>
+                    </button>
+                </form>
+                <div class="loveOnSlugs"> ♥ {{ $book->like }}</div>
+                <form id="likeForm" action="/blog/{{ $book->slug }}/like" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    @if (Auth::check() && $book->likedByUser(Auth::user()))
+                        <button id="likeButton" type="submit"
+                            class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-3 px-6 rounded-3xl">
+                            <i class="fas fa-thumbs-up"></i>
+                        </button>
+                    @else
+                        <button id="likeButton" type="submit"
+                            class="uppercase bg-gray-500 text-gray-100 text-lg font-extrabold py-3 px-6 rounded-3xl">
+                            <i class="fas fa-thumbs-up"></i>
+                        </button>
+                    @endif
+                </form>
+                <div>
+                </div>
+            </div>
+        </div> --}}
+        {{-- // can try to use class="w-4/5 m-auto" ---they are same meaning --}}
+        <div class="sm:grid grid-cols-2 mx-auto mt-12 gap-10">
+            <div>
+                <div>
+                    <img src="{{ asset('images/' . $book->image_path) }}" alt="">
+                </div>
+            </div>
+            <div>
+                <h2 class="text-4xl font-semibold pb-2">
+                    {{ $book->bookName }}
+                </h2>
+                <div class="text-gray-500 pb-2">
+                    Authored by {{ $book->author }}, published on {{ $book->publishTime }}
+                </div>
+                <div class="text-lg font-semibold pb-3">Type: {{ $book->type }}</div>
+                <div class="text-lg font-semibold pb-3">Page: {{ $book->pages }}</div>
+                <div class="text-lg font-semibold pb-3 ">Price: {{ $book->price }}</div>
+                <form action="/cart" method="POST">
+                    @csrf
+                    <input type="hidden" name="book_id" value="{{ $book->id }}">
+                    <input type="hidden" name="total_price" value="{{ $book->price }}">
+
+                    <select name="quantity" class="form-select w-full mb-8 text-xl">
+                        @for ($availableStock = 1; $availableStock <= min(10, $book->stock); $availableStock++)
+                            <option value="{{ $availableStock }}">{{ $availableStock }}</option>
+                        @endfor
+                    </select>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        add to cart
+                    </button>
+                </form>
+
+            </div>
+        </div>
+        <div class="w-4/5 m-auto pt-10">
+            <h3 class="text-2xl font-semibold">Description</h3>
+            {{-- <span class="text-gray-500">
         By <span class="font-bold italic text-gray-800">{{ $book->user->name }}</span>, Created on
         {{ date('jS M Y', strtotime($book->updated_at)) }}
     </span> --}}
 
-    {{-- <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light"> --}}
-    {{-- {{ $book->description }} --}}
-    {{-- {!! nl2br(e($book->description)) !!} --}}
-    @foreach (explode("\n", $book->description) as $paragraph)
-        @if (!empty(trim($paragraph)))
-            <p class="text-xl text-gray-700 pt-8 leading-8 font-normal">{{ $paragraph }}</p>
-        @endif
-    @endforeach
-    {{-- </p> --}}
-</div>
+            {{-- <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light"> --}}
+            {{-- {{ $book->description }} --}}
+            {{-- {!! nl2br(e($book->description)) !!} --}}
+            @foreach (explode("\n", $book->description) as $paragraph)
+                @if (!empty(trim($paragraph)))
+                    <p class="text-xl text-gray-700 pt-4 leading-8 font-normal">{{ $paragraph }}</p>
+                @endif
+            @endforeach
+            {{-- </p> --}}
+        </div>
 
 
-</div>
-{{-- <div class="about-background-color">
+    </div>
+    {{-- <div class="about-background-color">
 <div class="w-4/5 m-auto text-left py-7 mt-14">
     <div class="w-4/5 m-auto mb-7">
         <h2 class="text-3xl font-semibold">Comments</h2>
@@ -165,8 +165,8 @@
 
 
 
-{{-- @if (isset(Auth::user()->id)) --}}
-{{-- <form 
+    {{-- @if (isset(Auth::user()->id)) --}}
+    {{-- <form 
 action="{{ route('posts.updateLike', $book->slug) }}"
 
 method="POST"
@@ -186,85 +186,83 @@ enctype="multipart/form-data">
     Update Post
 </button>
 </form> --}}
-{{-- @endif --}}
-<script>
-    document.getElementById('quantity').addEventListener('change', function() {
-        let quantity = this.value;
-        let totalPrice = quantity * {{ $book->price }};
-        document.getElementById('total_price').value = totalPrice;
-    });
+    {{-- @endif --}}
+    <script>
+        document.getElementById('quantity').addEventListener('change', function() {
+            let quantity = this.value;
+            let totalPrice = quantity * {{ $book->price }};
+            document.getElementById('total_price').value = totalPrice;
+        });
+    </script>
 
-</script>
+    <script>
+        const likeForm = document.getElementById('likeForm');
+        const likeButton = document.getElementById('likeButton');
+        const commentContent = document.getElementById('commentContent');
+        const commentButton = document.getElementById('commentButton');
 
-<script>
-const likeForm = document.getElementById('likeForm');
-const likeButton = document.getElementById('likeButton');
-const commentContent = document.getElementById('commentContent');
-const commentButton = document.getElementById('commentButton');
-
-const cancelButtons = document.querySelectorAll('.cancelButton');
-const editButtons = document.querySelectorAll('.editButton');
-
-
-editButtons.forEach(editButton => {
-    editButton.addEventListener('click', function(event) {
-        const commentContainer = event.target.closest('.comment-container');
-        const commentContent = commentContainer.querySelector('.editCommentContent');
-        const editForm = commentContainer.querySelector('.inputEditCommentForm');
-        const commentTimes = commentContainer.querySelector('.commentTime');
-        const editButtonContainer=commentContainer.querySelector('.editButtonContainer');
-
-        commentContent.style.display = 'none';
-        commentTimes.style.display = 'none';
-        editForm.style.display = 'block';
-        editButtonContainer.style.display = 'none';
-    });
-});
+        const cancelButtons = document.querySelectorAll('.cancelButton');
+        const editButtons = document.querySelectorAll('.editButton');
 
 
-cancelButtons.forEach(cancelButton => {
-    cancelButton.addEventListener('click', function(event) {
-        const commentContainer = event.target.closest('.comment-container');
-        const commentContent = commentContainer.querySelector('.editCommentContent');
-        const editForm = commentContainer.querySelector('.inputEditCommentForm');
-        const commentTimes = commentContainer.querySelector('.commentTime');
-        const editButtonContainer=commentContainer.querySelector('.editButtonContainer');
+        editButtons.forEach(editButton => {
+            editButton.addEventListener('click', function(event) {
+                const commentContainer = event.target.closest('.comment-container');
+                const commentContent = commentContainer.querySelector('.editCommentContent');
+                const editForm = commentContainer.querySelector('.inputEditCommentForm');
+                const commentTimes = commentContainer.querySelector('.commentTime');
+                const editButtonContainer = commentContainer.querySelector('.editButtonContainer');
 
-        commentContent.style.display = 'block';
-        commentTimes.style.display = 'block';
-        editForm.style.display = 'none';
-        editButtonContainer.style.display = 'block';
-    });
-});
+                commentContent.style.display = 'none';
+                commentTimes.style.display = 'none';
+                editForm.style.display = 'block';
+                editButtonContainer.style.display = 'none';
+            });
+        });
 
 
-likeForm.addEventListener('submit', function(event) {
-    event.preventDefault();
+        cancelButtons.forEach(cancelButton => {
+            cancelButton.addEventListener('click', function(event) {
+                const commentContainer = event.target.closest('.comment-container');
+                const commentContent = commentContainer.querySelector('.editCommentContent');
+                const editForm = commentContainer.querySelector('.inputEditCommentForm');
+                const commentTimes = commentContainer.querySelector('.commentTime');
+                const editButtonContainer = commentContainer.querySelector('.editButtonContainer');
 
-    const actionUrl = likeButton.classList.contains('liked') ? '/blog/{{ $book->slug }}/dislike' :
-        '/blog/{{ $book->slug }}/like';
+                commentContent.style.display = 'block';
+                commentTimes.style.display = 'block';
+                editForm.style.display = 'none';
+                editButtonContainer.style.display = 'block';
+            });
+        });
 
-    likeForm.action = actionUrl;
 
-    likeForm.submit();
-});
+        likeForm.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-likeButton.addEventListener('click', function() {
-    likeButton.classList.toggle('liked');
-});
+            const actionUrl = likeButton.classList.contains('liked') ? '/blog/{{ $book->slug }}/dislike' :
+                '/blog/{{ $book->slug }}/like';
 
-commentContent.addEventListener('input', () => {
-    if (commentContent.value.trim() === "") {
-        commentButton.disabled = true;
-        if (!commentButton.classList.contains('hidden')) {
-            commentButton.classList.add('hidden');
-        }
+            likeForm.action = actionUrl;
 
-    } else {
-        commentButton.disabled = false;
-        commentButton.classList.remove('hidden');
-    }
-});
-</script>
+            likeForm.submit();
+        });
+
+        likeButton.addEventListener('click', function() {
+            likeButton.classList.toggle('liked');
+        });
+
+        commentContent.addEventListener('input', () => {
+            if (commentContent.value.trim() === "") {
+                commentButton.disabled = true;
+                if (!commentButton.classList.contains('hidden')) {
+                    commentButton.classList.add('hidden');
+                }
+
+            } else {
+                commentButton.disabled = false;
+                commentButton.classList.remove('hidden');
+            }
+        });
+    </script>
 @endsection
-

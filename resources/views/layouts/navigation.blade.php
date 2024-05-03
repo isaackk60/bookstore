@@ -18,10 +18,10 @@
                     <x-nav-link :href="route('book.index')" :active="request()->routeIs('book.index')">
                         {{ __('Book') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('user.cart')" :active="request()->routeIs('user.cart')">
+                    @auth
+                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
                         {{ __('shopping cart') }}
                     </x-nav-link>
-                    @auth
                     @if(Auth::user()->isAdmin())
                     <x-nav-link :href="route('user.userinfo')" :active="request()->routeIs('user.userinfo')">
                         {{ __('User Info') }}

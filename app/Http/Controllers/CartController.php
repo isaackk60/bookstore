@@ -13,8 +13,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cartItems = auth()->user()->cartItems()->orderBy('updated_at', 'DESC')->get();
-        return view('cart', compact('cartItems'));
+        
+        if (auth()->check()) {
+            $cartItems = auth()->user()->cartItems()->orderBy('updated_at', 'DESC')->get();
+            return view('cart', compact('cartItems'));
+        } else {
+            return redirect()->route('login');
+        }
+        
     }
 
 
@@ -73,7 +79,6 @@ class CartController extends Controller
             // Update the quantity
             $existingCartItem->update(['quantity' => $newQuantity]);
             return redirect()->route('cart.index')->with('message', 'Quantity updated successfully.');
-
         }
 
         $book = Book::findOrFail($book_id);
@@ -86,9 +91,7 @@ class CartController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        // return redirect()->route('cart.index')->with('message', 'Item added to cart successfully.');
-        // this part is connect with nav link.
-        return redirect()->route('user.cart')->with('message', 'Item added to cart successfully.');
+        return redirect()->route('cart.index')->with('message', 'Item added to cart successfully.');
     }
 
 
