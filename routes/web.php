@@ -14,8 +14,14 @@ Route::resource('/cart', CartController::class);
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
 
-Route::get('/userinfo',[AdminController::class, 'index'])->name('admin.users');
-Route::middleware(['auth', 'can:admin-only'])->get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
+Route::middleware(['auth'])->get('/userinfo', function () {
+    if (Auth::user()->isAdmin()) {
+        return redirect()->route('user.userinfo');
+    } else {
+        return redirect()->route('book.index');
+    }
+})->name('user.userinfo');
+
 
 // Route::get('/userinfo','AdminController@userinfo')->name('userinfo');
 

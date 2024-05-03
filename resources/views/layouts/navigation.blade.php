@@ -18,6 +18,12 @@
                     <x-nav-link :href="route('book.index')" :active="request()->routeIs('book.index')">
                         {{ __('Book') }}
                     </x-nav-link>
+                    @if(Auth::user()->isAdmin())
+                    <x-nav-link :href="route('user.userinfo')" :active="request()->routeIs('user.userinfo')">
+                        {{ __('User Info') }}
+                    </x-nav-link>
+                    @endif
+                    
                 </div>
             </div>
 
