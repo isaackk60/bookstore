@@ -45,9 +45,12 @@ class User extends Authenticatable
         ];
     }
     public function isAdmin(): bool
-    {
-        return $this->email === 'admin@admin.com';
-    }
+{
+    $adminEmails = ['admin@admin.com', 'admin2@admin2.com']; 
+
+    return in_array($this->email, $adminEmails);// if email container in adminEmails array return true
+}
+
     public function cartItems()
     {
         return $this->hasMany(Cart::class);
