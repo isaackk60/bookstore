@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="w-4/5 m-auto text-center">
-        <div class="py-15 border-b border-gray-200">
-            <h1 class="text-6xl uppercase text-blue-800 font-semibold">
-                Cart
+        <div class="py-15 border-b border-gray-200 m-20">
+            <h1 class="text-5xl uppercase text-blue-800 font-semibold">
+                Shopping Cart
             </h1>
         </div>
     </div>
@@ -17,68 +17,63 @@
         </div>
     @endif
 
-    <div class="mb-20">
+    <div class="mx-auto mb-20 max-w-7xl">
+        @php $totalPrice = 0; @endphp
         @foreach ($cartItems as $cartItem)
-            <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
-                <div class="image-padding">
-                    <img src="{{ asset('images/' . $cartItem->book->image_path) }}" alt="">
-                </div>
-                <div>
-                    <h2 class="text-gray-700 font-bold text-2xl pb-4">
-                        {{ $cartItem->book->bookName }}
-                    </h2>
-                    <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
-                        {{ $cartItem->book->author }}
+        <div class="flex items-center justify-between py-10 border-b border-gray-200">
+            <div class="flex-shrink-0 w-48 h-64 overflow-hidden aspect-w-3 aspect-h-4">
+                <img src="{{ asset('images/' . $cartItem->book->image_path) }}" alt="{{ $cartItem->book->bookName }}" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-grow">
+                <h2 class="text-2xl font-bold text-gray-700">
+                    {{ $cartItem->book->bookName }}
+                </h2>
+                <p class="text-sm text-gray-700">
+                    Authored by <span class="font-medium">{{ $cartItem->book->author }}</span>
+                </p>
+                <p class="text-sm text-gray-700">
+                    Price: <span class="font-medium">${{ number_format($cartItem->book->price, 2) }}</span>
+                </p>
+                <div class="mt-4 flex items-center space-x-4">
+                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" class="flex items-center">
+                        @csrf
+                        @method('PUT')
+                        <label for="quantity-{{ $cartItem->id }}" class="block text-sm font-medium text-gray-700">Quantity:</label>
+                        <select id="quantity-{{ $cartItem->id }}" name="quantity" class="ml-2 block form-select w-16 text-lg border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            onchange="updateTotalPrice(this,{{ $cartItem->book->price }})">
+                            @for ($availableStock = 1; $availableStock <= min(10, $cartItem->book->stock); $availableStock++)
+                            <option value="{{ $availableStock }}" {{ $cartItem->quantity == $availableStock ? 'selected' : '' }}>
+                                {{ $availableStock }}
+                            </option>
+                            @endfor
+                        </select>
+                    </form>
+                    <p class="text-gray-700">
+                        Total Price: <span class="font-semibold">${{ number_format($cartItem->book->price * $cartItem->quantity, 2) }}</span>
                     </p>
-                    <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
-                        Price: {{ $cartItem->book->price }}
-                    </p>
-                    <br>
-                    {{-- <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
-                        Quantity: {{ $cartItem->quantity }}
-                    </p> --}}
-                    <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
-                        @if (auth()->user()->id == $cartItem->user_id)
-                            <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
-                                <div>
-                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" class="updateForm">
-                                        @csrf
-                                        @method('PUT')
-                                        <label>Quantity: </label>
-                                        <select name="quantity" class="form-select w-full mb-8 text-xl"
-                                            onchange="updateTotalPrice(this,{{ $cartItem->book->price }})"  id="quantity">
-                                            @for ($availableStock = 1; $availableStock <= min(10, $cartItem->book->stock); $availableStock++)
-                                                <option value="{{ $availableStock }}"
-                                                    {{ $cartItem->quantity == $availableStock ? 'selected' : '' }}>
-                                                    {{ $availableStock }}
-                                                </option>
-                                            @endfor
-                                        </select>
-                                        <input type="hidden" name="total_price" class="total_price"
-                                            value="{{ $cartItem->book->price * $cartItem->quantity }}">
-                                    </form>
-                                    <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
-                                        Total Price: {{ $cartItem->book->price * $cartItem->quantity }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <form action="{{ route('cart.destroy', $cartItem->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="text-white delete-button-color p-3 rounded" type="submit">
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-
+                    <form action="{{ route('cart.destroy', $cartItem->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+                            Delete
+                        </button>
+                    </form>
                 </div>
             </div>
+            @php $totalPrice += $cartItem->book->price * $cartItem->quantity; @endphp
+        </div>
         @endforeach
-
+        {{-- <div>
+            <p class="text-gray-700">
+                Total Price: <span class="font-semibold">${{ number_format($cartItem->book->price * $cartItem->quantity, 2) }}</span>
+            </p>
+        </div> --}}
+        <div class="text-lg font-bold py-4">
+            Total price: ${{ number_format($totalPrice, 2) }}
+        </div>
     </div>
+    
+    
 @endsection
 
 <script>
