@@ -13,10 +13,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cartItems = auth()->user()->cartItems;
-        // return view('cart', compact('cartItems'));
-        return view('cart')
-            ->with('cartItems', Cart::orderBy('updated_at', 'DESC')->get());
+        $cartItems = auth()->user()->cartItems()->orderBy('updated_at', 'DESC')->get();
+        return view('cart', compact('cartItems'));
     }
 
 
