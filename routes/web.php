@@ -14,16 +14,7 @@ Route::resource('/cart', CartController::class);
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
 
-Route::middleware(['auth'])->get('/userinfo', function () {
-    if (Auth::user()->isAdmin()) {
-        return redirect()->route('user.userinfo');
-    } else {
-        return redirect()->route('book.index');
-    }
-})->name('user.userinfo');
-
-
-// Route::get('/userinfo','AdminController@userinfo')->name('userinfo');
+Route::middleware(['auth'])->get('/userinfo', [AdminController::class, 'index'])->name('user.userinfo');
 
 Route::get('/book', [BooksController::class, 'index'])->name('book.index');
 Route::get('/dashboard', function () {
