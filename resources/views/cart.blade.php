@@ -41,12 +41,12 @@
                         @if (auth()->user()->id == $cartItem->user_id)
                             <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
                                 <div>
-                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" id="updateForm">
+                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" class="updateForm">
                                         @csrf
                                         @method('PUT')
                                         <label>Quantity: </label>
                                         <select name="quantity" class="form-select w-full mb-8 text-xl"
-                                            onchange="updateTotalPrice(this, {{ $cartItem->book->price }});submitForm();" id="quantity">
+                                            onchange="updateTotalPrice(this,{{ $cartItem->book->price }})"  id="quantity">
                                             @for ($availableStock = 1; $availableStock <= min(10, $cartItem->book->stock); $availableStock++)
                                                 <option value="{{ $availableStock }}"
                                                     {{ $cartItem->quantity == $availableStock ? 'selected' : '' }}>
@@ -54,7 +54,7 @@
                                                 </option>
                                             @endfor
                                         </select>
-                                        <input type="hidden" name="total_price" id="total_price"
+                                        <input type="hidden" name="total_price" class="total_price"
                                             value="{{ $cartItem->book->price * $cartItem->quantity }}">
                                     </form>
                                     <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
@@ -82,12 +82,12 @@
 @endsection
 
 <script>
-    function submitForm() {
-        document.getElementById('updateForm').submit();
-    }
-    function updateTotalPrice(selectedQuantity, price) {
+
+    function updateTotalPrice(selectedQuantity,price) {
+        let form = selectedQuantity.closest('.updateForm');
         let quantity = selectedQuantity.value;
         let totalPrice = quantity * price;
-        document.getElementById('total_price').value = totalPrice;
+        form.querySelector('.total_price').value = totalPrice;
+        form.submit();
     }
 </script>
