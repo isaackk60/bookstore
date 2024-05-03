@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CartController;
@@ -13,6 +14,9 @@ Route::resource('/cart', CartController::class);
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
 
+
+Route::get('/usersinformation',[AdminController::class])->name('usersinformation');
+// Route::get('/usersinformation','AdminController@usersinformation')->name('usersinformation');
 
 Route::get('/book', [BooksController::class, 'index'])->name('book.index');
 Route::get('/dashboard', function () {
