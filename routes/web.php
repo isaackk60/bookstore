@@ -1,5 +1,6 @@
 <?php
 
+// use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BooksController;
@@ -14,13 +15,16 @@ Route::resource('/cart', CartController::class);
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
 
-Route::middleware(['auth'])->get('/userinfo', function () {
-    if (Auth::user()->isAdmin()) {
-        return redirect()->route('user.userinfo');
-    } else {
-        return redirect()->route('book.index');
-    }
-})->name('user.userinfo');
+
+// Route::middleware(['auth'])->get('/userinfo', function () {
+//     if (Auth::user()->isAdmin()) {
+//         return redirect()->route('user.userinfo');
+//     } else {
+//         return redirect()->route('book.index');
+//     }
+// })->name('user.userinfo');
+Route::middleware(['auth'])->get('/userinfo', [AdminController::class, 'index'])->name('user.userinfo');
+
 
 
 // Route::get('/userinfo','AdminController@userinfo')->name('userinfo');
