@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CartController;
@@ -13,6 +14,10 @@ Route::resource('/cart', CartController::class);
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
 
+Route::get('/userinfo',[AdminController::class, 'index'])->name('admin.users');
+Route::middleware(['auth', 'can:admin-only'])->get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
+
+// Route::get('/userinfo','AdminController@userinfo')->name('userinfo');
 
 Route::get('/book', [BooksController::class, 'index'])->name('book.index');
 Route::get('/dashboard', function () {
