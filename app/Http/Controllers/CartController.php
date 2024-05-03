@@ -13,8 +13,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cartItems = auth()->user()->cartItems()->orderBy('updated_at', 'DESC')->get();
-        return view('cart', compact('cartItems'));
+        
+        if (auth()->check()) {
+            $cartItems = auth()->user()->cartItems()->orderBy('updated_at', 'DESC')->get();
+            return view('cart', compact('cartItems'));
+        } else {
+            return redirect()->route('login');
+        }
+        
     }
 
 
