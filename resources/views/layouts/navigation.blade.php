@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('book.index')" :active="request()->routeIs('book.index')">
                         {{ __('Book') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('user.cart')" :active="request()->routeIs('user.cart')">
+                        {{ __('shopping cart') }}
+                    </x-nav-link>
                     @auth
                     @if(Auth::user()->isAdmin())
                     <x-nav-link :href="route('user.userinfo')" :active="request()->routeIs('user.userinfo')">
