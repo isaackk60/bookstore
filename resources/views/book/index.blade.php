@@ -97,17 +97,17 @@
                             <div class="flex flex-row items-center justify-evenly mt-5">
                                 <div>
                                     <a href="/book/{{ $book->slug }}/edit"
-                                        class="uppercase text-xs font-extrabold py-3 px-5 rounded-2xl edit_button_color">
+                                        class="uppercase text-sm font-extrabold py-2 px-4 edit_button_color">
                                         Edit
                                     </a>
                                 </div>
                                 <div>
-                                    <form action="/book/{{ $book->slug }}" method="POST" class="none">
+                                    <form action="{{ url('/userinfo/delete', $user->id) }}" method="POST" class="none">
                                         @csrf
                                         @method('delete')
 
                                         <button
-                                            class="uppercase text-xs font-extrabold py-3 px-5 rounded-2xl delete_button_color"
+                                            class="uppercase text-sm font-extrabold py-2 px-4 delete_button_color"
                                             type="submit">
                                             Delete
                                         </button>

@@ -2,17 +2,38 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1 class="my-4">User Information</h1>
-    <div class="list-group">
-        @foreach ($users as $user)
-            <a href="#!" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ $user->name }}</h5>
-                </div>
-                <p class="mb-1">{{ $user->email }}</p>
-            </a>
-        @endforeach
-    </div>
+<div class="mb-20">
+    <div class="w-4/5 m-auto text-center">
+    <h1 class="page_title">User Information</h1>
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                <th class="px-4 py-2 border-2">Name</th>
+                <th class="px-4 py-2 border-2">Email</th>
+                <th class="px-4 py-2 border-2">Button</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($users as $user)
+            @if(!$user->isAdmin())
+            <tr>
+                <td class="border-2 px-4 py-2">{{ $user->name }}</td>
+                <td class="border-2 px-4 py-2">{{ $user->email }}</td>
+                <td class="border-2 px-4 py-2">
+                    <div class="flex justify-evenly"> 
+                    <button class="uppercase text-sm font-extrabold py-2 px-4 edit_button_color">View</button>
+                    <form action="/userinfo/delete/{{ $user->id }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button class="uppercase text-sm font-extrabold py-2 px-4 delete_button_color" type="submit">Delete</button>
+                    </form>
+                    </div>
+                </td>
+            </tr>
+            @endif
+            @endforeach
+        </tbody>
+    </table>
+</div>
 </div>
 @endsection

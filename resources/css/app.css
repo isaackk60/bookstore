@@ -11,13 +11,13 @@
 
 .create_book_button {
     margin: 20px 20px 20px 0px;
-    padding: 12px 20px 12px 20px;
-    border-radius: 10px;
-    background-color: #0c91d8;
     color: white;
     text-transform: uppercase;
+    background-color: #357ef2;
     font-weight: 600;
-    font-size: 14px;
+    padding: 0.5em 1em;
+    border-radius: 0.375em;
+    margin-right: 0.5em;
 }
 
 .create_book_button:hover {
@@ -32,7 +32,8 @@
 
 .delete_button_color{
     background-color:#ff2020;
-    color:white;
+    color:white;    
+    border-radius: 0.375em;
 }
 .delete_button_color:hover{
     background-color: #c42321;
@@ -40,6 +41,7 @@
 .edit_button_color{
     background-color:#32b928;
     color:white;
+    border-radius: 0.375em;
 }
 .edit_button_color:hover{
     background-color:#22881b;
