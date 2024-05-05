@@ -102,7 +102,7 @@
                                     </a>
                                 </div>
                                 <div>
-                                    <form action="{{ url('/userinfo/delete', $user->id) }}" method="POST" class="none">
+                                    <form action="/book/{{ $book->slug }}" method="POST" class="none">
                                         @csrf
                                         @method('delete')
 
