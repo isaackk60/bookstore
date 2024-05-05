@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="w-4/5 m-auto text-center">
-        <div class="py-15 border-b border-gray-200">
-            <h1 class="text-6xl uppercase text-blue-800 font-semibold">
+        <div class="border-b border-gray-200">
+            <h1 class="page_title">
                 Book
             </h1>
         </div>
@@ -18,9 +18,8 @@
     @endif
 
     @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
-        <div class="pt-15 w-4/5 m-auto">
-            <a href="/book/create"
-                class="uppercase bg-transparent hover:bg-red-900 text-red-500 text-xs font-extrabold py-3 font-bold px-5 rounded-3xl">
+        <div class="py-10 w-4/5 m-auto">
+            <a href="/book/create" class="create_book_button">
                 Create Book
             </a>
         </div>
@@ -50,70 +49,75 @@
     </form>
 </div> --}}
     <div class="mb-20">
-        @foreach ($books as $book)
-            @if ($book->stock > 0)
-                <!-- Main book div wrapped in a link except edit and delete -->
-                <a href="/book/{{ $book->slug }}"
-                    class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200 no-underline hover:no-underline">
-                    <div class="image-padding">
-                        <img src="{{ asset('images/' . $book->image_path) }}" alt="{{ $book->bookName }}">
-                    </div>
-                    <div>
-                        <h2 class="text-gray-700 font-bold text-2xl pb-4">
-                            {{ $book->bookName }}
-                        </h2>
+        <div class="sm:grid grid-cols-3 gap-10 w-4/5 mx-auto py-15">
+            @foreach ($books as $book)
+                @if ($book->stock > 0)
+                    <!-- Main book div wrapped in a link except edit and delete -->
 
-                        <div class="text-gray-500">
-                            Authored By <span class="font-bold italic text-gray-800">{{ $book->author }}</span>, published
-                            on
-                            {{ date('jS M Y', strtotime($book->publishTime)) }}
-                        </div>
-                        <div class="text-gray-500">
-                            Type: <span class="font-bold italic text-gray-800">{{ $book->type }}</span>
-                        </div>
-                        <?php
-                        $wordCount = str_word_count($book->description);
-                        
-                        if ($wordCount > 40) {
-                            $words = explode(' ', $book->description);
-                            $shortDescription = implode(' ', array_slice($words, 0, 40));
-                            $shortDescription .= ' ...';
-                        } else {
-                            $shortDescription = $book->description;
-                        }
-                        
-                        echo "<p class='text-base text-red-700 pt-2 mb-3 leading-6 font-light'>$shortDescription</p>";
-                        ?>
-                        <div class="text-gray-500">
-                            Price: €<span class="font-bold italic text-gray-800">{{ $book->price }}</span>
-                        </div>
-                    </div>
-                </a>
+                    <div class="each_book_container">
+                        <a href="/book/{{ $book->slug }}" class="no-underline hover:no-underline flex flex-col justify-between">
+                            <div class="flex flex-col justify-center">
+                                <img src="{{ asset('images/' . $book->image_path) }}" alt="{{ $book->bookName }}">
+                            </div>
+                            <div>
+                                <h2 class="text-gray-700 font-bold text-2xl pb-4">
+                                    {{ $book->bookName }}
+                                </h2>
 
-                <!-- Admin actions outside of the main clickable area -->
-                @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
-                    <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-center mt-5">
-                        <div>
-                            <a href="/book/{{ $book->slug }}/edit"
-                                class="uppercase bg-transparent text-red-500 text-xs font-extrabold py-3 px-5 rounded-3xl">
-                                Edit
-                            </a>
-                        </div>
-                        <div>
-                            <form action="/book/{{ $book->slug }}" method="POST" class="none">
-                                @csrf
-                                @method('delete')
+                                <div class="text-gray-500">
+                                    Authored By <span class="font-bold italic text-gray-800">{{ $book->author }}</span>,
+                                    published
+                                    on
+                                    {{ date('jS M Y', strtotime($book->publishTime)) }}
+                                </div>
+                                <div class="text-gray-500">
+                                    Type: <span class="font-bold italic text-gray-800">{{ $book->type }}</span>
+                                </div>
+                                <?php
+                                $wordCount = str_word_count($book->description);
+                                
+                                if ($wordCount > 40) {
+                                    $words = explode(' ', $book->description);
+                                    $shortDescription = implode(' ', array_slice($words, 0, 40));
+                                    $shortDescription .= ' ...';
+                                } else {
+                                    $shortDescription = $book->description;
+                                }
+                                
+                                echo "<p class='text-base text-red-700 pt-2 mb-3 leading-6 font-light'>$shortDescription</p>";
+                                ?>
+                                <div class="text-gray-500">
+                                    Price: €<span class="font-bold italic text-gray-800">{{ $book->price }}</span>
+                                </div>
+                            </div>
+                        </a>
 
-                                <button
-                                    class="uppercase bg-transparent text-red-500 text-xs font-extrabold py-3 px-5 rounded-3xl"
-                                    type="submit">
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+                        <!-- Admin actions outside of the main clickable area -->
+                        @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
+                            <div class="flex flex-row items-center justify-evenly mt-5">
+                                <div>
+                                    <a href="/book/{{ $book->slug }}/edit"
+                                        class="uppercase text-sm font-extrabold py-2 px-4 edit_button_color">
+                                        Edit
+                                    </a>
+                                </div>
+                                <div>
+                                    <form action="{{ url('/userinfo/delete', $user->id) }}" method="POST" class="none">
+                                        @csrf
+                                        @method('delete')
+
+                                        <button
+                                            class="uppercase text-sm font-extrabold py-2 px-4 delete_button_color"
+                                            type="submit">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endif
                 @endif
-            @endif
+        </div>
         @endforeach
+    </div>
     </div>
 @endsection

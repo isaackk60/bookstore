@@ -13,14 +13,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        
+
         if (auth()->check()) {
             $cartItems = auth()->user()->cartItems()->orderBy('updated_at', 'DESC')->get();
             return view('cart', compact('cartItems'));
         } else {
             return redirect()->route('login');
         }
-        
+
     }
 
 
@@ -44,54 +44,54 @@ class CartController extends Controller
 
         $book_id = $request->book_id;
         $quantity = $request->quantity;
+        if (auth()->check()) {
+            // Check if the user already has this book in the cart
+            $existingCartItem = auth()->user()->cartItems()->where('book_id', $book_id)->first();
 
-        // Check if the user already has this book in the cart
-        $existingCartItem = auth()->user()->cartItems()->where('book_id', $book_id)->first();
+            if ($existingCartItem) {
+                // If the book is already in the cart, update the quantity
+                $newQuantity = $existingCartItem->quantity + $quantity;
+                // Check if new quantity exceeds the maximum allowed quantity
+                if ($newQuantity > 10) {
+                    if ($newQuantity > $existingCartItem->book->stock && $existingCartItem->book->stock < 10) {
+                        $newQuantity = $existingCartItem->book->stock;
+                        $existingCartItem->update(['quantity' => $newQuantity]);
+                        return redirect()->route('cart.index')->with('message', 'Quantity updated to maximum available stock.');
+                    } else if ($newQuantity > $existingCartItem->book->stock && $existingCartItem->book->stock > 10) {
+                        $existingCartItem->update(['quantity' => 10]);
+                        return redirect()->route('cart.index')->with('message', 'Maximum quantity allowed per book is 10.');
+                    } else if ($newQuantity < $existingCartItem->book->stock && $existingCartItem->book->stock > 10) {
+                        $existingCartItem->update(['quantity' => 10]);
+                        return redirect()->route('cart.index')->with('message', 'Maximum quantity allowed per book is 10.');
+                    }
+                }
 
-        if ($existingCartItem) {
-            // If the book is already in the cart, update the quantity
-            $newQuantity = $existingCartItem->quantity + $quantity;
-            // Check if new quantity exceeds the maximum allowed quantity
-            if ($newQuantity > 10) {
-                $existingCartItem->update(['quantity' => 10]);
-                return redirect()->route('cart.index')->with('message', 'Maximum quantity allowed per book is 10.');
-            }
-            if ($newQuantity > 10) {
-                if ($newQuantity > $existingCartItem->book->stock && $existingCartItem->book->stock < 10) {
+                // Check if new quantity exceeds the available stock
+                if ($newQuantity > $existingCartItem->book->stock) {
                     $newQuantity = $existingCartItem->book->stock;
                     $existingCartItem->update(['quantity' => $newQuantity]);
                     return redirect()->route('cart.index')->with('message', 'Quantity updated to maximum available stock.');
-                } else if ($newQuantity > $existingCartItem->book->stock && $existingCartItem->book->stock > 10) {
-                    $existingCartItem->update(['quantity' => 10]);
-                    return redirect()->route('cart.index')->with('message', 'Maximum quantity allowed per book is 10.');
-                } else if ($newQuantity < $existingCartItem->book->stock && $existingCartItem->book->stock > 10) {
-                    $existingCartItem->update(['quantity' => 10]);
-                    return redirect()->route('cart.index')->with('message', 'Maximum quantity allowed per book is 10.');
                 }
-
-            }
-            // Check if new quantity exceeds the available stock
-            if ($newQuantity > $existingCartItem->book->stock) {
-                $newQuantity = $existingCartItem->book->stock;
+                // Update the quantity
                 $existingCartItem->update(['quantity' => $newQuantity]);
-                return redirect()->route('cart.index')->with('message', 'Quantity updated to maximum available stock.');
+                return redirect()->route('cart.index')->with('message', 'Quantity updated successfully.');
+
             }
-            // Update the quantity
-            $existingCartItem->update(['quantity' => $newQuantity]);
-            return redirect()->route('cart.index')->with('message', 'Quantity updated successfully.');
+
+            $book = Book::findOrFail($book_id);
+
+            // Create a new cart item
+            Cart::create([
+                'book_id' => $book_id,
+                'quantity' => $quantity,
+                'total_price' => $book->price * $quantity,
+                'user_id' => auth()->id(),
+            ]);
+
+            return redirect()->route('cart.index')->with('message', 'Item added to cart successfully.');
+        } else {
+            return redirect()->route('login');
         }
-
-        $book = Book::findOrFail($book_id);
-
-        // Create a new cart item
-        Cart::create([
-            'book_id' => $book_id,
-            'quantity' => $quantity,
-            'total_price' => $book->price * $quantity,
-            'user_id' => auth()->id(),
-        ]);
-
-        return redirect()->route('cart.index')->with('message', 'Item added to cart successfully.');
     }
 
 

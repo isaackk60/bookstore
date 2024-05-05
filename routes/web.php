@@ -15,6 +15,7 @@ Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
 
 Route::middleware(['auth'])->get('/userinfo', [AdminController::class, 'index'])->name('user.userinfo');
+Route::middleware(['auth'])->delete('/userinfo/delete/{id}', [AdminController::class, 'destroy'])->name('user.destroy');
 
 Route::get('/book', [BooksController::class, 'index'])->name('book.index');
 Route::get('/dashboard', function () {
