@@ -1,12 +1,14 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-28">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ url('/dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <a href="{{ url('/') }}">
+                        {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
+                        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/c039b824474525.56334ce736de9.jpg  " class="block h-28 w-auto fill-current text-gray-800 navlogo"alt="">
+
                     </a >
                 </div>
 
@@ -26,7 +28,11 @@
                     <x-nav-link :href="route('user.userinfo')" :active="request()->routeIs('user.userinfo')">
                         {{ __('User Info') }}
                     </x-nav-link>
+
                     @endif
+                    <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.index')">
+                        {{ __('purchase history') }}
+                    </x-nav-link>
                     @endauth
                 </div>
             </div>
