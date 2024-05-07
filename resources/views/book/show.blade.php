@@ -77,6 +77,8 @@
                         add to cart
                     </button>
                 </form>
+                @elseif($book->stock <= 0)
+                <h3>The book is sold out</h3>
 @endif
             </div>
         </div>
