@@ -29,8 +29,8 @@
             must-read for lovers of complex narratives and rich, engaging storytelling.
         </p>
     </div>
-
-    <div class="grid grid-cols-4 gap-4 ">
+<div class="w-4/5 m-auto">
+    <div class="grid grid-cols-3 gap-4 ">
         @foreach ($books as $book)
             <div class="book-item">
                 <img src="{{ asset('images/' . $book->image_path) }}" alt="{{ $book->bookName }}" class="book-image">
@@ -53,6 +53,7 @@
             Learn More
         </a>
     </div>
+</div>
     
     
 @endsection
