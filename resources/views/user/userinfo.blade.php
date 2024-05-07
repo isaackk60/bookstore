@@ -21,7 +21,7 @@
                 <td class="border-2 px-4 py-2">{{ $user->email }}</td>
                 <td class="border-2 px-4 py-2">
                     <div class="flex justify-evenly"> 
-                    <button class="uppercase text-sm font-extrabold py-2 px-4 edit_button_color">View</button>
+                    <a href="{{ route('user.sales', $user) }}" class="uppercase text-sm font-extrabold py-2 px-4 edit_button_color">View</a>
                     <form action="/userinfo/delete/{{ $user->id }}" method="POST">
                         @csrf
                         @method('delete')
