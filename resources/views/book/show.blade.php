@@ -62,6 +62,7 @@
                 <div class="text-lg font-semibold pb-3">Type: {{ $book->type }}</div>
                 <div class="text-lg font-semibold pb-3">Page: {{ $book->pages }}</div>
                 <div class="text-lg font-semibold pb-3 ">Price: {{ $book->price }}</div>
+                @if ($book->stock > 0)
                 <form action="/cart" method="POST">
                     @csrf
                     <input type="hidden" name="book_id" value="{{ $book->id }}">
@@ -76,7 +77,7 @@
                         add to cart
                     </button>
                 </form>
-
+@endif
             </div>
         </div>
         <div class="w-4/5 m-auto pt-10">

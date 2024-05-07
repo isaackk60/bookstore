@@ -19,7 +19,7 @@
         <div class="mx-auto  max-w-7xl">
             @foreach ($sales as $sale)
                 <div>
-                    <p>Order Date: {{ $sale->order_date }}</p>
+                    <p>Order Date: {{ date('Y-m-d H:i:s', strtotime($sale->order_date)) }}</p>
                     <ul>
                         @foreach ($sale->books as $book)
                             <li>

@@ -26,7 +26,7 @@ class SalesController extends Controller
         $request->validate([
             'user_id' => 'required',
             'books' => 'required',
-            'order_date' => 'required|date',
+            'order_date' => 'required|date_format:Y-m-d H:i:s',
             'order_price' => 'required',
         ]);
 

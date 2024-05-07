@@ -64,7 +64,7 @@
     <div class="mb-20">
         <div class="sm:grid grid-cols-3 gap-10 w-4/5 mx-auto py-15">
             @foreach ($books as $book)
-                @if ($book->stock > 0)
+                
                     <!-- Main book div wrapped in a link except edit and delete -->
 
                     <div class="each_book_container">
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                         @endif
-                @endif
+           
         </div>
         @endforeach
     </div>

@@ -110,7 +110,7 @@
 
             @csrf
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-            <input type="hidden" name="order_date" value="{{ now()->toDateString() }}">
+            <input type="hidden" name="order_date" value="{{ now()->toDateTimeString() }}">
 
             <input type="hidden" name="books" value="{{ json_encode($cartItemsArray) }}">
 

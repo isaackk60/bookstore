@@ -19,7 +19,7 @@ return new class extends Migration
             // $table->unsignedBigInteger('book_id');
             // $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
             // $table->integer('quantity');
-            $table->date('order_date');
+            $table->datetime('order_date');
             $table->decimal('order_price', 10, 2);
             $table->timestamps();
         });
