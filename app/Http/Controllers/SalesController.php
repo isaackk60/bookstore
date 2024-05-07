@@ -12,7 +12,7 @@ class SalesController extends Controller
     {
         $user = Auth::user();
         $sales = $user->sales;
-    
+
         return view('sales', compact('sales'));
     }
 
@@ -22,23 +22,26 @@ class SalesController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'user_id' => 'required',
-        'books' => 'required|array',
-        'order_date' => 'required|date',
-        'total_price' => 'required|numeric',
-    ]);
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'books' => 'required',
+            'order_date' => 'required|date',
+            'order_price' => 'required',
+        ]);
 
-    Sale::create([
-        'user_id' => $request->user_id,
-        'books' => $request->books,
-        'order_date' => $request->order_date,
-        'total_price' => $request->total_price,
-    ]);
+        $books = json_decode($request->books, true);
 
-    return redirect()->route('sales')->with('message', 'Order created successfully.');
-}
+        Sale::create([
+            'user_id' => $request->user_id,
+            'books' => $books,
+            'order_date' => $request->order_date,
+            'order_price' => $request->order_price,
+        ]);
+
+        return redirect()->route('sales.index')->with('message', 'Order created successfully.');
+    }
+
 
     // public function show($id)
     // {
@@ -46,9 +49,9 @@ class SalesController extends Controller
     //     return view('sales.show', compact('sale'));
     // }
 
-    public function destroy($id)
-    {
-        Sale::findOrFail($id)->delete();
-        return redirect()->route('sales.index')->with('message', 'Sale deleted successfully.');
-    }
+    // public function destroy($id)
+    // {
+    //     Sale::findOrFail($id)->delete();
+    //     return redirect()->route('sales.index')->with('message', 'Sale deleted successfully.');
+    // }
 }

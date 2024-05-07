@@ -9,7 +9,7 @@ class Sale extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'books', 'order_date', 'total_price',
+        'user_id', 'books', 'order_date', 'order_price',
     ];
 
     protected $casts = [

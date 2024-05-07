@@ -29,6 +29,9 @@ class CartController extends Controller
      */
     public function create()
     {
+        if (!auth()->check()) {
+            return redirect()->route('book.index');
+        }
         return view('cart.create');
     }
 
@@ -98,18 +101,18 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    // public function show(string $id)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function edit(string $id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.

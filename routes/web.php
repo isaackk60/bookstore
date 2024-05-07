@@ -9,13 +9,15 @@ use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainPageController::class, 'index']);
-Route::resource('/book', BooksController::class);
 Route::resource('/sales', SalesController::class);
+Route::resource('/book', BooksController::class);
 Route::resource('/cart', CartController::class);
 
+Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');
 Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
+
 
 Route::middleware(['auth'])->get('/userinfo', [AdminController::class, 'index'])->name('user.userinfo');
 Route::middleware(['auth'])->delete('/userinfo/delete/{id}', [AdminController::class, 'destroy'])->name('user.destroy');

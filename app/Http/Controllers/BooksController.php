@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\User;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 
@@ -45,6 +46,9 @@ class BooksController extends Controller
     // }
     public function create()
     {
+        if (!auth()->check() ||!auth()->user()->isAdmin()) {
+            return redirect()->route('book.index');
+        }
         return view('book.create');
     }
 

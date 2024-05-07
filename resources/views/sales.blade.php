@@ -4,7 +4,7 @@
     <div class="w-full mx-auto text-center">
         <div class="py-15 border-b border-gray-200 m-20">
             <h1 class="text-5xl uppercase text-blue-800 font-semibold">
-                Shopping Cart
+                Purchase History
             </h1>
         </div>
 
@@ -30,7 +30,7 @@
                             </li>
                         @endforeach
                     </ul>
-                    <p>Total Price: {{ $sale->total_price }}</p>
+                    <p>Total Price: {{ $sale->order_price }}</p>
                 </div>
             @endforeach
 
