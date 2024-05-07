@@ -18,7 +18,7 @@ class SalesController extends Controller
 
     public function create()
     {
-        return view('sales.create');
+        return redirect()->route('book.index');
     }
 
     public function store(Request $request)
@@ -39,19 +39,23 @@ class SalesController extends Controller
             'order_price' => $request->order_price,
         ]);
 
+        auth()->user()->cartItems()->delete();
+
         return redirect()->route('sales.index')->with('message', 'Order created successfully.');
     }
 
 
-    // public function show($id)
-    // {
-    //     $sale = Sale::findOrFail($id);
-    //     return view('sales.show', compact('sale'));
-    // }
+    public function show($id)
+    {
+        return redirect()->route('book.index');
+        // $sale = Sale::findOrFail($id);
+        // return view('sales.show', compact('sale'));
+    }
 
     // public function destroy($id)
     // {
-    //     Sale::findOrFail($id)->delete();
-    //     return redirect()->route('sales.index')->with('message', 'Sale deleted successfully.');
+    //     // Sale::findOrFail($id)->delete();
+    //     // return redirect()->route('sales.index')->with('message', 'Sale deleted successfully.');
+    //     return redirect()->route('book.index');
     // }
 }
