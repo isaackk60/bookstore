@@ -26,6 +26,15 @@ class AdminController extends Controller
         return back()->with('message', 'User removed successfully');
     }
 
+    public function showSales(User $user)
+    {
+        if (!auth()->user()->isAdmin()) {
+            return redirect()->route('book.index');
+        }
+        $sales = $user->sales;
+        return view('sales', compact('user', 'sales'));
+    }
+
 
 
 }

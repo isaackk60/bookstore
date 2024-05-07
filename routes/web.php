@@ -18,6 +18,7 @@ Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
 
+Route::middleware(['auth'])->get('/users/{user}/sales', [AdminController::class, 'showSales'])->name('user.sales');
 
 Route::middleware(['auth'])->get('/userinfo', [AdminController::class, 'index'])->name('user.userinfo');
 Route::middleware(['auth'])->delete('/userinfo/delete/{id}', [AdminController::class, 'destroy'])->name('user.destroy');
