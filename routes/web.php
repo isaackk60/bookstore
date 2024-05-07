@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,7 +11,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('/book', BooksController::class);
+Route::resource('/sales', SalesController::class);
 Route::resource('/cart', CartController::class);
+
+Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
 

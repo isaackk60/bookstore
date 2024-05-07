@@ -15,10 +15,10 @@ class Book extends Model
         'bookName', 'type', 'pages','price', 'description', 'publishTime', 'author', 'stock', 'slug', 'image_path'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);//user id related to user table
-    }
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);//user id related to user table
+    // }
 
     public function sluggable(): array
     {
