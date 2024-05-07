@@ -9,11 +9,40 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class BooksController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+        // return view('book.index')
+        //     ->with('books', Book::orderBy('updated_at', 'DESC')->get());
+
+        public function index(Request $request)
     {
-        return view('book.index')
-            ->with('books', Book::orderBy('updated_at', 'DESC')->get());
+        $sort = $request->input('sort', 'publishTime');
+
+        switch ($sort) {
+            case 'publishTime_asc':
+                $order = 'asc';
+                $orderBy = 'publishTime';
+                break;
+            case 'price_asc':
+                $order = 'asc';
+                $orderBy = 'price';
+                break;
+            case 'price_desc':
+                $order = 'desc';
+                $orderBy = 'price';
+                break;
+            default:
+                $order = 'desc';
+                $orderBy = 'publishTime';
+                break;
+        }
+
+        $books = Book::orderBy($orderBy, $order)->get();
+
+        return view('book.index', compact('books'));
     }
+
+    // }
     public function create()
     {
         return view('book.create');

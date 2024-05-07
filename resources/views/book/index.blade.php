@@ -17,6 +17,19 @@
         </div>
     @endif
 
+    <div class="w-4/5 mx-auto pt-15">
+        <form action="/book" method="GET">
+            <label for="sort">Sort by:</label>
+            <select name="sort" onchange="this.form.submit()" class="ml-3 cursor-pointer pl-2 pr-5 border-2 border-gray-500">
+                <option value="publishTime" {{ request()->get('sort') == 'publishTime' ? 'selected' : '' }}>Most Recent</option>
+                <option value="publishTime_asc" {{ request()->get('sort') == 'publishTime_asc' ? 'selected' : '' }}>Oldest First</option>
+                <option value="price_asc" {{ request()->get('sort') == 'price_asc' ? 'selected' : '' }}>Price Low to High</option>
+                <option value="price_desc" {{ request()->get('sort') == 'price_desc' ? 'selected' : '' }}>Price High to Low</option>
+            </select>
+        </form>
+    </div>
+    
+
     @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
         <div class="py-10 w-4/5 m-auto">
             <a href="/book/create" class="create_book_button">
@@ -121,3 +134,4 @@
     </div>
     </div>
 @endsection
+
