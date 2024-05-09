@@ -90,20 +90,46 @@
                     <h3 class="text-lg font-bold text-gray-100 mb-4">
                         Quick Links
                     </h3>
-
                     <ul class="text-sm text-gray-400">
+                        @guest
+                            <li class="mb-2">
+                                <a href="/login" class="hover:text-gray-200">Log In</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="/register" class="hover:text-gray-200">Register</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="/" class="hover:text-gray-200">Home</a>
+                            </li>
+                        @else
+                            <li class="mb-2">
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                    class="hover:text-gray-200">
+                                    Log Out
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endguest
                         <li class="mb-2">
-                            <a href="/" class="hover:text-gray-200">Home</a>
+                            <a href="/book" class="hover:text-gray-200">Books</a>
                         </li>
-                        <li class="mb-2">
-                            <a href="/reviews" class="hover:text-gray-200">Book Reviews</a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="/authors" class="hover:text-gray-200">Meet the Authors</a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="/events" class="hover:text-gray-200">Events</a>
-                        </li>
+
+                        @auth
+                            <li class="mb-2">
+                                <a href="/sales" class="hover:text-gray-200">Orders</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="/cart" class="hover:text-gray-200">Cart</a>
+                            </li>
+                            @if (Auth::user()->isAdmin())
+                                <li class="mb-2">
+                                    <a href="/userinfo" class="hover:text-gray-200">User Details</a>
+                                </li>
+                            @endif
+                        @endauth
                     </ul>
                 </div>
                 <div>
