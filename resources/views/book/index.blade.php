@@ -17,6 +17,14 @@
         </div>
     @endif
 
+    @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
+        <div class="my-10 w-4/5 m-auto">
+            <a href="/book/create" class="create_book_button">
+                Create Book
+            </a>
+        </div>
+    @endif
+
     <div class="w-4/5 mx-auto my-10">
         <form action="/book" method="GET">
             <label for="sort">Sort by:</label>
@@ -29,14 +37,6 @@
         </form>
     </div>
     
-
-    @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
-        <div class="pb-10 w-4/5 m-auto">
-            <a href="/book/create" class="create_book_button">
-                Create Book
-            </a>
-        </div>
-    @endif
 
 
 

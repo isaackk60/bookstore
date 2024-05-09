@@ -1,9 +1,9 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 navLink">
     <!-- Primary Navigation Menu -->
     <!-- Scrolling Subtitle -->
-    <div class="marquee">
-        <p class="marquee-content">Only €20 and free shipping on all books! Order now!</p>
-        <p class="marquee-content">New Releases Available! Get the latest from your favorite authors now!</p>
+    <div class="scroll">
+        <p class="scroll-content">Only €20 and free shipping on all books! Order now!</p>
+        <p class="scroll-content">New Releases Available! Get the latest from your favorite authors now!</p>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-28">
@@ -23,7 +23,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link> --}}
                     <x-nav-link :href="route('book.index')" :active="request()->routeIs('book.index')">
-                        {{ __('Book') }}
+                        {{ __('Books') }}
                     </x-nav-link>
                     @auth
                         {{-- <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
@@ -34,7 +34,7 @@
                         </x-nav-link>
                         @if (Auth::user()->isAdmin())
                             <x-nav-link :href="route('user.userinfo')" :active="request()->routeIs('user.userinfo')">
-                                {{ __('User Information') }}
+                                {{ __('User Details') }}
                             </x-nav-link>
                         @endif
                     @endauth
