@@ -51,21 +51,12 @@
                         class="block h-44 w-auto fill-current text-gray-800 navlogo"alt="">
                 </a>
             </div>
-            {{-- <h2 class="text-center text-3xl font-bold text-gray-100 mb-10">ABout Book Shop</h2> --}}
-
-            {{-- <nav class="container mx-auto flex flex-wrap justify-center mb-10 footer-nav-links">
-                    <a href="/" class="mr-5 text-lg font-bold text-gray-100 hover:text-gray-200">Home</a>
-                    <a href="/book" class="mr-5 text-lg font-bold text-gray-100 hover:text-gray-200">Catalog</a>
-                    <a href="/login" class="mr-5 text-lg font-bold text-gray-100 hover:text-gray-200">Login</a>
-                    <a href="/register" class="text-lg font-bold text-gray-100 hover:text-gray-200">Register</a>
-                </nav> --}}
-
             <div class="container mx-auto gap-8">
                 <div>
-                    <h3 class="text-xl font-bold text-gray-100 mb-4">
+                    <h3 class="text-xl font-bold mb-4">
                         About Our Bookstore
                     </h3>
-                    <p class="text-sm text-gray-400 mb-4">
+                    <p class="text-sm text-gray-500 mb-4">
                         Book Store is the premier destination for book lovers in the Ireland, offering an extensive
                         selection of books and stationery at unbeatable prices. Known for our curated collections and
                         knowledgeable staff, we provide a haven for readers and writers alike.
@@ -73,11 +64,11 @@
                     <div class="text-xl font-bold text-gray-100 mb-4">
                         <h3 class="mb-4">Keep In Touch</h3>
                         <ul>
-                            <li class="text-sm text-gray-400 ">Mail us: <a href="mailto:D00234545@student.dkit.ie">Kim
+                            <li class="text-sm text-gray-500 ">Mail us: <a href="mailto:D00234545@student.dkit.ie">Kim
                                     Fui Leung</a></li>
-                            <li class="text-sm text-gray-400 mb-4">Mail us: <a
+                            <li class="text-sm text-gray-500 mb-4">Mail us: <a
                                     href="mailto:D00251825@student.dkit.ie">Jianfeng Han</a></li>
-                            <li class="text-sm text-gray-400 mb-4">Book Store Address: Institute of Technology, Dublin
+                            <li class="text-sm text-gray-500 mb-4">Book Store Address: Institute of Technology, Dublin
                                 Rd, Marshes Upper, Dundalk, Co. Louth, A91 K584</li>
                         </ul>
                     </div>
@@ -87,25 +78,25 @@
 
                 <!-- Quick Links on the right -->
                 <div class="text-center">
-                    <h3 class="text-lg font-bold text-gray-100 mb-4">
+                    <h3 class="text-lg font-bold mb-4">
                         Quick Links
                     </h3>
-                    <ul class="text-sm text-gray-400">
+                    <ul class="text-sm text-gray-500">
                         @guest
                             <li class="mb-2">
-                                <a href="/login" class="hover:text-gray-200">Log In</a>
+                                <a href="/login">Log In</a>
                             </li>
                             <li class="mb-2">
-                                <a href="/register" class="hover:text-gray-200">Register</a>
+                                <a href="/register" >Register</a>
                             </li>
                             <li class="mb-2">
-                                <a href="/" class="hover:text-gray-200">Home</a>
+                                <a href="/" >Home</a>
                             </li>
                         @else
                             <li class="mb-2">
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="hover:text-gray-200">
+                                    >
                                     Log Out
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -114,26 +105,26 @@
                             </li>
                         @endguest
                         <li class="mb-2">
-                            <a href="/book" class="hover:text-gray-200">Books</a>
+                            <a href="/book">Books</a>
                         </li>
 
                         @auth
                             <li class="mb-2">
-                                <a href="/sales" class="hover:text-gray-200">Orders</a>
+                                <a href="/sales" >Orders</a>
                             </li>
                             <li class="mb-2">
-                                <a href="/cart" class="hover:text-gray-200">Cart</a>
+                                <a href="/cart" >Cart</a>
                             </li>
                             @if (Auth::user()->isAdmin())
                                 <li class="mb-2">
-                                    <a href="/userinfo" class="hover:text-gray-200">User Details</a>
+                                    <a href="/userinfo" >User Details</a>
                                 </li>
                             @endif
                         @endauth
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg text-center font-bold text-gray-100 mb-4">
+                    <h3 class="text-lg text-center font-bold  mb-4">
                         Social Media
                     </h3>
 
