@@ -160,14 +160,14 @@
     margin:0;
 }
 
-.marquee {
+.scroll {
     overflow: hidden;
     white-space: nowrap;
     background: #F6F1E9;  
     padding: 10px 0;  
 }
 
-.marquee-content {
+.scroll-content {
     min-width: 100%; 
     display: inline-block;  
     animation: marquee-animation 20s linear infinite;  
@@ -191,8 +191,11 @@
 }
 
 .container{
+    width:80vw;
     display:grid;
-    grid-template-columns: 33vw 20vw auto;
-    gap:90px;
+    grid-template-columns: 32vw auto auto;
+}
+.container i:hover{
+color:black;
 }
 

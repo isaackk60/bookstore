@@ -60,7 +60,7 @@
                     <a href="/register" class="text-lg font-bold text-gray-100 hover:text-gray-200">Register</a>
                 </nav> --}}
 
-            <div class="container mx-auto">
+            <div class="container mx-auto gap-8">
                 <div>
                     <h3 class="text-xl font-bold text-gray-100 mb-4">
                         About Our Bookstore
@@ -71,79 +71,69 @@
                         knowledgeable staff, we provide a haven for readers and writers alike.
                     </p>
                     <div class="text-xl font-bold text-gray-100 mb-4">
-                        <h3>Keep In Touch</h3>
+                        <h3 class="mb-4">Keep In Touch</h3>
                         <ul>
                             <li class="text-sm text-gray-400 ">Mail us: <a href="mailto:D00234545@student.dkit.ie">Kim
-                                    Fui leung</a></li>
+                                    Fui Leung</a></li>
                             <li class="text-sm text-gray-400 mb-4">Mail us: <a
                                     href="mailto:D00251825@student.dkit.ie">Jianfeng Han</a></li>
                             <li class="text-sm text-gray-400 mb-4">Book Store Address: Institute of Technology, Dublin
                                 Rd, Marshes Upper, Dundalk, Co. Louth, A91 K584</li>
                         </ul>
                     </div>
+
                 </div>
-                <div>
-                    <h3 class="text-xl font-bold text-gray-100 mb-4">
-                        Featured Books
-                    </h3>
-                    <ul class="space-y-2">
-                        <li class="text-sm text-gray-400 hover:text-gray-200">
-                            <a href="/book/the-great-gatsby">The Great Gatsby - F. Scott Fitzgerald</a>
-                        </li>
-                        <li class="text-sm text-gray-400 hover:text-gray-200">
-                            <a href="/book/1984">1984 - George Orwell</a>
-                        </li>
-                        <li class="text-sm text-gray-400 hover:text-gray-200">
-                            <a href="/book/to-kill-a-mockingbird">To Kill a Mockingbird - Harper Lee</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
+
+
+                <!-- Quick Links on the right -->
+                <div class="text-center">
                     <h3 class="text-lg font-bold text-gray-100 mb-4">
                         Quick Links
                     </h3>
 
                     <ul class="text-sm text-gray-400">
-                        @guest
-                            <li class="mb-2">
-                                <a href="/login" class="hover:text-gray-200">Log In</a>
-                            </li>
-                            <li class="mb-2">
-                                <a href="/register" class="hover:text-gray-200">Register</a>
-                            </li>
-                        @else
-                            <li class="mb-2">
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="hover:text-gray-200">
-                                    Log Out
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
-                        @endguest
                         <li class="mb-2">
                             <a href="/" class="hover:text-gray-200">Home</a>
                         </li>
                         <li class="mb-2">
-                            <a href="/book" class="hover:text-gray-200">Book</a>
+                            <a href="/reviews" class="hover:text-gray-200">Book Reviews</a>
                         </li>
-
-                        @auth
-                            <li class="mb-2">
-                                <a href="/sales" class="hover:text-gray-200">Order</a>
-                            </li>
-                            <li class="mb-2">
-                                <a href="/cart" class="hover:text-gray-200">Cart</a>
-                            </li>
-                            @if (Auth::user()->isAdmin())
-                                <li class="mb-2">
-                                    <a href="/userinfo" class="hover:text-gray-200">User Detail</a>
-                                </li>
-                            @endif
-                        @endauth
+                        <li class="mb-2">
+                            <a href="/authors" class="hover:text-gray-200">Meet the Authors</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="/events" class="hover:text-gray-200">Events</a>
+                        </li>
                     </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg text-center font-bold text-gray-100 mb-4">
+                        Social Media
+                    </h3>
+
+                    <div class='sm:grid grid-cols-4 pt-10 pb-16 m-auto text-center text-3xl'>
+                        <div>
+                            <a href="#">
+                                <i class="fab fa-facebook-square text-gray-100"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <i class="fab fa-instagram-square text-gray-100"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <i class="fab fa-pinterest-square text-gray-100"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <i class="fab fa-youtube-square text-gray-100"></i>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <p class="text-center text-xs text-gray-100 mt-10">
