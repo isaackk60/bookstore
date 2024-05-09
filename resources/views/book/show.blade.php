@@ -57,7 +57,7 @@
                     {{ $book->bookName }}
                 </h2>
                 <div class="text-gray-500 pb-2">
-                    Authored by {{ $book->author }}, published on {{ $book->publishTime }}
+                    Authored by {{ $book->author }}, published on {{ date('jS M Y', strtotime($book->publishTime)) }}
                 </div>
                 <div class="text-lg font-semibold pb-3">Type: {{ $book->type }}</div>
                 <div class="text-lg font-semibold pb-3">Page: {{ $book->pages }}</div>
