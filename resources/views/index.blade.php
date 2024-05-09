@@ -39,12 +39,19 @@
     <div class="text-center mt-8 px-6 py-4 shadow-lg rounded-lg bg-white featured-book">
         <h4 class="text-gray-800 text-xl font-bold mb-2">Featured Book of the Month</h4>
         <p class="text-gray-600 text-md mb-5">
-            "Infinite Jest" by David Foster Wallace offers an in-depth exploration of human emotions and modern society, a
-            must-read for lovers of complex narratives and rich, engaging storytelling.
+            "Infinite Jest" by David Foster Wallace is a profound and complex novel, widely regarded as a monumental work of modern American literature. Spanning over a thousand pages and featuring a sprawling narrative, the book dives deep into themes of addiction, entertainment, and the pursuit of happiness in contemporary life.
         </p>
-        <a href="/book" class="bg-slate-800 hover:bg-slate-700 text-white py-2 px-4 rounded mt-2 inline-block ">
-            Learn More
-        </a>
+        <p class="text-gray-600 text-md mb-5">
+            The novel is set in an alternate reality where the United States, Canada, and Mexico form a superstate known as the Organization of North American Nations. It follows a wide range of characters, including students at a tennis academy, residents at a nearby rehabilitation center, and various others intertwined in the complex web of Wallace's narrative.
+        </p>
+        <p class="text-gray-600 text-md mb-5">
+            Wallace's unique style, characterized by lengthy and intricately structured sentences, extensive use of footnotes, and a deep focus on internal dialogue, offers readers a challenging but incredibly rewarding experience. His ability to blend high intellectualism with raw emotion makes "Infinite Jest" not just a book but an experience, reflecting the chaotic, media-saturated lives of its characters.
+        </p>
+        <p class="text-gray-600 text-md mb-5">
+            The book's influence extends beyond literature into the realms of cinema, theater, and philosophy, continually prompting discussions and debates about the nature of art and entertainment in our society. It’s a must-read for anyone who values thoughtful, provocative writing and is willing to engage with a text that questions the very structure of narrative and the purpose of fiction.
+        </p>
+        <a href="/book" class="text-center bg-gray-50 text-gray-700 py-2 px-4 font-bold text-xl uppercase bookstartbutton">
+            Start Finding</a>
     </div>
     <div class="w-4/5 m-auto">
         <div class="grid grid-cols-3 gap-4 ">

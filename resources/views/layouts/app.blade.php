@@ -62,10 +62,10 @@
 
             <div class="container mx-auto gap-8">
                 <div>
-                    <h3 class="text-xl font-bold text-gray-100 mb-4">
+                    <h3 class="text-xl font-bold text-lime-600 mb-4">
                         About Our Bookstore
                     </h3>
-                    <p class="text-sm text-gray-400 mb-4">
+                    <p class="text-sm text-stone-900 mb-4">
                         Book Store is the premier destination for book lovers in the Ireland, offering an extensive
                         selection of books and stationery at unbeatable prices. Known for our curated collections and
                         knowledgeable staff, we provide a haven for readers and writers alike.
