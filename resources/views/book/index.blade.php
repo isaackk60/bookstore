@@ -62,7 +62,7 @@
     </form>
 </div> --}}
     <div class="mb-20">
-        <div class="sm:grid grid-cols-3 gap-10 w-4/5 mx-auto py-15">
+        <div class="sm:grid grid-cols-4 gap-10 w-4/5 mx-auto py-15">
             @foreach ($books as $book)
                 
                     <!-- Main book div wrapped in a link except edit and delete -->
@@ -78,7 +78,7 @@
                                 </h2>
 
                                 <div class="text-gray-500">
-                                    Authored By <span class="font-bold italic text-gray-800">{{ $book->author }}</span>,
+                                     By <span class="font-bold italic text-gray-800">{{ $book->author }}</span>,
                                     published
                                     on
                                     {{ date('jS M Y', strtotime($book->publishTime)) }}
@@ -86,7 +86,7 @@
                                 <div class="text-gray-500">
                                     Type: <span class="font-bold italic text-gray-800">{{ $book->type }}</span>
                                 </div>
-                                <?php
+                                {{-- <?php
                                 $wordCount = str_word_count($book->description);
                                 
                                 if ($wordCount > 40) {
@@ -98,9 +98,9 @@
                                 }
                                 
                                 echo "<p class='text-base text-red-700 pt-2 mb-3 leading-6 font-light'>$shortDescription</p>";
-                                ?>
+                                ?> --}}
                                 <div class="text-gray-500">
-                                    Price: €<span class="font-bold italic text-gray-800">{{ $book->price }}</span>
+                                     €<span class="font-bold italic text-gray-800">{{ $book->price }}</span>
                                 </div>
                             </div>
                         </a>
