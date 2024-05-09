@@ -13,9 +13,10 @@ class SalesController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $sales = $user->sales;
+        $sales = $user->sales()->orderBy('order_date', 'DESC')->get();
 
         return view('sales', compact('sales'));
+        
     }
 
     public function create()

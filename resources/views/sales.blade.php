@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="w-full mx-auto text-center">
-        <div class="py-15 border-b border-gray-200 m-20">
-            <h1 class="text-5xl uppercase text-blue-800 font-semibold">
+        <div class="border-b border-gray-200">
+            <h1 class="page_title text-blue-800">
                 Purchase History
             </h1>
         </div>
@@ -16,15 +16,23 @@
             </div>
         @endif
 
-        <div class="mx-auto max-w-7xl px-4">
+        @if (count($sales) == 0)
+           <div class="my-10">
+                <span class="text-3xl font-bold text-gray-700 mb-5">You haven't placed any orders yet</span>
+           </div>
+           <a href="/book" class="bg-slate-800 hover:bg-slate-700 text-white py-2 px-4 rounded mt-2 inline-block ">
+            Go Shopping
+        </a>
+        @else
+        <div class="mx-auto max-w-7xl px-4 saleWidth">
             @foreach ($sales as $sale)
                 <div class="mt-8 p-6 bg-white shadow-md rounded-lg">
-                    <h3 class="text-xl font-semibold mb-4">Order Details</h3>
+                    <h3 class="text-xl font-semibold mb-4">Order Details # {{ $sale->id }}</h3>
                     <p class="font-medium">Order Date: {{ date('Y-m-d H:i:s', strtotime($sale->order_date)) }}</p>
                     <div class="mt-4">
                         <ul class="space-y-4">
                             @foreach ($sale->books as $book)
-                                <li class="bg-gray-100 rounded-lg p-4 flex flex-row items-center gap-4">
+                                <li class="bg-gray-100 rounded-lg p-4 gap-4 saleContainer">
                                     <img class=" h-32 object-cover rounded-md" src="{{ $book['image'] }}" alt="Book Image">
                                     <div class="flex-1">
                                         <p class="text-lg font-semibold">{{ $book['name'] }}</p>
@@ -40,6 +48,7 @@
                 </div>
             @endforeach
         </div>
+        @endif
     </div>
 @endsection
 
