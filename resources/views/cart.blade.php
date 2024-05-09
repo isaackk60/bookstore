@@ -34,6 +34,7 @@
             $cartItemsArray = [];
             @endphp
             @foreach ($cartItems as $cartItem)
+            @if($cartItem->quantity<$cartItem->book->stock)
                 {{-- <div class="flex flex-col md:flex-row justify-center py-5 border-b border-gray-200"> --}}
                 <div class="flex flex-col md:flex-row justify-center items-center py-5 border-b border-gray-200">
                     <div class="w-32 h-48 overflow-hidden aspect-w-3 aspect-h-4 mb-4 md:mb-0">
@@ -101,6 +102,48 @@
                     
                     $totalPrice += $cartItem->book->price * $cartItem->quantity; @endphp
                 </div>
+                @else
+                <div class="flex flex-col md:flex-row justify-center items-center py-5 border-b border-gray-200 soldOutBg">
+                    <div class="w-32 h-48 overflow-hidden aspect-w-3 aspect-h-4 mb-4 md:mb-0">
+                        <img src="{{ asset('images/' . $cartItem->book->image_path) }}" alt="{{ $cartItem->book->bookName }}"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-3/5 ml-8 text-center md:text-left">
+                        <h1 class="text-3xl font-bold text-gray-700 mb-5">
+                            {{ $cartItem->book->bookName }}
+                        </h1>
+                        <p class="text-sm text-gray-700 mb-5 font-bold">
+                            Authored by <span class="font-bold ">{{ $cartItem->book->author }}</span>
+                        </p>
+                        <p class="text-sm text-gray-700 font-bold ">
+                            Price: <span class="font-medium">€ {{ number_format($cartItem->book->price, 2) }}</span>
+                        </p>
+                        <div class="mt-5">
+                            <span class="font-medium">Out of Stock</span>
+                        </div>
+                        @php  $totalPrice +=0; @endphp
+                    </div>
+
+
+                    <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
+                        @if (auth()->user()->id == $cartItem->user_id)
+                            <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
+                                <div>
+                                    <form action="{{ route('cart.destroy', $cartItem->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                                            type="submit">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                @endif
             @endforeach
             <div class="text-lg font-bold py-4">
                 Total price: €{{ number_format($totalPrice, 2) }}

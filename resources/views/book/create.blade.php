@@ -31,14 +31,13 @@
         <input type="number" name="price" step="0.01" placeholder="Price" class="form-input w-full mb-8 text-xl">
         <textarea name="description" placeholder="Description" class="form-textarea w-full h-60"></textarea>
 
-        <div class="bg-grey-lighter pt-15">
+        <div class="bg-grey-lighter mt-8">
             <label id="fileUploadContainer"
-                class="w-44 flex flex-col items-center px-2 py-3 bg-gray-100 rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
+                class="w-44 flex flex-col items-center px-2 py-3 rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
                 <span id="fileUploadText" class="text-base leading-normal">
                     Upload Image
                 </span>
                 <input type="file" name="image" class="hidden" id="fileInput" onchange="fileUploaded()">
-                {{-- <input type="file" name="image" class="hidden" id="fileInput" onchange="fileUploaded()"> --}}
             </label>
         </div>
 
