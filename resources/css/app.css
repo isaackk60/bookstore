@@ -66,17 +66,17 @@
 }
 
 #slide1 {
-    background-image: url('https://media.istockphoto.com/id/615911984/photo/woman-lies-on-the-beach-reading-a-book.jpg?s=170667a&w=0&k=20&c=6_RwpBSOQP4Ov8_u1sCTtMRTNQ0DAoNqdlaVZ-WSTqM=');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://media.istockphoto.com/id/615911984/photo/woman-lies-on-the-beach-reading-a-book.jpg?s=170667a&w=0&k=20&c=6_RwpBSOQP4Ov8_u1sCTtMRTNQ0DAoNqdlaVZ-WSTqM=');
     animation-delay: 0s;
 }
 
 #slide2 {
-    background-image: url('https://images.unsplash.com/photo-1485322551133-3a4c27a9d925?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJvb2tzdG9yZXxlbnwwfHwwfHx8MA%3D%3D');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1485322551133-3a4c27a9d925?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJvb2tzdG9yZXxlbnwwfHwwfHx8MA%3D%3D');
     animation-delay: 5s;
 }
 
 #slide3 {
-    background-image: url('https://images.unsplash.com/photo-1491841651911-c44c30c34548?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8b2xkJTIwYm9va3N8ZW58MHx8MHx8fDA%3D');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1491841651911-c44c30c34548?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8b2xkJTIwYm9va3N8ZW58MHx8MHx8fDA%3D');
     animation-delay: 10s;
 }
 
@@ -141,6 +141,9 @@
     height: auto; 
     margin-right: 20px; 
     border-radius: 4px; 
+}
+.soldOutBg{
+    background-color: #FFF2D7;
 }
 
 

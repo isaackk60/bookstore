@@ -17,7 +17,7 @@
         </div>
     @endif
 
-    <div class="w-4/5 mx-auto pt-15">
+    <div class="w-4/5 mx-auto my-10">
         <form action="/book" method="GET">
             <label for="sort">Sort by:</label>
             <select name="sort" onchange="this.form.submit()" class="ml-3 cursor-pointer pl-2 pr-5 border-2 border-gray-500">
@@ -31,7 +31,7 @@
     
 
     @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
-        <div class="py-10 w-4/5 m-auto">
+        <div class="pb-10 w-4/5 m-auto">
             <a href="/book/create" class="create_book_button">
                 Create Book
             </a>

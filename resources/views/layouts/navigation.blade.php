@@ -7,8 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/') }}">
                         {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
-                        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/c039b824474525.56334ce736de9.jpg  " class="block h-28 w-auto fill-current text-gray-800 navlogo"alt="">
-
+                        <img src="{{ URL('/imageFolder/logoNoBg.png') }}" class="block h-28 w-auto fill-current text-gray-800 navlogo"alt="">
                     </a >
                 </div>
 
