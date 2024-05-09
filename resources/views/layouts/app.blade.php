@@ -134,12 +134,12 @@
                             <li class="mb-2">
                                 <a href="/sales" class="hover:text-gray-200">Order</a>
                             </li>
+                            <li class="mb-2">
+                                <a href="/cart" class="hover:text-gray-200">Cart</a>
+                            </li>
                             @if (Auth::user()->isAdmin())
                                 <li class="mb-2">
                                     <a href="/userinfo" class="hover:text-gray-200">User Detail</a>
-                                </li>
-                                <li class="mb-2">
-                                    <a href="/cart" class="hover:text-gray-200">Cart</a>
                                 </li>
                             @endif
                         @endauth
