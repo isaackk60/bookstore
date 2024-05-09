@@ -146,5 +146,39 @@
     background-color: #FFF2D7;
 }
 
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    background: #F6F1E9;  
+    padding: 10px 0;  
+}
 
+.marquee-content {
+    min-width: 100%; 
+    display: inline-block;  
+    animation: marquee-animation 20s linear infinite;  
+    color: #072541;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    
+}
+
+@keyframes marquee-animation {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.footerBg{
+    background-color: #DAC0A3;  
+}
+
+.container{
+    display:grid;
+    grid-template-columns: 33vw 20vw auto;
+    gap:90px;
+}
 

@@ -42,42 +42,62 @@
                 @yield('content')
                 @endauth
             </main> --}}
-            <footer class="bg-gray-800 py-20 mt-20">
-                <h2 class="text-center text-3xl font-bold text-gray-100 mb-10">Travel All World</h2>
+            <footer class="mt-20 footerBg">
+                <div class="shrink-0 flex items-center flex-col footerImg">
+                    <a href="{{ url('/') }}">
+                        <img src="{{ URL('/imageFolder/logoNoBg.png') }}" class="block h-44 w-auto fill-current text-gray-800 navlogo"alt="">
+                    </a >
+                </div>
+                {{-- <h2 class="text-center text-3xl font-bold text-gray-100 mb-10">ABout Book Shop</h2> --}}
             
-                <nav class="container mx-auto flex flex-wrap justify-center mb-10 footer-nav-links">
+                {{-- <nav class="container mx-auto flex flex-wrap justify-center mb-10 footer-nav-links">
                     <a href="/" class="mr-5 text-lg font-bold text-gray-100 hover:text-gray-200">Home</a>
-                    <a href="/blog" class="mr-5 text-lg font-bold text-gray-100 hover:text-gray-200">Blog</a>
+                    <a href="/book" class="mr-5 text-lg font-bold text-gray-100 hover:text-gray-200">Catalog</a>
                     <a href="/login" class="mr-5 text-lg font-bold text-gray-100 hover:text-gray-200">Login</a>
                     <a href="/register" class="text-lg font-bold text-gray-100 hover:text-gray-200">Register</a>
-                </nav>
+                </nav> --}}
             
-                <div class="container mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <div class="container mx-auto">
                     <div>
-                        <h3 class="text-lg font-bold text-gray-100 mb-4">
-                            About Us
+                        <h3 class="text-xl font-bold text-gray-100 mb-4">
+                            About Our Bookstore
                         </h3>
-            
                         <p class="text-sm text-gray-400 mb-4">
-                            Travel All World is your ultimate destination for travel inspiration, tips, and guides. Explore the world with us and discover new adventures!
+                            Book Store is the premier destination for book lovers in the Ireland, offering an extensive selection of books and stationery at unbeatable prices. Known for our curated collections and knowledgeable staff, we provide a haven for readers and writers alike.
                         </p>
+                        <div class="text-xl font-bold text-gray-100 mb-4">
+                            <h3>Keep In Touch</h3>
+                            <ul>
+                                <li class="text-sm text-gray-400 ">Mail us: <a href="mailto:D00234545@student.dkit.ie">Kim Fui leung</a></li>
+                                <li class="text-sm text-gray-400 mb-4">Mail us: <a href="mailto:D00251825@student.dkit.ie">Jianfeng Han</a></li>
+                                <li class="text-sm text-gray-400 mb-4">Book Store Address: Institute of Technology, Dublin Rd, Marshes Upper, Dundalk, Co. Louth, A91 K584</li>
+                            </ul>
+                        </div>
+                    
             
                         <!-- Social Media Links -->
-                        <div class="flex items-center">
-                            <a href="#" class="text-gray-400 hover:text-gray-200 mr-4"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-gray-200 mr-4"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-gray-200 mr-4"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-gray-200"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+                        
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-100 mb-4">
+                            Featured Books
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-gray-400 hover:text-gray-200">
+                                <a href="/book/the-great-gatsby">The Great Gatsby - F. Scott Fitzgerald</a>
+                            </li>
+                            <li class="text-sm text-gray-400 hover:text-gray-200">
+                                <a href="/book/1984">1984 - George Orwell</a>
+                            </li>
+                            <li class="text-sm text-gray-400 hover:text-gray-200">
+                                <a href="/book/to-kill-a-mockingbird">To Kill a Mockingbird - Harper Lee</a>
+                            </li>
+                        </ul>
                     </div>
             
-                    <!-- Lego Photo in the middle -->
-                    <div class="flex justify-center items-center">
-                        <img src="https://images.squarespace-cdn.com/content/v1/5a05c7feedaed85978bb9947/ac3caaf7-743e-48c9-b8bb-487f60de2d53/AWJ_Logo_RGB_WHT.png?format=1500w" alt="Lego Photo" class="h-24">
-                    </div>
             
                     <!-- Quick Links on the right -->
-                    <div class="text-right">
+                    <div>
                         <h3 class="text-lg font-bold text-gray-100 mb-4">
                             Quick Links
                         </h3>
@@ -87,21 +107,22 @@
                                 <a href="/" class="hover:text-gray-200">Home</a>
                             </li>
                             <li class="mb-2">
-                                <a href="/map" class="hover:text-gray-200">Map</a>
+                                <a href="/reviews" class="hover:text-gray-200">Book Reviews</a>
                             </li>
                             <li class="mb-2">
-                                <a href="/picturescollection" class="hover:text-gray-200">City Gallery</a>
+                                <a href="/authors" class="hover:text-gray-200">Meet the Authors</a>
                             </li>
                             <li class="mb-2">
-                                <a href="/about" class="hover:text-gray-200">About</a>
+                                <a href="/events" class="hover:text-gray-200">Events</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <p class="text-center text-xs text-gray-100 mt-10">
-                    &copy 2017-2021 Travel All World. All Rights Reserved
+                    &copy 2017-2021 Explore Our Books. All Rights Reserved
                 </p>
             </footer>
+            
         </div>
     </body>
 </html>

@@ -1,5 +1,10 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
+    <!-- Scrolling Subtitle -->
+    <div class="marquee">
+        <p class="marquee-content">Only €20 and free shipping on all books! Order now!</p>
+        <p class="marquee-content">New Releases Available! Get the latest from your favorite authors now!</p>
+    </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-28">
             <div class="flex">
