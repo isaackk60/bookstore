@@ -42,7 +42,7 @@
             "Infinite Jest" by David Foster Wallace offers an in-depth exploration of human emotions and modern society, a
             must-read for lovers of complex narratives and rich, engaging storytelling.
         </p>
-        <a href="/book" class="bg-slate-800 text-white py-2 px-4 rounded mt-2 inline-block ">
+        <a href="/book" class="bg-slate-800 hover:bg-slate-700 text-white py-2 px-4 rounded mt-2 inline-block ">
             Learn More
         </a>
     </div>

@@ -145,6 +145,20 @@
 .soldOutBg{
     background-color: #FFF2D7;
 }
+.saleContainer{
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+.saleWidth{
+    width:60vw;
+}
+.navLink a{
+    font-size: 16px;
+}
+.navLink form{
+    margin:0;
+}
 
 .marquee {
     overflow: hidden;

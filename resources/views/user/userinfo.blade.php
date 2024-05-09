@@ -4,7 +4,7 @@
 @section('content')
 <div class="mb-20">
     <div class="w-4/5 m-auto text-center">
-    <h1 class="page_title">User Information</h1>
+        <h1 class="page_title text-blue-800">User Information</h1>
     <table class="table-auto w-full">
         <thead>
             <tr>
