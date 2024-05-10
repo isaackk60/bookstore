@@ -35,12 +35,12 @@ This web application is made using Laravel framework and runs as an online books
 
 ## Installation
 
-To run the Travel Blog Laravel project on your local machine, follow these steps:
+To run the **Book Store Laravel** project on your local machine, follow these steps:
 
 ## Requirements
 +	PHP 7.3 or higher <br>
 +	Node 12.13.0 or higher <br>
-+	Xampp<br>
++	Xampp/MySql<br>
 +   Vs Code (code editor)<br>
 
 ## Create and Configure Laravel Environment
@@ -103,9 +103,15 @@ Follow these steps to set up your development environment on your local machine:
     npm run dev
     ```
 
-Each step is numbered and includes a brief description along with the commands to run, making it easier for users to follow. Using fenced code blocks (```) with a specified language (e.g., `bash` or `javascript`) enhances readability and syntax highlighting in Markdown viewers that support it, such as GitHub.
+7. **Starter kit for Laravel LOGIN AND REGISTER**
+    This Starter Kit is referenced from [Laravel starter kits website](https://laravel.com/docs/11.x/starter-kits).
 
-
+## Web page description and function introduction
+ + **Book Browse, Search, and Sort:** Users can effortlessly browse, search, and sort books using a variety of criteria, including price and publication date, ensuring they find the books they need quickly and easily.
+ + **User Authentication:** The system supports differentiated access levels, with distinct functionalities for guests, registered users, and administrators, enhancing security and user experience.
+ + **User Detail:** Administrators have the ability to view detailed purchase records and user information, enabling effective management and oversight of platform activity.
+ + **Shopping Cart:** To ensure fair distribution and manage inventory effectively, the system limits purchases to a maximum of 10 copies of each book per transaction.
+ + **Payment Functionality:** While the checkout process includes a simulation that displays the total price, actual payment processing is not implemented,but the total price is displayed in the database, allowing for demonstration purposes without real transactions.
 
 ## About Laravel
 
