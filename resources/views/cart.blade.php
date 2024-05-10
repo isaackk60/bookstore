@@ -48,10 +48,12 @@
                     @if ($cartItem->quantity <= $cartItem->book->stock)
                         {{-- <div class="flex flex-col md:flex-row justify-center py-5 border-b border-gray-200"> --}}
                         <div class="flex flex-col md:flex-row justify-center items-center py-5 border-b border-gray-200">
+                            <a href="/book/{{ $cartItem->book->slug }}">
                             <div class="w-32 h-48 overflow-hidden aspect-w-3 aspect-h-4 mb-4 md:mb-0">
                                 <img src="{{ asset('images/' . $cartItem->book->image_path) }}"
                                     alt="{{ $cartItem->book->bookName }}" class="w-full h-full object-cover">
                             </div>
+                        </a>
                             <div class="w-3/5 ml-8 text-center md:text-left">
                                 <h1 class="text-3xl font-bold text-gray-700 mb-5">
                                     {{ $cartItem->book->bookName }}
@@ -63,25 +65,25 @@
                                     Price: <span class="font-medium">€ {{ number_format($cartItem->book->price, 2) }}</span>
                                 </p>
 
-                                {{-- <div class="flex items-center mt-4">
-                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST"
-                                        class="flex items-center updateForm">
+                                <div class="flex items-center mt-4">
+                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" class="updateForm">
                                         @csrf
                                         @method('PUT')
-                                        <button type="button"
-                                            class="text-lg px-3 py-1 border rounded-l-md border-gray-300 bg-gray-200 hover:bg-gray-300"
-                                            onclick="changeQuantity(false, '{{ $cartItem->id }}', {{ $cartItem->book->stock }})">-</button>
-                                        <input type="text" name="quantity" value="{{ $cartItem->quantity }}"
-                                            class="w-12 text-center border-t border-b border-gray-300"
-                                            id="quantity-{{ $cartItem->id }}" readonly>
-                                        <button type="button"
-                                            class="text-lg px-3 py-1 border rounded-r-md border-gray-300 bg-gray-200 hover:bg-gray-300"
-                                            onclick="changeQuantity(true, '{{ $cartItem->id }}', {{ $cartItem->book->stock }})">+</button>
+                                        <label>Quantity: </label>
+                                        <select name="quantity" class="form-select w-full mb-8 text-xl"
+                                            onchange="updateTotalPrice(this,{{ $cartItem->book->price }})"  id="quantity">
+                                            @for ($availableStock = 1; $availableStock <= min(10, $cartItem->book->stock); $availableStock++)
+                                                <option value="{{ $availableStock }}"
+                                                    {{ $cartItem->quantity == $availableStock ? 'selected' : '' }}>
+                                                    {{ $availableStock }}
+                                                </option>
+                                            @endfor
+                                        </select>
                                         <input type="hidden" name="total_price" class="total_price"
                                             value="{{ $cartItem->book->price * $cartItem->quantity }}">
                                     </form>
-                                </div> --}}
-                                <div class="flex items-center mt-4">
+                                </div>
+                                {{-- <div class="flex items-center mt-4">
                                     <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" class="flex items-center updateForm">
                                         @csrf
                                         @method('PUT')
@@ -93,7 +95,7 @@
                                                 onclick="changeQuantity(true, '{{ $cartItem->id }}', {{ $cartItem->book->stock }}, 10)">+</button>
                                         <input type="hidden" name="total_price" class="total_price" value="{{ $cartItem->book->price * $cartItem->quantity }}">
                                     </form>
-                                </div>
+                                </div> --}}
                                 <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
                                     Total Price: {{ $cartItem->book->price * $cartItem->quantity }}
                                 </p>
@@ -129,10 +131,12 @@
                     @else
                         <div
                             class="flex flex-col md:flex-row justify-center items-center py-5 border-b border-gray-200 soldOutBg">
+                            <a href="/book/{{ $cartItem->book->slug }}">
                             <div class="w-32 h-48 overflow-hidden aspect-w-3 aspect-h-4 mb-4 md:mb-0">
                                 <img src="{{ asset('images/' . $cartItem->book->image_path) }}"
                                     alt="{{ $cartItem->book->bookName }}" class="w-full h-full object-cover">
                             </div>
+                            </a>
                             <div class="w-3/5 ml-8 text-center md:text-left">
                                 <h1 class="text-3xl font-bold text-gray-700 mb-5">
                                     {{ $cartItem->book->bookName }}
@@ -144,9 +148,16 @@
                                     Price: <span class="font-medium">€
                                         {{ number_format($cartItem->book->price, 2) }}</span>
                                 </p>
+                                @if($cartItem->book->stock==0)
                                 <div class="mt-5">
                                     <span class="font-medium">Out of Stock</span>
                                 </div>
+                                @else
+                                <div class="mt-5">
+                                    <span class="font-medium">Only {{ $cartItem->book->stock }} left</span>
+                                </div>
+                                @endif
+
                                 @php  $totalPrice +=0; @endphp
                             </div>
 
@@ -183,7 +194,7 @@
 
                 <input type="hidden" name="books" value="{{ json_encode($cartItemsArray) }}">
 
-                <input type="hidden" name="order_price" value="{{ number_format($totalPrice, 2) }}">
+                <input type="hidden" name="order_price" value="{{ $totalPrice }}">
 
                 <div class="flex justify-center">
                     <button type="submit"
@@ -223,28 +234,4 @@
 
     //     quantityInput.closest('.updateForm').submit(); // Automatically submit the form
     // }
-    function changeQuantity(isIncrement, id, maxStock, userLimit) {
-        const quantityInput = document.getElementById('quantity-' + id);
-        let currentQuantity = parseInt(quantityInput.value);
-        let newQuantity = isIncrement ? currentQuantity + 1 : currentQuantity - 1;
-
-        if (newQuantity > maxStock) {
-            return; // Stop further execution if trying to exceed the stock
-        }
-
-        if (newQuantity > userLimit) {
-            return; // Stop further execution if trying to exceed the user purchase limit
-        }
-
-        if (newQuantity < 1) {
-            return; // Stop further execution if trying to have less than one item
-        }
-
-        quantityInput.value = newQuantity;
-
-        updateTotalPrice(quantityInput, maxStock); 
-
-        quantityInput.closest('.updateForm').submit();
-    }
-
 </script>
