@@ -245,7 +245,7 @@ class BooksController extends Controller
         }
 
         return redirect()->route('book.index')
-            ->with('message', 'Your post has been updated!');
+            ->with('message', 'Your book has been updated!');
     }
 
     public function destroy($slug)

@@ -25,26 +25,26 @@ class ReviewsController extends Controller
         return back()->with('message','Your review has been added!');
     }
 
-    public function update(Request $request, $id)
-    {
-        $review = Review::findOrFail($id);
+    // public function update(Request $request, $id)
+    // {
+    //     $review = Review::findOrFail($id);
 
-        if ($request->has('cancelButton')) {
-            return back()->with('message','Review editing canceled.');
-            // if have time can try to use redirect() id to review part 
-            //return redirect()->route('route_name', ['#id']);
-        }else{
+    //     if ($request->has('cancelButton')) {
+    //         return back()->with('message','Review editing canceled.');
+    //         // if have time can try to use redirect() id to review part 
+    //         //return redirect()->route('route_name', ['#id']);
+    //     }else{
 
-        $request->validate([
-            'content' => 'required',
-        ]);
+    //     $request->validate([
+    //         'content' => 'required',
+    //     ]);
 
-        $review->content = $request->input('content');
-        $review->save();
+    //     $review->content = $request->input('content');
+    //     $review->save();
 
-        return back()->with('message','Your review has been updated!');
-    }
-    }
+    //     return back()->with('message','Your review has been updated!');
+    // }
+    // }
 
 
 
