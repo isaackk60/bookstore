@@ -6,6 +6,7 @@ use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ReviewsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainPageController::class, 'index']);
@@ -16,7 +17,10 @@ Route::resource('/cart', CartController::class);
 Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');
 Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); 
-Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update'); 
+Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+
+Route::resource('/reviews', ReviewsController::class);
+Route::put('/reviews/{review}', [ReviewsController::class, 'update'])->name('reviews.update');
 
 Route::middleware(['auth'])->get('/users/{user}/sales', [AdminController::class, 'showSales'])->name('user.sales');
 

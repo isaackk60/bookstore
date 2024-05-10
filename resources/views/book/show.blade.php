@@ -63,31 +63,32 @@
                 <div class="text-lg font-semibold pb-3">Page: {{ $book->pages }}</div>
                 <div class="text-lg font-semibold pb-3 ">Price: {{ $book->price }}</div>
                 @if ($book->stock > 0)
-                <form action="/cart" method="POST">
-                    @csrf
-                    <input type="hidden" name="book_id" value="{{ $book->id }}">
-                    <input type="hidden" name="total_price" value="{{ $book->price }}">
+                    <form action="/cart" method="POST">
+                        @csrf
+                        <input type="hidden" name="book_id" value="{{ $book->id }}">
+                        <input type="hidden" name="total_price" value="{{ $book->price }}">
 
-                    <select name="quantity" class="form-select w-full mb-8 text-xl">
-                        @for ($availableStock = 1; $availableStock <= min(10, $book->stock); $availableStock++)
-                            <option value="{{ $availableStock }}">{{ $availableStock }}</option>
-                        @endfor
-                    </select>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold uppercase py-2 px-4 rounded">
-                        add to cart
-                    </button>
-                </form>
+                        <select name="quantity" class="form-select w-full mb-8 text-xl">
+                            @for ($availableStock = 1; $availableStock <= min(10, $book->stock); $availableStock++)
+                                <option value="{{ $availableStock }}">{{ $availableStock }}</option>
+                            @endfor
+                        </select>
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold uppercase py-2 px-4 rounded">
+                            add to cart
+                        </button>
+                    </form>
                 @elseif($book->stock <= 0)
-                <h3>The book is sold out</h3>
-@endif
+                    <h3>The book is sold out</h3>
+                @endif
             </div>
         </div>
         <div class="w-4/5 m-auto pt-10">
             <h3 class="text-2xl font-semibold">Description</h3>
             {{-- <span class="text-gray-500">
-        By <span class="font-bold italic text-gray-800">{{ $book->user->name }}</span>, Created on
-        {{ date('jS M Y', strtotime($book->updated_at)) }}
-    </span> --}}
+            By <span class="font-bold italic text-gray-800">{{ $book->user->name }}</span>, Created on
+            {{ date('jS M Y', strtotime($book->updated_at)) }}
+            </span> --}}
 
             {{-- <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light"> --}}
             {{-- {{ $book->description }} --}}
@@ -102,22 +103,108 @@
 
 
     </div>
+    <div class="about-background-color">
+        <div class="w-4/5 m-auto text-left py-7 mt-14">
+            <div class="w-4/5 m-auto mb-7">
+                <h3 class="text-2xl font-semibold">Customers Reviews ({{ count($book->reviews) }})</h3>
+
+                @if ($book->reviews->isNotEmpty())
+                    @php
+                        $averageRating = $book->reviews->avg('rating');
+                    @endphp
+                    <div>
+                        <p class="text-3xl py-4 leading-8 font-bold">
+                            {{ number_format($averageRating, 1) }}</p>
+                    </div>
+                @endif
+                @foreach ($book->reviews as $review)
+                    <div class="review-container border-b border-gray-300">
+                        <div class="sm:flex sm:h-10 sm:flex-row sm:items-center sm:justify-between">
+                            <div class="reviewTime text-gray-500">
+                                <span class="font-bold italic text-gray-800">{{ $review->user->name }}</span>
+                            </div>
+
+                            @if (Auth::check() && ($review->user_id === Auth::id()|| Auth::user()->isAdmin()))
+                                <div
+                                    class="editButtonContainer sm:flex sm:h-10 sm:flex-row sm:items-center sm:justify-between">
+                                    <form action="{{ route('reviews.destroy', $review) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="uppercase text-sm font-extrabold py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300">Delete</button>
+                                    </form>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="star-icon-display">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $review->rating)
+                                    <span class="fa fa-star"></span>
+                                @else
+                                    <span class="fa fa-star noRatingColor"></span>
+                                @endif
+                            @endfor
+                        </div> 
+                        <div class="reviewTime text-gray-500">
+                            Reviewed on
+                            {{ date('jS M Y', strtotime($review->updated_at)) }}
+                        </div>                       
+                        <p class="editReviewContent text-xl text-gray-700 leading-8 font-normal py-2">
+                            {{ $review->content }}</p>
+
+                        
+                    </div>
+                @endforeach
+                @if ($book->reviews->isEmpty())
+                    <div class="mx-auto py-5">
+                        <h3 class="text-2xl font-medium text-center">There are no reviews yet</h3>
+                    </div>
+                @endif
+
+                @if (Auth::check())
+                <h3 class="text-2xl font-semibold py-4">Create Reviews</h3>
+                    <form class="flex flex-col items-start" action="{{ route('reviews.store') }}" method="POST">
+                        @csrf
+                        <div class="star-icon">
+                            <input type="radio" id="rating1" name="rating" value="1">
+                            <label for="rating1" class="fa fa-star"></label>
+                            <input type="radio" id="rating2" name="rating" value="2">
+                            <label for="rating2" class="fa fa-star"></label>
+                            <input type="radio" id="rating3" name="rating" value="3">
+                            <label for="rating3" class="fa fa-star"></label>
+                            <input type="radio" id="rating4" name="rating" value="4">
+                            <label for="rating4" class="fa fa-star"></label>
+                            <input type="radio" id="rating5" name="rating" value="5">
+                            <label for="rating5" class="fa fa-star"></label>
+                        </div>
+
+
+                        <input type="hidden" name="book_id" value="{{ $book->id }}">
+                        <textarea id="reviewContent" name="content" placeholder="Add a Comment..."
+                            class="p-2 leading-7 bg-transparent block border-2 w-full h-20 text-xl outline-none mt-9 mb-5 bg-gray-100">No comment provided</textarea>
+                        <button id="reviewButton" type="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold uppercase py-2 px-4 rounded">Review</button>
+                    </form>
+                @endif
+            </div>
+        </div>
+    </div>
     {{-- <div class="about-background-color">
 <div class="w-4/5 m-auto text-left py-7 mt-14">
     <div class="w-4/5 m-auto mb-7">
         <h2 class="text-3xl font-semibold">Comments</h2>
 
-        @foreach ($book->comments as $comment)
-            <div class="comment-container">
-                <p class="editCommentContent text-xl text-gray-700 pt-8 leading-8 font-normal pb-2">
-                    {{ $comment->content }}</p>
+        @foreach ($book->reviews as $review)
+            <div class="review-container">
+                <p class="editReviewContent text-xl text-gray-700 pt-8 leading-8 font-normal pb-2">
+                    {{ $review->content }}</p>
 
-                <form action="{{ route('comments.update', $comment->id) }}" method="POST"
-                    class="hidden inputEditCommentForm ">
+                <form action="{{ route('reviews.update', $review->id) }}" method="POST"
+                    class="hidden inputEditReviewForm ">
                     @csrf
                     @method('PUT')
                     <textarea name="content" placeholder="Add a Comment..."
-                        class="inputEditComment p-2 leading-7 bg-transparent block border-2 w-full h-20 text-xl outline-none my-9 bg-gray-100">{{ $comment->content }}</textarea>
+                        class="inputEditComment p-2 leading-7 bg-transparent block border-2 w-full h-20 text-xl outline-none my-9 bg-gray-100">{{ $review->content }}</textarea>
                     <button type="submit"
                         class="editCommentButton uppercase button-color text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">Save</button>
                     <button id="cancelButton" name="cancelButton"
@@ -125,18 +212,18 @@
                 </form>
 
                 <div class="sm:flex sm:h-10 sm:flex-row sm:items-center sm:justify-between">
-                    <div class="commentTime text-gray-500">
-                        By <span class="font-bold italic text-gray-800">{{ $comment->user->name }}</span>,
+                    <div class="reviewTime text-gray-500">
+                        By <span class="font-bold italic text-gray-800">{{ $review->user->name }}</span>,
                         Commented on
-                        {{ date('jS M Y', strtotime($comment->updated_at)) }}
+                        {{ date('jS M Y', strtotime($review->updated_at)) }}
                     </div>
 
-                    @if (Auth::check() && $comment->user_id === Auth::id())
+                    @if (Auth::check() && $review->user_id === Auth::id())
                         <div class="editButtonContainer sm:flex sm:h-10 sm:flex-row sm:items-center sm:justify-between">
                             <button
                                 class="editButton text-white mr-3 edit-button-color px-3 py-2.5 rounded">Edit</button>
 
-                            <form action="{{ route('comments.destroy', $comment) }}" method="POST">
+                            <form action="{{ route('reviews.destroy', $review) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-white delete-button-color p-3 rounded">Delete</button>
@@ -146,19 +233,19 @@
                 </div>
             </div>
         @endforeach
-        @if ($book->comments->isEmpty())
+        @if ($book->reviews->isEmpty())
             <div class="mx-auto py-5">
-                <h3 class="text-2xl font-medium text-center">There are no comments yet</h3>
+                <h3 class="text-2xl font-medium text-center">There are no reviews yet</h3>
             </div>
         @endif
 
         @if (Auth::check())
-            <form action="{{ route('comments.store') }}" method="POST">
+            <form action="{{ route('reviews.store') }}" method="POST">
                 @csrf
-                <input type="hidden" name="post_id" value="{{ $book->id }}">
-                <textarea id="commentContent" name="content" placeholder="Add a Comment..."
+                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                <textarea id="reviewContent" name="content" placeholder="Add a Comment..."
                     class="p-2 leading-7 bg-transparent block border-2 w-full h-20 text-xl outline-none mt-9 mb-5 bg-gray-100"></textarea>
-                <button id="commentButton" type="submit"
+                <button id="reviewButton" type="submit"
                     class="uppercase button-color text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl mb-4 hidden">Comment</button>
             </form>
         @endif
@@ -190,81 +277,86 @@ enctype="multipart/form-data">
 </button>
 </form> --}}
     {{-- @endif --}}
-    <script>
+    {{-- <script>
         document.getElementById('quantity').addEventListener('change', function() {
             let quantity = this.value;
             let totalPrice = quantity * {{ $book->price }};
             document.getElementById('total_price').value = totalPrice;
         });
-    </script>
+    </script> --}}
 
     <script>
-        const likeForm = document.getElementById('likeForm');
-        const likeButton = document.getElementById('likeButton');
-        const commentContent = document.getElementById('commentContent');
-        const commentButton = document.getElementById('commentButton');
+        // document.getElementById('quantity').addEventListener('change', function() {
+        //     let quantity = this.value;
+        //     let totalPrice = quantity * {{ $book->price }};
+        //     document.getElementById('total_price').value = totalPrice;
+        // });
+        // const likeForm = document.getElementById('likeForm');
+        // const likeButton = document.getElementById('likeButton');
+        const reviewContent = document.getElementById('reviewContent');
+        const reviewButton = document.getElementById('reviewButton');
 
-        const cancelButtons = document.querySelectorAll('.cancelButton');
-        const editButtons = document.querySelectorAll('.editButton');
-
-
-        editButtons.forEach(editButton => {
-            editButton.addEventListener('click', function(event) {
-                const commentContainer = event.target.closest('.comment-container');
-                const commentContent = commentContainer.querySelector('.editCommentContent');
-                const editForm = commentContainer.querySelector('.inputEditCommentForm');
-                const commentTimes = commentContainer.querySelector('.commentTime');
-                const editButtonContainer = commentContainer.querySelector('.editButtonContainer');
-
-                commentContent.style.display = 'none';
-                commentTimes.style.display = 'none';
-                editForm.style.display = 'block';
-                editButtonContainer.style.display = 'none';
-            });
-        });
+        // const cancelButtons = document.querySelectorAll('.cancelButton');
+        // const editButtons = document.querySelectorAll('.editButton');
 
 
-        cancelButtons.forEach(cancelButton => {
-            cancelButton.addEventListener('click', function(event) {
-                const commentContainer = event.target.closest('.comment-container');
-                const commentContent = commentContainer.querySelector('.editCommentContent');
-                const editForm = commentContainer.querySelector('.inputEditCommentForm');
-                const commentTimes = commentContainer.querySelector('.commentTime');
-                const editButtonContainer = commentContainer.querySelector('.editButtonContainer');
+        // editButtons.forEach(editButton => {
+        //     editButton.addEventListener('click', function(event) {
+        //         const reviewContainer = event.target.closest('.review-container');
+        //         const reviewContent = reviewContainer.querySelector('.editReviewContent');
+        //         const editForm = reviewContainer.querySelector('.inputEditReviewForm');
+        //         const reviewTimes = reviewContainer.querySelector('.reviewTime');
+        //         const editButtonContainer = reviewContainer.querySelector('.editButtonContainer');
 
-                commentContent.style.display = 'block';
-                commentTimes.style.display = 'block';
-                editForm.style.display = 'none';
-                editButtonContainer.style.display = 'block';
-            });
-        });
+        //         reviewContent.style.display = 'none';
+        //         reviewTimes.style.display = 'none';
+        //         editForm.style.display = 'block';
+        //         editButtonContainer.style.display = 'none';
+        //     });
+        // });
 
 
-        likeForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+        // cancelButtons.forEach(cancelButton => {
+        //     cancelButton.addEventListener('click', function(event) {
+        //         const reviewContainer = event.target.closest('.review-container');
+        //         const reviewContent = reviewContainer.querySelector('.editReviewContent');
+        //         const editForm = reviewContainer.querySelector('.inputEditReviewForm');
+        //         const reviewTimes = reviewContainer.querySelector('.reviewTime');
+        //         const editButtonContainer = reviewContainer.querySelector('.editButtonContainer');
 
-            const actionUrl = likeButton.classList.contains('liked') ? '/blog/{{ $book->slug }}/dislike' :
-                '/blog/{{ $book->slug }}/like';
+        //         reviewContent.style.display = 'block';
+        //         reviewTimes.style.display = 'block';
+        //         editForm.style.display = 'none';
+        //         editButtonContainer.style.display = 'block';
+        //     });
+        // });
 
-            likeForm.action = actionUrl;
 
-            likeForm.submit();
-        });
+        // likeForm.addEventListener('submit', function(event) {
+        //     event.preventDefault();
 
-        likeButton.addEventListener('click', function() {
-            likeButton.classList.toggle('liked');
-        });
+        //     const actionUrl = likeButton.classList.contains('liked') ? '/blog/{{ $book->slug }}/dislike' :
+        //         '/blog/{{ $book->slug }}/like';
 
-        commentContent.addEventListener('input', () => {
-            if (commentContent.value.trim() === "") {
-                commentButton.disabled = true;
-                if (!commentButton.classList.contains('hidden')) {
-                    commentButton.classList.add('hidden');
+        //     likeForm.action = actionUrl;
+
+        //     likeForm.submit();
+        // });
+
+        // likeButton.addEventListener('click', function() {
+        //     likeButton.classList.toggle('liked');
+        // });
+
+        reviewContent.addEventListener('input', () => {
+            if (reviewContent.value.trim() === "") {
+                reviewButton.disabled = true;
+                if (!reviewButton.classList.contains('hidden')) {
+                    reviewButton.classList.add('hidden');
                 }
 
             } else {
-                commentButton.disabled = false;
-                commentButton.classList.remove('hidden');
+                reviewButton.disabled = false;
+                reviewButton.classList.remove('hidden');
             }
         });
     </script>

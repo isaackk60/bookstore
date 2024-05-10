@@ -29,4 +29,9 @@ class Book extends Model
         ];
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class); // Review table must have a belongTo no need another database table
+    }
+
 }
