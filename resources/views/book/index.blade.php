@@ -4,7 +4,7 @@
     <div class="w-4/5 m-auto text-center">
         <div class="border-b border-gray-200">
             <h1 class="page_title text-blue-800 text-4xl font-semibold uppercase" style="font-family: 'Merriweather', serif;">
-               All Books
+                All Books
             </h1>
         </div>
     </div>
@@ -18,8 +18,10 @@
     @endif
 
     <div class="w-4/5 m-auto mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
-        <img src="https://www.bookstation.ie/wp-content/uploads/2024/03/BTHP-2403.jpg" alt="Book Cover" class="rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-        <img src="https://www.bookstation.ie/wp-content/uploads/2024/04/The-Trial.jpg" alt="Book Cover" class="rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <img src="https://www.bookstation.ie/wp-content/uploads/2024/03/BTHP-2403.jpg" alt="Book Cover"
+            class="rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <img src="https://www.bookstation.ie/wp-content/uploads/2024/04/The-Trial.jpg" alt="Book Cover"
+            class="rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
     </div>
     <span class="line"></span>
 
@@ -34,25 +36,31 @@
     <div class="w-4/5 mx-auto my-10 flex justify-between items-center">
         <form action="/book" method="GET">
             <label>Sort by:</label>
-            <select name="sort" onchange="this.form.submit()" class="ml-3 cursor-pointer pl-2 pr-8 border-2 border-gray-500">
-                <option value="publishTime" {{ request()->get('sort') == 'publishTime' ? 'selected' : '' }}>Most Recent</option>
-                <option value="publishTime_asc" {{ request()->get('sort') == 'publishTime_asc' ? 'selected' : '' }}>Oldest First</option>
-                <option value="price_asc" {{ request()->get('sort') == 'price_asc' ? 'selected' : '' }}>Price Low to High</option>
-                <option value="price_desc" {{ request()->get('sort') == 'price_desc' ? 'selected' : '' }}>Price High to Low</option>
+            <select name="sort" onchange="this.form.submit()"
+                class="ml-3 cursor-pointer pl-2 pr-8 border-2 border-gray-500">
+                <option value="publishTime" {{ request()->get('sort') == 'publishTime' ? 'selected' : '' }}>Most Recent
+                </option>
+                <option value="publishTime_asc" {{ request()->get('sort') == 'publishTime_asc' ? 'selected' : '' }}>Oldest
+                    First</option>
+                <option value="price_asc" {{ request()->get('sort') == 'price_asc' ? 'selected' : '' }}>Price Low to High
+                </option>
+                <option value="price_desc" {{ request()->get('sort') == 'price_desc' ? 'selected' : '' }}>Price High to Low
+                </option>
             </select>
             <input type="hidden" name="query" value="{{ request()->get('query') }}">
         </form>
-    
+
         <form action="/book" method="GET">
             <input type="hidden" name="sort" value="{{ request()->get('sort') }}">
-            <input type="text" name="query" value="{{ request()->get('query') }}" placeholder="Search" class="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500">
+            <input type="text" name="query" value="{{ request()->get('query') }}" placeholder="Search"
+                class="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500">
             <button type="submit" class="ml-2 px-4 py-2.5 create_book_button text-white rounded-md hover:bg-blue-600">
                 <i class="fas fa-search"></i>
             </button>
         </form>
     </div>
-    
-   
+
+
     <div class="mb-20">
         <div class="sm:grid grid-cols-4 gap-10 w-4/5 mx-auto py-15">
             @foreach ($books as $book)
@@ -72,6 +80,24 @@
                             <p class="text-gray-500 mt-2 text-center">
                                 By <span class="font-bold text-gray-800">{{ $book->author }}</span>
                             </p>
+                            @if ($book->reviews->isNotEmpty())
+                                @php
+                                    $averageRating = $book->reviews->avg('rating');
+                                @endphp
+
+                                <div class="star-icon-display text-center">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $averageRating)
+                                            <span class="fa fa-star"></span>
+                                        @elseif ($i - 1 < $averageRating && $i > $averageRating)
+                                        <span class="fa-solid fa-star-half halfStar"></span>
+                                        @endif
+                                    @endfor
+                                </div>
+                            @endif
+
+
+
                             <p class="text-gray-500 text-center mt-2">
                                 Type: <span class="font-bold italic text-gray-800 ">{{ $book->type }}</span>
                             </p>
