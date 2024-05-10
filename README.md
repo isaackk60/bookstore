@@ -22,6 +22,17 @@ This web application is made using Laravel framework and runs as an online books
     **D00251825** (Jianfeng Han) and **D00234545** (Kim Fui Leung)<br>
 
 ## Table Of Contents
+1. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
+2. [Requirements](#Requirements)
+3. [Web Description And Features](#web-page-description-and-function-introduction)
+4. [Screenshots](#ScreenShots)
+5. [Installation](#installation)
+	- [Before Starting](#before-starting)
+6. [Contact](#Contact)
+7. [Reference](#Reference)
+8. [Contributing](#Contributing)
+9. [License](#License)
+
 
 
 ## Technologies / Programming Languages Used
