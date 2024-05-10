@@ -37,11 +37,11 @@ This web application is made using Laravel framework and runs as an online books
 
 
 ## Technologies / Programming Languages Used
-•	Laravel 8 <br>
-•	JavaScript<br>
-•	Tailwind CSS <br>
-•	MySQL<br>
-•	PHP<br>
++	Laravel 8 <br>
++	JavaScript<br>
++	Tailwind CSS <br>
++	MySQL<br>
++	PHP<br>
 
 ## Requirements
 +	PHP 8.3 or higher <br>
