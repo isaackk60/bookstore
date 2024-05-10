@@ -22,29 +22,17 @@ This web application is made using Laravel framework and runs as an online books
     **D00251825** (Jianfeng Han) and **D00234545** (Kim Fui Leung)<br>
 
 ## Table Of Contents
-1. [Web Description](#web-page-description-and-function-introduction)
-2. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
-3. [Installation](#installation)
-4. [Requirements](#Requirements)
-5. [Configure Laravel Environment](#create-and-configure-laravel-environment)
-6. [Screenshots](#ScreenShots)
-
-2. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
-3. [Features](#Features)
-4. [Screenshots](#Screenshots)
+1. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
+2. [Requirements](#Requirements)
+3. [Web Description And Features](#web-page-description-and-function-introduction)
+4. [Screenshots](#ScreenShots)
 5. [Installation](#installation)
-    - [Before Starting](#before-starting)
-6. [Authors](#Authors)
-7. [Contact](#Contact)
+- [Before Starting](#before-starting)
+6. [Contact](#Contact)
+7. [Reference](#Reference)
 8. [Contributing](#Contributing)
 9. [License](#License)
 
-## Web page description and function introduction
- + **Book Browse, Search, and Sort:** Users can effortlessly browse, search, and sort books using a variety of criteria, including price and publication date, ensuring they find the books they need quickly and easily.
- + **User Authentication:** The system supports differentiated access levels, with distinct functionalities for guests, registered users, and administrators, enhancing security and user experience.
- + **User Detail:** Administrators have the ability to view detailed purchase records and user information, enabling effective management and oversight of platform activity.
- + **Shopping Cart:** To ensure fair distribution and manage inventory effectively, the system limits purchases to a maximum of 10 copies of each book per transaction.
- + **Payment Functionality:** While the checkout process includes a simulation that displays the total price, actual payment processing is not implemented,but the total price is displayed in the database, allowing for demonstration purposes without real transactions.
 
 ## Technologies / Programming Languages Used
 •	Laravel 8 <br>
@@ -53,19 +41,27 @@ This web application is made using Laravel framework and runs as an online books
 •	MySQL<br>
 •	PHP<br>
 
+## Requirements
++	PHP 8.3 or higher <br>
++	Node 20.0.0 or higher <br>
++	Xampp/MySql<br>
++ Vs Code (code editor)<br>
+
+## Web page description and function introduction
+ + **Book Browse, Search, and Sort:** Users can effortlessly browse, search, and sort books using a variety of criteria, including price and publication date, ensuring they find the books they need quickly and easily.
+ + **User Authentication:** The system supports differentiated access levels, with distinct functionalities for guests, registered users, and administrators, enhancing security and user experience.
+ + **User Detail:** Administrators have the ability to view detailed purchase records and user information, enabling effective management and oversight of platform activity.
+ + **Shopping Cart:** To ensure fair distribution and manage inventory effectively, the system limits purchases to a maximum of 10 copies of each book per transaction.
+ + **Payment Functionality:** While the checkout process includes a simulation that displays the total price, actual payment processing is not implemented,but the total price is displayed in the database, allowing for demonstration purposes without real transactions.
+
+
+## ScreenShots
+
+
+
 ## Installation
 
 To run the **Book Store Laravel** project on your local machine, follow these steps:
-
-## Requirements
-+	PHP 7.3 or higher <br>
-+	Node 12.13.0 or higher <br>
-+	Xampp/MySql<br>
-+   Vs Code (code editor)<br>
-
-## Create and Configure Laravel Environment
-
-Follow these steps to set up your development environment on your local machine:
 
 1. **Clone the repository and install dependencies**
     ```bash
@@ -79,21 +75,21 @@ Follow these steps to set up your development environment on your local machine:
     ```
 
 2. **Install Laravel**
-    - Open your terminal and install the Laravel framework first:
+    - Open your terminal and install the Laravel framework first:<br>
     ```bash
     composer create-project laravel/laravel my-project
     cd my-project
     ```
 
 3. **Install Tailwind CSS**
-    - Add Tailwind CSS to your project:
+    - Add Tailwind CSS to your project:<br>
     ```bash
     npm install -D tailwindcss postcss autoprefixer
     npx tailwindcss init -p
     ```
 
 4. **Configure your template paths**
-    - Update your `tailwind.config.js` file to include the paths to all of your template files:
+    - Update your `tailwind.config.js` file to include the paths to all of your template files:<br>
     ```javascript
     /** @type {import('tailwindcss').Config} */
     export default {
@@ -110,7 +106,7 @@ Follow these steps to set up your development environment on your local machine:
     ```
 
 5. **Add Tailwind Directives to Your CSS**
-    - Insert the following Tailwind directives at the top of your CSS file:
+    - Insert the following Tailwind directives at the top of your CSS file:<br>
     ```css
     @tailwind base;
     @tailwind components;
@@ -118,7 +114,7 @@ Follow these steps to set up your development environment on your local machine:
     ```
 
 6. **Start Your Build Process**
-    - Run the following command to process your CSS with Tailwind:
+    - Run the following command to process your CSS with Tailwind:<br>
     ```bash
     npm run dev
     ```
@@ -127,15 +123,41 @@ Follow these steps to set up your development environment on your local machine:
     + This Starter Kit is referenced from [Laravel starter kits website](https://laravel.com/docs/11.x/starter-kits).
     + This video is tell you how to download and install this Starter kits [This YouTube video](https://www.youtube.com/watch?v=f1hCx-NXbek).
 
-## ScreenShots
+    ## Before Starting
+Create a database <br>
+```
+mysql
+create database laravelbookstore;
+exit;
+```
+
+Setup your database credentials in the .env file <br>
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravelbookstore
+DB_USERNAME={USERNAME}
+DB_PASSWORD={PASSWORD}
+```
+
+Migrate the tables
+```
+php artisan migrate
+```
+
 
 
 ## Contact
 
+For any questions, suggestions, or conspiracy theories you'd like to share, feel free to reach out to us at:<br/>
+Email: (kimfuileung@gmail.com) (Kim Fui Leung)
 
-## License
+## Reference
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Contributing
+Do not hesitate to contribute to the project by adapting or adding features ! Bug reports or pull requests are welcome.
 
 
 ## About Laravel
@@ -191,4 +213,9 @@ In order to ensure that the Laravel community is welcoming to all, please review
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
