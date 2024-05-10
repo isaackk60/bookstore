@@ -100,11 +100,10 @@
             @endforeach
             {{-- </p> --}}
         </div>
-
-
     </div>
+    <span class="line w-3/4"></span>
     <div class="about-background-color">
-        <div class="w-4/5 m-auto text-left py-7 mt-14">
+        <div class="w-4/5 m-auto text-left py-3 mt-14">
             <div class="w-4/5 m-auto mb-7">
                 <h3 class="text-2xl font-semibold">Customers Reviews ({{ count($book->reviews) }})</h3>
 
@@ -115,15 +114,15 @@
                     <div class="flex items-center">
                         <p class="text-3xl py-4 leading-8 font-bold">
                             {{ number_format($averageRating, 1) }}</p>
-                            <div class="star-icon-display pl-2">
-                                @for ($i = 1; $i <= 5; $i++)
-                                    @if ($i <= $averageRating)
-                                        <span class="fa fa-star"></span>
-                                    @elseif ($i - 1 < $averageRating && $i > $averageRating)
-                                    <span class="fa-solid fa-star-half halfStar"></span>
-                                    @endif
-                                @endfor
-                            </div>
+                        <div class="star-icon-display pl-2">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $averageRating)
+                                    <span class="fa fa-star text-yellow-500"></span>
+                                @elseif ($i - 1 < $averageRating && $i > $averageRating)
+                                    <span class="fa-solid fa-star-half halfStar text-yellow-500"></span>
+                                @endif
+                            @endfor
+                        </div>
                     </div>
                 @endif
                 @foreach ($book->reviews as $review)
@@ -139,18 +138,20 @@
                                     <form action="{{ route('reviews.destroy', $review) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
+                                        {{-- <button type="submit"
+                                            class="uppercase text-sm font-extrabold py-2 px-4 text-red-600 rounded transition-colors duration-300">Delete</button> --}}
                                         <button type="submit"
-                                            class="uppercase text-sm font-extrabold py-2 px-4 text-red-600 rounded transition-colors duration-300">Delete</button>
+                                            class="text-red-600 font-bold uppercase text-sm px-4 py-2 rounded hover:bg-red-500 hover:text-white transition-colors duration-300">Delete</button>
                                     </form>
                                 </div>
                             @endif
                         </div>
-                        <div class="star-icon-display">
+                        <div class="star-icon-display ">
                             @for ($i = 1; $i <= 5; $i++)
                                 @if ($i <= $review->rating)
-                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star text-yellow-500"></span>
                                 @else
-                                    <span class="fa fa-star noRatingColor"></span>
+                                    <span class="fa fa-star noRatingColor "></span>
                                 @endif
                             @endfor
                         </div>
@@ -170,32 +171,60 @@
                     </div>
                 @endif
 
-                @if (Auth::check())
+                {{-- @if (Auth::check())
                     <h3 class="text-2xl font-semibold py-4">Create Reviews</h3>
-                    <form class="flex flex-col items-start" action="{{ route('reviews.store') }}" method="POST">
+                    <form class="flex flex-col items-start space-y-4" action="{{ route('reviews.store') }}" method="POST">
                         @csrf
-                        <div class="star-icon">
-                            <input type="radio" class="hidden" name="rating" value="5" checked>
-                            <input type="radio" id="rating1" name="rating" value="1">
-                            <label for="rating1" class="fa fa-star"></label>
-                            <input type="radio" id="rating2" name="rating" value="2">
-                            <label for="rating2" class="fa fa-star"></label>
-                            <input type="radio" id="rating3" name="rating" value="3">
-                            <label for="rating3" class="fa fa-star"></label>
-                            <input type="radio" id="rating4" name="rating" value="4">
-                            <label for="rating4" class="fa fa-star"></label>
-                            <input type="radio" id="rating5" name="rating" value="5">
-                            <label for="rating5" class="fa fa-star"></label>
+                        <div class="star-icon flex space-x-1">
+                            <input type="radio" id="rating1" name="rating" value="1" class="hidden">
+                            <label for="rating1" class="fa fa-star text-yellow-500 cursor-pointer"></label>
+                            <input type="radio" id="rating2" name="rating" value="2" class="hidden">
+                            <label for="rating2" class="fa fa-star text-yellow-500 cursor-pointer"></label>
+                            <input type="radio" id="rating3" name="rating" value="3" class="hidden">
+                            <label for="rating3" class="fa fa-star text-yellow-500 cursor-pointer"></label>
+                            <input type="radio" id="rating4" name="rating" value="4" class="hidden">
+                            <label for="rating4" class="fa fa-star text-yellow-500 cursor-pointer"></label>
+                            <input type="radio" id="rating5" name="rating" value="5" class="hidden" checked>
+                            <label for="rating5" class="fa fa-star text-yellow-500 cursor-pointer"></label>
                         </div>
-
 
                         <input type="hidden" name="book_id" value="{{ $book->id }}">
                         <textarea id="reviewContent" name="content" placeholder="Add a Comment..."
-                            class="p-2 leading-7 bg-transparent block border-2 w-full h-20 text-xl outline-none mt-9 mb-5 bg-gray-100">No comment provided</textarea>
+                            class="p-2 bg-gray-100 block border-2 border-gray-300 w-full max-w-5xl h-32 text-lg outline-none mt-4 mb-5"></textarea>
                         <button id="reviewButton" type="submit"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold uppercase py-2 px-4 rounded">Review</button>
                     </form>
+                @endif --}}
+
+                @if (Auth::check())
+                    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h3 class="text-2xl font-semibold text-gray-800  pt-3">Create a Review</h3>
+                        <form class="flex flex-col space-y-4" action="{{ route('reviews.store') }}" method="POST">
+                            @csrf
+                            <div class="star-icon flex space-x-1">
+                                <input type="radio" id="rating1" name="rating" value="1" class="hidden">
+                                <label for="rating1" class="fa fa-star text-yellow-500 cursor-pointer"></label>
+                                <input type="radio" id="rating2" name="rating" value="2" class="hidden">
+                                <label for="rating2" class="fa fa-star text-yellow-500 cursor-pointer"></label>
+                                <input type="radio" id="rating3" name="rating" value="3" class="hidden">
+                                <label for="rating3" class="fa fa-star text-yellow-500 cursor-pointer"></label>
+                                <input type="radio" id="rating4" name="rating" value="4" class="hidden">
+                                <label for="rating4" class="fa fa-star text-yellow-500 cursor-pointer"></label>
+                                <input type="radio" id="rating5" name="rating" value="5" class="hidden" checked>
+                                <label for="rating5" class="fa fa-star text-yellow-500 cursor-pointer"></label>
+                            </div>
+
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
+                            <textarea id="reviewContent" name="content" placeholder="Add a Comment..."
+                                class="p-4 bg-white border border-gray-300 w-full h-36 text-lg rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-150 ease-in-out mt-4 mb-5"></textarea>
+                            <button id="reviewButton" type="submit"
+                                class="w-1/4 bg-blue-500 hover:bg-blue-700 text-white font-bold uppercase py-3 px-4 rounded shadow hover:shadow-md transition duration-300">Post
+                                Review</button>
+
+                        </form>
+                    </div>
                 @endif
+
             </div>
         </div>
     </div>
