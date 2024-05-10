@@ -22,7 +22,13 @@ This web application is made using Laravel framework and runs as an online books
     **D00251825** (Jianfeng Han) and **D00234545** (Kim Fui Leung)<br>
 
 ## Table Of Contents
-1. [Requirements](#Requirements)
+1. [Web Description](#web-page-description-and-function-introduction)
+2. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
+3. [Installation](#installation)
+4. [Requirements](#Requirements)
+5. [Configure Laravel Environment](#create-and-configure-laravel-environment)
+6. [Screenshots](#ScreenShots)
+
 2. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
 3. [Features](#Features)
 4. [Screenshots](#Screenshots)
@@ -32,6 +38,20 @@ This web application is made using Laravel framework and runs as an online books
 7. [Contact](#Contact)
 8. [Contributing](#Contributing)
 9. [License](#License)
+
+## Web page description and function introduction
+ + **Book Browse, Search, and Sort:** Users can effortlessly browse, search, and sort books using a variety of criteria, including price and publication date, ensuring they find the books they need quickly and easily.
+ + **User Authentication:** The system supports differentiated access levels, with distinct functionalities for guests, registered users, and administrators, enhancing security and user experience.
+ + **User Detail:** Administrators have the ability to view detailed purchase records and user information, enabling effective management and oversight of platform activity.
+ + **Shopping Cart:** To ensure fair distribution and manage inventory effectively, the system limits purchases to a maximum of 10 copies of each book per transaction.
+ + **Payment Functionality:** While the checkout process includes a simulation that displays the total price, actual payment processing is not implemented,but the total price is displayed in the database, allowing for demonstration purposes without real transactions.
+
+## Technologies / Programming Languages Used
+•	Laravel 8 <br>
+•	JavaScript<br>
+•	Tailwind CSS <br>
+•	MySQL<br>
+•	PHP<br>
 
 ## Installation
 
@@ -106,12 +126,16 @@ Follow these steps to set up your development environment on your local machine:
 7. **Starter kit for Laravel LOGIN AND REGISTER**
     This Starter Kit is referenced from [Laravel starter kits website](https://laravel.com/docs/11.x/starter-kits).
 
-## Web page description and function introduction
- + **Book Browse, Search, and Sort:** Users can effortlessly browse, search, and sort books using a variety of criteria, including price and publication date, ensuring they find the books they need quickly and easily.
- + **User Authentication:** The system supports differentiated access levels, with distinct functionalities for guests, registered users, and administrators, enhancing security and user experience.
- + **User Detail:** Administrators have the ability to view detailed purchase records and user information, enabling effective management and oversight of platform activity.
- + **Shopping Cart:** To ensure fair distribution and manage inventory effectively, the system limits purchases to a maximum of 10 copies of each book per transaction.
- + **Payment Functionality:** While the checkout process includes a simulation that displays the total price, actual payment processing is not implemented,but the total price is displayed in the database, allowing for demonstration purposes without real transactions.
+## ScreenShots
+
+
+## Contact
+
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
 
 ## About Laravel
 
@@ -167,6 +191,3 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
