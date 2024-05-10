@@ -74,6 +74,7 @@ This web application is made using Laravel framework and runs as an online books
 ![User Details page image](https://github.com/isaackk60/bookstore/blob/Isaac3/public/imageFolder/user_details_page.png)
 
 
+
 ## Installation
 
 To run the **Book Store Laravel** project on your local machine, follow these steps:
