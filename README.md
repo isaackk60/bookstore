@@ -125,6 +125,7 @@ Follow these steps to set up your development environment on your local machine:
 
 7. **Starter kit for Laravel LOGIN AND REGISTER**
     This Starter Kit is referenced from [Laravel starter kits website](https://laravel.com/docs/11.x/starter-kits).
+    This video is tell you how to download and install this Starter kits [This YouTube video](https://www.youtube.com/watch?v=f1hCx-NXbek).
 
 ## ScreenShots
 
