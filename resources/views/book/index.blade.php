@@ -85,7 +85,7 @@
                                     $averageRating = $book->reviews->avg('rating');
                                 @endphp
 
-                                <div class="star-icon-display text-center mt-2 ">
+                                <div class="star-icon-display text-center mt-2  ">
                                     @for ($i = 1; $i <= 5; $i++)
                                         @if ($i <= $averageRating)
                                             <span class="fa fa-star"></span>
