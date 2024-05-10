@@ -1,4 +1,11 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<img src="https://png.pngtree.com/template/20191125/ourmid pngtree-book-store-logo-template-sale-learning-logo-designs-vector-image_335046.jpg" width="400" alt="Book store Logo"> -->
+<p align="center">
+  <a href="https://laravel.com" target="_blank">
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
+  </a>
+  <img src="https://png.pngtree.com/template/20191125/ourmid/pngtree-book-store-logo-template-sale-learning-logo-designs-vector-image_335046.jpg" width="400" alt="Book store Logo">
+</p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -6,6 +13,29 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
+## Welcome to the Bookstore Laravel Project!
+This web application is made using Laravel framework and runs as an online bookstore. Our platform facilitates the browsing and purchase of books, however, support for transactions is currently lacking as a virtual account system has not been implemented. But the amount of the simulated checkout will be displayed in the database. Below is a detailed description of the entire project:
+
+•	Author: Jianfeng Han(SD2A) and Kim Fui Leung(SD2A) <br>
+•	Student Number: D00251825(Jianfeng Han) and D00234545(Kim Fui Leung)<br>
+
+## Table Of Contents
+1. [Requirements](#Requirements)
+2. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
+3. [Features](#Features)
+4. [Screenshots](#Screenshots)
+5. [Installation](#installation)
+    - [Before Starting](#before-starting)
+6. [Authors](#Authors)
+7. [Contact](#Contact)
+8. [Contributing](#Contributing)
+9. [License](#License)
+
+## Requirements
++	PHP 7.3 or higher <br>
++	Node 12.13.0 or higher <br>
++	Xampp<br>
 
 ## Installation
 composer require cviebrock/eloquent-sluggable
