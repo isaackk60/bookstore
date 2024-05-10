@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->json('books'); // array for quantity, book_id
+            $table->json('books'); // array for quantity, book image, name, price
             // $table->unsignedBigInteger('book_id');
             // $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
             // $table->integer('quantity');

@@ -23,26 +23,37 @@
 
     <h2 class="text-center text-5xl font-semibold text-gray-700 my-5 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">Update
         Book</h2>
-    <div class="w-4/5 m-auto mb-20 rounded pt-5">
+    <div class="w-4/5 m-auto mb-20 rounded">
         <form action="/book/{{ $book->slug }}" method="POST" enctype="multipart/form-data"
             class="px-6 space-y-6 sm:px-10 sm:space-y-8">
             @csrf
             @method('PUT')
             <div class="flex flex-col">
+                <label for="bookName" class="text-lg font-semibold mb-1">Book Name</label>
                 <input type="text" name="bookName" value="{{ $book->bookName }}" placeholder="Book Name"
                     class="form-input w-full mb-8 text-xl">
+                <label for="author" class="text-lg font-semibold mb-1">Author</label>
                 <input type="text" name="author" value="{{ $book->author }}" placeholder="Author"
                     class="form-input w-full mb-8 text-xl">
+                <label for="publishTime" class="text-lg font-semibold mb-1">Publish Date</label>
                 <input type="date" name="publishTime" value="{{ $book->publishTime }}" max="{{ now()->toDateString() }}"
                     class="form-input w-full mb-8 text-xl">
+                <label for="stock" class="text-lg font-semibold mb-1">Stock</label>
                 <input type="number" name="stock" value="{{ $book->stock }}" placeholder="Stock"
                     class="form-input w-full mb-8 text-xl">
-                    <input type="number" name="price" step="0.01" value="{{ $book->price }}" placeholder="Price"
-                    class="form-input w-full mb-8 text-xl">
+                {{-- <label for="price" class="text-lg font-semibold mb-1">Price</label>
+                <input type="number" name="price" step="0.01" value="{{ $book->price }}" placeholder="Price"
+                    class="form-input w-full mb-8 text-xl"> --}}
+                <label for="type" class="text-lg font-semibold mb-1">Type</label>
                 <input type="text" name="type" value="{{ $book->type }}" placeholder="Type"
                     class="form-input w-full mb-8 text-xl">
+                <label for="pages" class="text-lg font-semibold mb-1">Pages</label>
                 <input type="number" name="pages" value="{{ $book->pages }}" placeholder="Pages"
                     class="form-input w-full mb-8 text-xl">
+                <label for="price" class="text-lg font-semibold mb-1">Price</label>
+                <input type="number" name="price" step="0.01" value="{{ $book->price }}" placeholder="Price"
+                    class="form-input w-full mb-8 text-xl">
+                <label for="description" class="text-lg font-semibold mb-1">Description</label>
                 <textarea name="description" placeholder="Description" class="form-textarea w-full h-60">{{ $book->description }}</textarea>
                 {{-- <div class="bg-grey-lighter pt-15">
                     <label class="w-44 flex flex-col items-center px-2 py-3 bg-gray-100 rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">

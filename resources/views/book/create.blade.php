@@ -15,20 +15,28 @@
 @endif
 
 <h2 class="text-center text-5xl font-semibold text-gray-700 my-5 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">Create Book</h2>
-<div class="w-4/5 m-auto mb-20 rounded pt-5">
+<div class="w-4/5 m-auto mb-20 rounded">
 <form action="/book" method="POST" enctype="multipart/form-data" class="px-6 space-y-6 sm:px-10 sm:space-y-8">
     @csrf
 
     <div class="flex flex-col">
         {{-- <input type="text" name="slug" placeholder="Slug..." class="form-input w-full mb-8 text-xl"> --}}
+        <label for="bookName" class="text-lg font-semibold mb-1">Book Name</label>
         <input type="text" name="bookName" placeholder="Book Name" class="form-input w-full mb-8 text-xl">
+        <label for="author" class="text-lg font-semibold mb-1">Author</label>
         <input type="text" name="author" placeholder="Author" class="form-input w-full mb-8 text-xl">
+        <label for="publishTime" class="text-lg font-semibold mb-1">Publish Date</label>
         <input type="date" name="publishTime" placeholder="Publish Date" class="form-input w-full mb-8 text-xl"
         max="{{ now()->toDateString() }}">
+        <label for="stock" class="text-lg font-semibold mb-1">Stock</label>
         <input type="number" name="stock" placeholder="Stock" class="form-input w-full mb-8 text-xl">
+        <label for="type" class="text-lg font-semibold mb-1">Type</label>
         <input type="text" name="type" placeholder="Type" class="form-input w-full mb-8 text-xl">
+        <label for="pages" class="text-lg font-semibold mb-1">Pages</label>
         <input type="number" name="pages" placeholder="Pages" class="form-input w-full mb-8 text-xl">
+        <label for="price" class="text-lg font-semibold mb-1">Price</label>
         <input type="number" name="price" step="0.01" placeholder="Price" class="form-input w-full mb-8 text-xl">
+        <label for="description" class="text-lg font-semibold mb-1">Description</label>
         <textarea name="description" placeholder="Description" class="form-textarea w-full h-60"></textarea>
 
         <div class="bg-grey-lighter mt-8">

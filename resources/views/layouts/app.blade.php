@@ -61,7 +61,7 @@
                         selection of books and stationery at unbeatable prices. Known for our curated collections and
                         knowledgeable staff, we provide a haven for readers and writers alike.
                     </p>
-                    <div class="text-xl font-bold text-gray-100 mb-4">
+                    <div class="text-xl font-bold  mb-4">
                         <h3 class="mb-4">Keep In Touch</h3>
                         <ul>
                             <li class="text-sm text-gray-500 ">Mail us: <a href="mailto:D00234545@student.dkit.ie">Kim
@@ -131,30 +131,30 @@
                     <div class='sm:grid grid-cols-4 pt-10 pb-16 m-auto text-center text-3xl'>
                         <div>
                             <a href="#">
-                                <i class="fab fa-facebook-square text-gray-100"></i>
+                                <i class="fab fa-facebook-square "></i>
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <i class="fab fa-instagram-square text-gray-100"></i>
+                                <i class="fab fa-instagram-square "></i>
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <i class="fab fa-pinterest-square text-gray-100"></i>
+                                <i class="fab fa-pinterest-square "></i>
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <i class="fab fa-youtube-square text-gray-100"></i>
+                                <i class="fab fa-youtube-square "></i>
                             </a>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <p class="text-center text-xs text-gray-100 mt-10">
-                &copy 2017-2021 Explore Our Books. All Rights Reserved
+            <p class="text-center text-xs pt-8 pb-4">
+                &copy 2024 Book Store Code With Kim Fui Leung And Jianfeng Han. All Rights Reserved
             </p>
         </footer>
 

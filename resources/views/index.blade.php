@@ -51,7 +51,7 @@
             The book's influence extends beyond literature into the realms of cinema, theater, and philosophy, continually prompting discussions and debates about the nature of art and entertainment in our society. It’s a must-read for anyone who values thoughtful, provocative writing and is willing to engage with a text that questions the very structure of narrative and the purpose of fiction.
         </p>
         <a href="/book" class="text-center bg-gray-50 text-gray-700 py-2 px-4 font-bold text-xl uppercase bookstartbutton">
-            Start Finding</a>
+            Start Exploring</a>
     </div>
     <div class="w-4/5 m-auto">
         <div class="grid grid-cols-3 gap-4 ">

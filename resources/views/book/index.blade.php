@@ -67,7 +67,7 @@
                     </a>
 
                     @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
-                        <div class="flex flex-row items-center justify-evenly mt-5">
+                        <div class="flex flex-row items-center justify-evenly mb-6">
                             <div>
                                 <a href="/book/{{ $book->slug }}/edit"
                                     class="uppercase text-sm font-extrabold py-2 px-4 edit_button_color">

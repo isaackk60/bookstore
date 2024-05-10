@@ -175,6 +175,10 @@
     width: 60vw;
 }
 
+.guestNavLink a{
+    height:7rem; /* same as h-28 */
+}
+
 .navLink a {
     font-size: 16px;
 }
@@ -218,6 +222,7 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* footer */
 .container {
     width: 80vw;
     display: grid;
