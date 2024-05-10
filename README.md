@@ -22,25 +22,6 @@ This web application is made using Laravel framework and runs as an online books
     **D00251825** (Jianfeng Han) and **D00234545** (Kim Fui Leung)<br>
 
 ## Table Of Contents
-- [Welcome to the Bookstore Laravel Project!](#welcome-to-the-bookstore-laravel-project)
-- [Table Of Contents](#table-of-contents)
-- [Technologies / Programming Languages Used](#technologies--programming-languages-used)
-- [Requirements](#requirements)
-- [Web page description and function introduction](#web-page-description-and-function-introduction)
-- [ScreenShots](#screenshots)
-- [Installation](#installation)
-- [Before Starting](#before-starting)
-- [Contact](#contact)
-- [Reference](#reference)
-- [Contributing](#contributing)
-- [About Laravel](#about-laravel)
-- [Learning Laravel](#learning-laravel)
-- [Laravel Sponsors](#laravel-sponsors)
-  - [Premium Partners](#premium-partners)
-- [Contributing](#contributing-1)
-- [Code of Conduct](#code-of-conduct)
-- [Security Vulnerabilities](#security-vulnerabilities)
-- [License](#license)
 
 
 ## Technologies / Programming Languages Used
@@ -63,7 +44,7 @@ This web application is made using Laravel framework and runs as an online books
  + **User Authentication:** The system provides access levels to enhance security and user experience:
     - Visitors can browse books but need to register to purchase.
     - Registered users can purchase books, view purchase history, and participate in rating and reviewing books.
-    - Administrators can access advanced features including book management, ratings and reviews, set book quantities, view detailed user information and purchase history and delete user reviews and registered users.<br>
+    - Administrators can access advanced features including book management, ratings and reviews, set book quantities, view detailed user information and purchase history, and delete user reviews and registered users.<br>
  + **User Detail:** Administrators have the ability to view detailed purchase records and user information, enabling effective management and oversight of platform activity.<br>
  + **Shopping Cart:** The system imposes a purchase limit of 10 copies per book per user per transaction. Users also have the option to purchase multiple different books during a single checkout process.<br>
  + **Payment Functionality:** While the checkout process includes a simulation that displays the total price, actual payment processing is not implemented,but the total price is displayed in the database, allowing for demonstration purposes without real transactions.
