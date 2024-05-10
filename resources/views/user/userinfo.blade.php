@@ -5,7 +5,7 @@
 <div class="mb-20">
     <div class="w-4/5 m-auto text-center">
         {{-- <h1 class="page_title text-blue-800"> --}}
-            <h1 class="page_title text-blue-800 text-4xl font-semibold tracking-wide uppercase" style="font-family: 'Merriweather', serif;">
+            <h1 class="page_title text-blue-800 text-4xl font-semibold uppercase" style="font-family: 'Merriweather', serif;">
             User Information</h1>
     <table class="table-auto w-full">
         <thead>

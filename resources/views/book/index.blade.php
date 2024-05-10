@@ -3,8 +3,8 @@
 @section('content')
     <div class="w-4/5 m-auto text-center">
         <div class="border-b border-gray-200">
-            <h1 class="page_title text-blue-800 text-4xl font-semibold tracking-wide uppercase" style="font-family: 'Merriweather', serif;">
-               All Book
+            <h1 class="page_title text-blue-800 text-4xl font-semibold uppercase" style="font-family: 'Merriweather', serif;">
+               All Books
             </h1>
         </div>
     </div>

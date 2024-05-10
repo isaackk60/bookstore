@@ -55,10 +55,11 @@ class CartController extends Controller
                 // If the book is already in the cart, update the quantity
                 $newQuantity = $existingCartItem->quantity + $quantity;
 
-if($quantity <= $existingCartItem->quantity && ($newQuantity>10||$newQuantity > $existingCartItem->book->stock)){
-    $existingCartItem->update(['quantity' => $quantity]);
-    return redirect()->route('cart.index')->with('message', 'Quantity updated successfully.');
-}
+                // if cart items are out of stock or left... only update to new input quantity
+                if ($quantity <= $existingCartItem->quantity && ($newQuantity > 10 || $newQuantity > $existingCartItem->book->stock)) {
+                    $existingCartItem->update(['quantity' => $quantity]);
+                    return redirect()->route('cart.index')->with('message', 'Quantity updated successfully.');
+                }
 
 
                 // Check if new quantity exceeds the maximum allowed quantity

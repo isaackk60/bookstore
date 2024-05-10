@@ -4,7 +4,7 @@
     <div class="w-full mx-auto text-center">
         <div class="border-b border-gray-200">
             {{-- <h1 class="page_title text-blue-800"> --}}
-                <h1 class="page_title text-blue-800 text-4xl font-semibold tracking-wide uppercase" style="font-family: 'Merriweather', serif;">
+                <h1 class="page_title text-blue-800 text-4xl font-semibold uppercase" style="font-family: 'Merriweather', serif;">
                 Purchase History
             </h1>
         </div>

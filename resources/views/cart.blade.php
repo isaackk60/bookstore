@@ -4,7 +4,7 @@
     <div class="w-full mx-auto text-center">
         <div class="border-b border-gray-200">
             {{-- <h1 class="page_title text-blue-800"> --}}
-                <h1 class="page_title text-blue-800 text-4xl font-semibold tracking-wide uppercase" style="font-family: 'Merriweather', serif;">
+                <h1 class="page_title text-blue-800 text-4xl font-semibold uppercase" style="font-family: 'Merriweather', serif;">
                 Shopping Cart
             </h1>
         </div>
@@ -97,7 +97,7 @@
                                     </form>
                                 </div> --}}
                                 <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
-                                    Total Price: {{ $cartItem->book->price * $cartItem->quantity }}
+                                    Total Price: €{{ $cartItem->book->price * $cartItem->quantity }}
                                 </p>
                             </div>
 
