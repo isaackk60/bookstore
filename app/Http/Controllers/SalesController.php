@@ -12,11 +12,14 @@ class SalesController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        $sales = $user->sales()->orderBy('order_date', 'DESC')->get();
+        if (auth()->check()) {
+            $user = Auth::user();
+            $sales = $user->sales()->orderBy('order_date', 'DESC')->get();
 
-        return view('sales', compact('sales'));
-        
+            return view('sales', compact('sales'));
+        } else {
+            return redirect()->route('login');
+        }
     }
 
     public function create()
@@ -42,7 +45,7 @@ class SalesController extends Controller
             'order_price' => $request->order_price,
         ]);
 
-        foreach($books as $book){
+        foreach ($books as $book) {
             // $bookModel = Book::find($book['bookName']);
             // $newStock = $bookModel->stock - $book['quantity'];
             // $bookModel->stock = $newStock >= 0 ? $newStock : 0; 
@@ -50,7 +53,7 @@ class SalesController extends Controller
             // $bookModel = Book::where('bookName','like','%', $book['name'])->first();
             $bookModel = Book::where('bookName', $book['name'])->first();
 
-    
+
             if ($bookModel) {
                 $newStock = $bookModel->stock - $book['quantity'];
                 $bookModel->stock = max($newStock, 0); // Ensure stock doesn't go negative

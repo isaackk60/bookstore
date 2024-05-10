@@ -57,38 +57,38 @@ class BooksController extends Controller
     // }
 
     public function index(Request $request)
-{
-    $query = Book::query();
+    {
+        $query = Book::query();
 
-    if ($request->has('query')) {
-        $search = $request->input('query');
-        $query->where('bookName', 'like', "%{$search}%")
-              ->orWhere('author', 'like', "%{$search}%")
-              ->orWhere('type', 'like', "%{$search}%")
-              ->orWhere('description', 'like', "%{$search}%");
-    }
-
-    if ($request->has('sort')) {
-        switch ($request->input('sort')) {
-            case 'publishTime':
-                $query->orderBy('publishTime', 'DESC');
-                break;
-            case 'publishTime_asc':
-                $query->orderBy('publishTime', 'ASC');
-                break;
-            case 'price_asc':
-                $query->orderBy('price', 'ASC');
-                break;
-            case 'price_desc':
-                $query->orderBy('price', 'DESC');
-                break;
+        if ($request->has('query')) {
+            $search = $request->input('query');
+            $query->where('bookName', 'like', "%{$search}%")
+                ->orWhere('author', 'like', "%{$search}%")
+                ->orWhere('type', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
         }
+
+        if ($request->has('sort')) {
+            switch ($request->input('sort')) {
+                case 'publishTime':
+                    $query->orderBy('publishTime', 'DESC');
+                    break;
+                case 'publishTime_asc':
+                    $query->orderBy('publishTime', 'ASC');
+                    break;
+                case 'price_asc':
+                    $query->orderBy('price', 'ASC');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'DESC');
+                    break;
+            }
+        }
+
+        $books = $query->get();
+
+        return view('book.index', compact('books'));
     }
-
-    $books = $query->get();
-
-    return view('book.index', compact('books'));
-}
 
 
     // }
@@ -149,8 +149,16 @@ class BooksController extends Controller
     }
     public function show($slug)
     {
-        return view('book.show')
-            ->with('book', Book::where('slug', $slug)->first());
+        // return view('book.show')
+        //     ->with('book', Book::where('slug', $slug)->first());
+
+        $book = Book::where('slug', $slug)->first();
+
+        if (!$book) {
+            return redirect()->route('book.index');
+        }
+
+        return view('book.show')->with('book', $book);
     }
 
     public function edit($slug)
