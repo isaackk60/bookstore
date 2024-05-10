@@ -20,7 +20,6 @@ Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
 
 Route::resource('/reviews', ReviewsController::class);
-Route::put('/reviews/{review}', [ReviewsController::class, 'update'])->name('reviews.update');
 
 Route::middleware(['auth'])->get('/users/{user}/sales', [AdminController::class, 'showSales'])->name('user.sales');
 

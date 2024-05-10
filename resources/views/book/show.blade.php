@@ -112,9 +112,18 @@
                     @php
                         $averageRating = $book->reviews->avg('rating');
                     @endphp
-                    <div>
+                    <div class="flex items-center">
                         <p class="text-3xl py-4 leading-8 font-bold">
                             {{ number_format($averageRating, 1) }}</p>
+                            <div class="star-icon-display pl-2">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $averageRating)
+                                        <span class="fa fa-star"></span>
+                                    @elseif ($i - 1 < $averageRating && $i > $averageRating)
+                                    <span class="fa-solid fa-star-half halfStar"></span>
+                                    @endif
+                                @endfor
+                            </div>
                     </div>
                 @endif
                 @foreach ($book->reviews as $review)
