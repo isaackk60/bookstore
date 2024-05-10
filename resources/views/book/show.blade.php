@@ -124,14 +124,14 @@
                                 <span class="font-bold italic text-gray-800">{{ $review->user->name }}</span>
                             </div>
 
-                            @if (Auth::check() && ($review->user_id === Auth::id()|| Auth::user()->isAdmin()))
+                            @if (Auth::check() && ($review->user_id === Auth::id() || Auth::user()->isAdmin()))
                                 <div
                                     class="editButtonContainer sm:flex sm:h-10 sm:flex-row sm:items-center sm:justify-between">
                                     <form action="{{ route('reviews.destroy', $review) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="uppercase text-sm font-extrabold py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300">Delete</button>
+                                            class="uppercase text-sm font-extrabold py-2 px-4 text-red-600 rounded transition-colors duration-300">Delete</button>
                                     </form>
                                 </div>
                             @endif
@@ -144,15 +144,15 @@
                                     <span class="fa fa-star noRatingColor"></span>
                                 @endif
                             @endfor
-                        </div> 
+                        </div>
                         <div class="reviewTime text-gray-500">
                             Reviewed on
                             {{ date('jS M Y', strtotime($review->updated_at)) }}
-                        </div>                       
+                        </div>
                         <p class="editReviewContent text-xl text-gray-700 leading-8 font-normal py-2">
                             {{ $review->content }}</p>
 
-                        
+
                     </div>
                 @endforeach
                 @if ($book->reviews->isEmpty())
@@ -162,10 +162,11 @@
                 @endif
 
                 @if (Auth::check())
-                <h3 class="text-2xl font-semibold py-4">Create Reviews</h3>
+                    <h3 class="text-2xl font-semibold py-4">Create Reviews</h3>
                     <form class="flex flex-col items-start" action="{{ route('reviews.store') }}" method="POST">
                         @csrf
                         <div class="star-icon">
+                            <input type="radio" class="hidden" name="rating" value="5" checked>
                             <input type="radio" id="rating1" name="rating" value="1">
                             <label for="rating1" class="fa fa-star"></label>
                             <input type="radio" id="rating2" name="rating" value="2">
@@ -355,6 +356,24 @@ enctype="multipart/form-data">
                 }
 
             } else {
+                reviewButton.disabled = false;
+                reviewButton.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('reviewContent').addEventListener('focus', function() {
+            if (this.value === 'No comment provided') {
+                this.value = ''; // Clear the text when it matches default text
+                reviewButton.disabled = true;
+                if (!reviewButton.classList.contains('hidden')) {
+                    reviewButton.classList.add('hidden');
+                }
+            }
+        });
+
+        document.getElementById('reviewContent').addEventListener('blur', function() {
+            if (this.value.trim() === '') {
+                this.value = 'No comment provided'; // Restore default text if empty
                 reviewButton.disabled = false;
                 reviewButton.classList.remove('hidden');
             }
