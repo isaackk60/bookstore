@@ -25,25 +25,29 @@ This web application is made using Laravel framework and runs as an online books
 1. [Web Description](#web-page-description-and-function-introduction)
 2. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
 3. [Installation](#installation)
-4. [Requirements](#Requirements)
-5. [Configure Laravel Environment](#create-and-configure-laravel-environment)
-6. [Screenshots](#ScreenShots)
-
-2. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
-3. [Features](#Features)
-4. [Screenshots](#Screenshots)
-5. [Installation](#installation)
-    - [Before Starting](#before-starting)
-6. [Authors](#Authors)
-7. [Contact](#Contact)
-8. [Contributing](#Contributing)
-9. [License](#License)
+    - [Requirements](#Requirements)
+4. [Configure Laravel Environment](#create-and-configure-laravel-environment)
+5. [Screenshots](#ScreenShots)
+6. [Contact](#Contact)
+7. [License](#License)
+8. [About Laravel](#about-laravel)
+9. [Learning Laravel](#learning-laravel)
+10. [Laravel Sponsors](#laravel-sponsors)
+11. [Premium Partners](#premium-partners)
+12. [Contributing](#contributing)
+13. [Code of Conduct](#code-of-conduct)
+14. [Security Vulnerabilities](#security-vulnerabilities)
 
 ## Web page description and function introduction
- + **Book Browse, Search, and Sort:** Users can effortlessly browse, search, and sort books using a variety of criteria, including price and publication date, ensuring they find the books they need quickly and easily.
- + **User Authentication:** The system supports differentiated access levels, with distinct functionalities for guests, registered users, and administrators, enhancing security and user experience.
+ + **Home page:** The homepage features dynamic scrolling subtitles and engaging text content designed to provide visitors with a quick overview of the services offered by the platform.
+ + **Book Browse, Search, and Sort:** The website offers an intuitive browsing experience where users can easily search for books and sort them using price and publication date. It is also possible to use search functions including (search for book title, price, type, etc.) This function ensures that users can find exactly the book they are looking for quickly and efficiently.
+ + **Comments and ratings functionality：**The system supports a strong comment and rating system. Users and administrators can comment on books and rate them on a scale of 1 to 5 stars. In addition, the system aggregates these ratings to arrive at a final average score for each book, helping other users make informed decisions based on varying user feedback.
+ + **User Authentication:** The system provides access levels to enhance security and user experience:
+    - Visitors can browse books but need to register to purchase.
+    - Registered users can purchase books, view purchase history, and participate in rating and reviewing books.
+    - Administrators can access advanced features including book management, ratings and reviews, set book quantities, and view detailed user information and purchase history.
  + **User Detail:** Administrators have the ability to view detailed purchase records and user information, enabling effective management and oversight of platform activity.
- + **Shopping Cart:** To ensure fair distribution and manage inventory effectively, the system limits purchases to a maximum of 10 copies of each book per transaction.
+ + **Shopping Cart:** The system imposes a purchase limit of 10 copies per book per user per transaction. Users also have the option to purchase multiple different books during a single checkout process.
  + **Payment Functionality:** While the checkout process includes a simulation that displays the total price, actual payment processing is not implemented,but the total price is displayed in the database, allowing for demonstration purposes without real transactions.
 
 ## Technologies / Programming Languages Used
@@ -131,7 +135,9 @@ Follow these steps to set up your development environment on your local machine:
 
 
 ## Contact
-
+For support, collaboration, or further inquiries, here are the ways you can reach out to us or For any questions, suggestions, or conspiracy theories you'd like to share, feel free to reach out to us to at:
++ Email (jf08942378268@gmail.com) / (D00251825@studnet.dkit.ie) Name: Jianfeng Han
++ Email (isaac97663396@gmail.com) / (D00234545@student.dkit.ie) Name: Kim Fui Leung
 
 ## License
 
