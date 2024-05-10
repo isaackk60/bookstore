@@ -43,54 +43,68 @@ To run the Travel Blog Laravel project on your local machine, follow these steps
 +	Xampp<br>
 +   Vs Code (code editor)<br>
 
-## Create and configure Laravel Environment
-+ Setting up your development environment on your local machine: <br>
-```
-git clone git@github.com:codewithdary/laravel-8-complete-blog.git
-cd laravel-8-complete-blog
-cp .env.example .env
-composer install
-php artisan key:generate
-php artisan cache:clear && php artisan config:clear
-php artisan serve
+## Create and Configure Laravel Environment
 
+Follow these steps to set up your development environment on your local machine:
 
-+ Open your terminal and install a laravel framework first <br>
+1. **Clone the repository and install dependencies**
+    ```bash
+    git clone git@github.com:codewithdary/laravel-8-complete-blog.git
+    cd laravel-8-complete-blog
+    cp .env.example .env
+    composer install
+    php artisan key:generate
+    php artisan cache:clear && php artisan config:clear
+    php artisan serve
+    ```
 
-+ Create your project
-```
-composer create-project laravel/laravel my-project
-cd my-project
+2. **Install Laravel**
+    - Open your terminal and install the Laravel framework first:
+    ```bash
+    composer create-project laravel/laravel my-project
+    cd my-project
+    ```
 
-+ Install Tailwind CSS
-```
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
+3. **Install Tailwind CSS**
+    - Add Tailwind CSS to your project:
+    ```bash
+    npm install -D tailwindcss postcss autoprefixer
+    npx tailwindcss init -p
+    ```
 
-+ Configure your template paths
-```
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
+4. **Configure your template paths**
+    - Update your `tailwind.config.js` file to include the paths to all of your template files:
+    ```javascript
+    /** @type {import('tailwindcss').Config} */
+    export default {
+      content: [
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+      ],
+      theme: {
+        extend: {},
+      },
+      plugins: [],
+    }
+    ```
 
-+ Add the Tailwind directives to your CSS
-```
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+5. **Add Tailwind Directives to Your CSS**
+    - Insert the following Tailwind directives at the top of your CSS file:
+    ```css
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    ```
 
-+ Start your build process
-```
-npm run dev
+6. **Start Your Build Process**
+    - Run the following command to process your CSS with Tailwind:
+    ```bash
+    npm run dev
+    ```
+
+Each step is numbered and includes a brief description along with the commands to run, making it easier for users to follow. Using fenced code blocks (```) with a specified language (e.g., `bash` or `javascript`) enhances readability and syntax highlighting in Markdown viewers that support it, such as GitHub.
+
 
 
 ## About Laravel
