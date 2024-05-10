@@ -197,7 +197,7 @@
                 @endif --}}
 
                 @if (Auth::check())
-                    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="w-5/6 mr-auto pt-3 pr-4 sm:pr-6 lg:pr-8">
                         <h3 class="text-2xl font-semibold text-gray-800  pt-3">Create a Review</h3>
                         <form class="flex flex-col space-y-4" action="{{ route('reviews.store') }}" method="POST">
                             @csrf
