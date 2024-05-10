@@ -46,6 +46,10 @@
                 </option>
                 <option value="price_desc" {{ request()->get('sort') == 'price_desc' ? 'selected' : '' }}>Price High to Low
                 </option>
+                <option value="rating_asc" {{ request()->get('sort') == 'reviewRating_asc' ? 'selected' : '' }}>Rating
+                    Low to High</option>
+                <option value="rating_desc" {{ request()->get('sort') == 'reviewRating_desc' ? 'selected' : '' }}>
+                    Rating High to Low</option>
             </select>
             <input type="hidden" name="query" value="{{ request()->get('query') }}">
         </form>
@@ -90,9 +94,9 @@
                                         @if ($i <= $averageRating)
                                             <span class="fa fa-star"></span>
                                         @elseif ($i - 1 < $averageRating && $i > $averageRating)
-                                        <span class="fa-solid fa-star-half halfStar"></span>
+                                            <span class="fa-solid fa-star-half halfStar"></span>
                                         @endif
-                                    @endfor 
+                                    @endfor
                                 </div>
                             @endif
 

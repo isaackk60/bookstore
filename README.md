@@ -64,7 +64,14 @@ This web application is made using Laravel framework and runs as an online books
 
 
 ## ScreenShots
-
+![Main page sideshow image](https://github.com/isaackk60/bookstore/blob/Isaac3/public/imageFolder/main_page.png) <br/>
+![Main page show books image](https://github.com/isaackk60/bookstore/blob/Isaac3/public/imageFolder/main_page_2.png) <br/>
+![Books page image](https://github.com/isaackk60/bookstore/blob/Isaac3/public/imageFolder/books_page.png) <br/>
+![Book Details page image](https://github.com/isaackk60/bookstore/blob/Isaac3/public/imageFolder/book_detail_page.png) <br/>
+![Reviews image](https://github.com/isaackk60/bookstore/blob/Isaac3/public/imageFolder/reviews.png) <br/>
+![Shopping Cart page image](https://github.com/isaackk60/bookstore/blob/Isaac3/public/imageFolder/shopping_cart_page.png) <br/>
+![Purchase History page image](https://github.com/isaackk60/bookstore/blob/Isaac3/public/imageFolder/purchase_history_page.png) <br/>
+![User Details page image](https://github.com/isaackk60/bookstore/blob/Isaac3/public/imageFolder/user_details_page.png)
 
 
 ## Installation

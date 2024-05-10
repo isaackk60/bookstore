@@ -82,7 +82,21 @@ class BooksController extends Controller
                 case 'price_desc':
                     $query->orderBy('price', 'DESC');
                     break;
+                case 'rating_asc':
+                    $query->leftJoin('reviews', 'books.id', '=', 'reviews.book_id')
+                        ->selectRaw('books.*, AVG(reviews.rating) as avg_rating')
+                        ->groupBy('books.id', 'books.bookName', 'books.type', 'books.pages', 'books.price', 'books.description', 'books.publishTime', 'books.author', 'books.stock', 'books.slug', 'books.image_path', 'books.updated_at', 'books.created_at')
+                        ->orderBy('avg_rating', 'ASC');
+                    break;
+                case 'rating_desc':
+                    $query->leftJoin('reviews', 'books.id', '=', 'reviews.book_id')
+                        ->selectRaw('books.*, AVG(reviews.rating) as avg_rating')
+                        ->groupBy('books.id', 'books.bookName', 'books.type', 'books.pages', 'books.price', 'books.description', 'books.publishTime', 'books.author', 'books.stock', 'books.slug', 'books.image_path', 'books.updated_at', 'books.created_at')
+                        ->orderBy('avg_rating', 'DESC');
+                    break;
             }
+        } else {//default
+            $query->orderBy('publishTime', 'DESC');
         }
 
         $books = $query->get();
