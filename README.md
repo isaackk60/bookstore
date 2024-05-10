@@ -39,15 +39,15 @@ This web application is made using Laravel framework and runs as an online books
 14. [Security Vulnerabilities](#security-vulnerabilities)
 
 ## Web page description and function introduction
- + **Home page:** The homepage features dynamic scrolling subtitles and engaging text content designed to provide visitors with a quick overview of the services offered by the platform.
- + **Book Browse, Search, and Sort:** The website offers an intuitive browsing experience where users can easily search for books and sort them using price and publication date. It is also possible to use search functions including (search for book title, price, type, etc.) This function ensures that users can find exactly the book they are looking for quickly and efficiently.
- + **Comments and ratings functionality：**The system supports a strong comment and rating system. Users and administrators can comment on books and rate them on a scale of 1 to 5 stars. In addition, the system aggregates these ratings to arrive at a final average score for each book, helping other users make informed decisions based on varying user feedback.
+ + **Home page:** The homepage features dynamic scrolling subtitles and engaging text content designed to provide visitors with a quick overview of the services offered by the platform.<br>
+ + **Book Browse, Search, and Sort:** The website offers an intuitive browsing experience where users can easily search for books and sort them using price and publication date. It is also possible to use search functions including (search for book title, price, type, etc.) This function ensures that users can find exactly the book they are looking for quickly and efficiently.<br>
+ + **Comments and ratings functionality：** The system supports a strong comment and rating system. Users and administrators can comment on books and rate them on a scale of 1 to 5 stars. In addition, the system aggregates these ratings to arrive at a final average score for each book, helping other users make informed decisions based on varying user feedback.<br>
  + **User Authentication:** The system provides access levels to enhance security and user experience:
     - Visitors can browse books but need to register to purchase.
     - Registered users can purchase books, view purchase history, and participate in rating and reviewing books.
-    - Administrators can access advanced features including book management, ratings and reviews, set book quantities, and view detailed user information and purchase history.
- + **User Detail:** Administrators have the ability to view detailed purchase records and user information, enabling effective management and oversight of platform activity.
- + **Shopping Cart:** The system imposes a purchase limit of 10 copies per book per user per transaction. Users also have the option to purchase multiple different books during a single checkout process.
+    - Administrators can access advanced features including book management, ratings and reviews, set book quantities, and view detailed user information and purchase history.<br>
+ + **User Detail:** Administrators have the ability to view detailed purchase records and user information, enabling effective management and oversight of platform activity.<br>
+ + **Shopping Cart:** The system imposes a purchase limit of 10 copies per book per user per transaction. Users also have the option to purchase multiple different books during a single checkout process.<br>
  + **Payment Functionality:** While the checkout process includes a simulation that displays the total price, actual payment processing is not implemented,but the total price is displayed in the database, allowing for demonstration purposes without real transactions.
 
 ## Technologies / Programming Languages Used
