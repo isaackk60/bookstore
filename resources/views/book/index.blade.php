@@ -46,9 +46,9 @@
                 </option>
                 <option value="price_desc" {{ request()->get('sort') == 'price_desc' ? 'selected' : '' }}>Price High to Low
                 </option>
-                <option value="rating_asc" {{ request()->get('sort') == 'reviewRating_asc' ? 'selected' : '' }}>Rating
+                <option value="rating_asc" {{ request()->get('sort') == 'rating_asc' ? 'selected' : '' }}>Rating
                     Low to High</option>
-                <option value="rating_desc" {{ request()->get('sort') == 'reviewRating_desc' ? 'selected' : '' }}>
+                <option value="rating_desc" {{ request()->get('sort') == 'rating_desc' ? 'selected' : '' }}>
                     Rating High to Low</option>
             </select>
             <input type="hidden" name="query" value="{{ request()->get('query') }}">
