@@ -248,3 +248,10 @@ footer {
     font-weight: 400;
     font-size:16px;
 }
+.detailImage{
+    display:flex;
+    justify-content: center;
+}
+.detailImage img{
+    height:370px;
+}

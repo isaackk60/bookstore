@@ -25,11 +25,11 @@
         </div>
     @endif
 
-    <div class="w-4/5 mx-auto my-10">
+    <div class="w-4/5 mx-auto my-10 flex justify-between items-center">
         <form action="/book" method="GET">
-            <label for="sort">Sort by:</label>
+            <label>Sort by:</label>
             <select name="sort" onchange="this.form.submit()"
-                class="ml-3 cursor-pointer pl-2 pr-5 border-2 border-gray-500">
+                class="ml-3 cursor-pointer pl-2 pr-8 border-2 border-gray-500">
                 <option value="publishTime" {{ request()->get('sort') == 'publishTime' ? 'selected' : '' }}>Most Recent
                 </option>
                 <option value="publishTime_asc" {{ request()->get('sort') == 'publishTime_asc' ? 'selected' : '' }}>Oldest
@@ -40,7 +40,19 @@
                 </option>
             </select>
         </form>
+
+        <form action="/book" method="GET">
+            <input type="text" name="query" placeholder="Search"
+                   class="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500">
+            <button type="submit" class="ml-2 px-4 py-2.5 create_book_button text-white rounded-md hover:bg-blue-600">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
     </div>
+
+    
+
+
     <div class="mb-20">
         <div class="sm:grid grid-cols-4 gap-10 w-4/5 mx-auto py-15">
             @foreach ($books as $book)

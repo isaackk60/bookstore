@@ -48,7 +48,7 @@
         {{-- // can try to use class="w-4/5 m-auto" ---they are same meaning --}}
         <div class="sm:grid grid-cols-2 mx-auto mt-12 gap-10">
             <div>
-                <div>
+                <div class="detailImage">
                     <img src="{{ asset('images/' . $book->image_path) }}" alt="">
                 </div>
             </div>
