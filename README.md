@@ -15,10 +15,11 @@
 ## Welcome to the Bookstore Laravel Project!
 This web application is made using Laravel framework and runs as an online bookstore. Our platform facilitates the browsing and purchase of books, however, support for transactions is currently lacking as a virtual account system has not been implemented. But the amount of the simulated checkout will be displayed in the database. Below is a detailed description of the entire project:
 
-•	**Author:** 
++ **Author:** 
     **Jianfeng Han (SD2A)** and **Kim Fui Leung (SD2A)**<br>
-•	**Student Number:** 
-    D00251825 (**Jianfeng Han**) and D00234545 (**Kim Fui Leung**)<br>
+
++ **Student Number:** 
+    **D00251825** (Jianfeng Han) and **D00234545** (Kim Fui Leung)<br>
 
 ## Table Of Contents
 1. [Requirements](#Requirements)
@@ -32,13 +33,59 @@ This web application is made using Laravel framework and runs as an online books
 8. [Contributing](#Contributing)
 9. [License](#License)
 
+## Installation
+
+To run the Travel Blog Laravel project on your local machine, follow these steps:
+
 ## Requirements
 +	PHP 7.3 or higher <br>
 +	Node 12.13.0 or higher <br>
 +	Xampp<br>
++   Vs Code (code editor)<br>
 
-## Installation
-composer require cviebrock/eloquent-sluggable
+## Create and configure Laravel Environment
++ Setting up your development environment on your local machine: <br>
+```
+git clone git@github.com:codewithdary/laravel-8-complete-blog.git
+cd laravel-8-complete-blog
+cp .env.example .env
+composer install
+php artisan key:generate
+php artisan cache:clear && php artisan config:clear
+php artisan serve
+
+```
++ Open your terminal and install a laravel framework first <br>
+
++ Create your project
+composer create-project laravel/laravel my-project
+cd my-project
+
++ Install Tailwind CSS
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
++ Configure your template paths
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.vue",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
++ Add the Tailwind directives to your CSS
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
++ Start your build process
+npm run dev
 
 
 ## About Laravel
