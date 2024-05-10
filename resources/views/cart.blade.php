@@ -3,7 +3,8 @@
 @section('content')
     <div class="w-full mx-auto text-center">
         <div class="border-b border-gray-200">
-            <h1 class="page_title text-blue-800">
+            {{-- <h1 class="page_title text-blue-800"> --}}
+                <h1 class="page_title text-blue-800 text-4xl font-semibold tracking-wide uppercase" style="font-family: 'Merriweather', serif;">
                 Shopping Cart
             </h1>
         </div>
@@ -44,7 +45,7 @@
 
                 @foreach ($cartItems as $cartItem)
                 
-                    @if ($cartItem->quantity < $cartItem->book->stock)
+                    @if ($cartItem->quantity <= $cartItem->book->stock)
                         {{-- <div class="flex flex-col md:flex-row justify-center py-5 border-b border-gray-200"> --}}
                         <div class="flex flex-col md:flex-row justify-center items-center py-5 border-b border-gray-200">
                             <div class="w-32 h-48 overflow-hidden aspect-w-3 aspect-h-4 mb-4 md:mb-0">
@@ -62,7 +63,7 @@
                                     Price: <span class="font-medium">€ {{ number_format($cartItem->book->price, 2) }}</span>
                                 </p>
 
-                                <div class="flex items-center mt-4">
+                                {{-- <div class="flex items-center mt-4">
                                     <form action="{{ route('cart.update', $cartItem->id) }}" method="POST"
                                         class="flex items-center updateForm">
                                         @csrf
@@ -78,6 +79,19 @@
                                             onclick="changeQuantity(true, '{{ $cartItem->id }}', {{ $cartItem->book->stock }})">+</button>
                                         <input type="hidden" name="total_price" class="total_price"
                                             value="{{ $cartItem->book->price * $cartItem->quantity }}">
+                                    </form>
+                                </div> --}}
+                                <div class="flex items-center mt-4">
+                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" class="flex items-center updateForm">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="button" class="text-lg px-3 py-1 border rounded-l-md border-gray-300 bg-gray-200 hover:bg-gray-300"
+                                                onclick="changeQuantity(false, '{{ $cartItem->id }}', {{ $cartItem->book->stock }}, 10)">-</button>
+                                        <input type="text" name="quantity" value="{{ $cartItem->quantity }}" class="w-12 text-center border-t border-b border-gray-300"
+                                               id="quantity-{{ $cartItem->id }}" readonly>
+                                        <button type="button" class="text-lg px-3 py-1 border rounded-r-md border-gray-300 bg-gray-200 hover:bg-gray-300"
+                                                onclick="changeQuantity(true, '{{ $cartItem->id }}', {{ $cartItem->book->stock }}, 10)">+</button>
+                                        <input type="hidden" name="total_price" class="total_price" value="{{ $cartItem->book->price * $cartItem->quantity }}">
                                     </form>
                                 </div>
                                 <p class="text-base text-gray-700 pt-2 mb-3 leading-6 font-light">
@@ -191,22 +205,46 @@
         form.submit();
     }
 
-    function changeQuantity(isIncrement, id, maxStock) {
+    // function changeQuantity(isIncrement, id, maxStock) {
+    //     const quantityInput = document.getElementById('quantity-' + id);
+    //     let currentQuantity = parseInt(quantityInput.value);
+    //     if (isIncrement && currentQuantity < maxStock) {
+    //         currentQuantity++;
+    //     } else if (!isIncrement && currentQuantity > 1) {
+    //         currentQuantity--;
+    //     }
+    //     quantityInput.value = currentQuantity;
+
+    //     // Update the total price before submitting
+    //     const totalPriceInput = quantityInput.closest('.updateForm').querySelector('.total_price');
+    //     const pricePerItem = totalPriceInput.value /
+    //         currentQuantity; // Adjust this if your price per item calculation differs
+    //     totalPriceInput.value = pricePerItem * currentQuantity;
+
+    //     quantityInput.closest('.updateForm').submit(); // Automatically submit the form
+    // }
+    function changeQuantity(isIncrement, id, maxStock, userLimit) {
         const quantityInput = document.getElementById('quantity-' + id);
         let currentQuantity = parseInt(quantityInput.value);
-        if (isIncrement && currentQuantity < maxStock) {
-            currentQuantity++;
-        } else if (!isIncrement && currentQuantity > 1) {
-            currentQuantity--;
+        let newQuantity = isIncrement ? currentQuantity + 1 : currentQuantity - 1;
+
+        if (newQuantity > maxStock) {
+            return; // Stop further execution if trying to exceed the stock
         }
-        quantityInput.value = currentQuantity;
 
-        // Update the total price before submitting
-        const totalPriceInput = quantityInput.closest('.updateForm').querySelector('.total_price');
-        const pricePerItem = totalPriceInput.value /
-            currentQuantity; // Adjust this if your price per item calculation differs
-        totalPriceInput.value = pricePerItem * currentQuantity;
+        if (newQuantity > userLimit) {
+            return; // Stop further execution if trying to exceed the user purchase limit
+        }
 
-        quantityInput.closest('.updateForm').submit(); // Automatically submit the form
+        if (newQuantity < 1) {
+            return; // Stop further execution if trying to have less than one item
+        }
+
+        quantityInput.value = newQuantity;
+
+        updateTotalPrice(quantityInput, maxStock); 
+
+        quantityInput.closest('.updateForm').submit();
     }
+
 </script>

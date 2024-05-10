@@ -15,38 +15,80 @@ class BooksController extends Controller
     // return view('book.index')
     //     ->with('books', Book::orderBy('updated_at', 'DESC')->get());
 
+    // public function index(Request $request)
+    // {
+    //     $query = $request->input('query');
+
+    //     if ($query) {
+    //         // $books = Book::where('bookName', 'like', "%$query%")->orderBy('publishTime', 'DESC')->get();
+    //         $books = Book::where(function ($q) use ($query) {
+    //             $q->where('bookName', 'like', "%{$query}%")
+    //               ->orWhere('author', 'like', "%{$query}%")
+    //               ->orWhere('type', 'like', "%{$query}%")
+    //               ->orWhere('price', 'like', "%{$query}%");
+    //         })
+    //         ->orderBy('publishTime', 'DESC')
+    //         ->get();
+    //     } else {
+    //         $sort = $request->input('sort', 'publishTime');
+    //         switch ($sort) {
+    //             case 'publishTime_asc':
+    //                 $order = 'asc';
+    //                 $orderBy = 'publishTime';
+    //                 break;
+    //             case 'price_asc':
+    //                 $order = 'asc';
+    //                 $orderBy = 'price';
+    //                 break;
+    //             case 'price_desc':
+    //                 $order = 'desc';
+    //                 $orderBy = 'price';
+    //                 break;
+    //             default:
+    //                 $order = 'desc';
+    //                 $orderBy = 'publishTime';
+    //                 break;
+    //         }
+
+    //         $books = Book::orderBy($orderBy, $order)->get();
+    //     }
+
+    //     return view('book.index', compact('books'));
+    // }
+
     public function index(Request $request)
-    {
-        $query = $request->input('query');
+{
+    $query = Book::query();
 
-        if ($query) {
-            $books = Book::where('bookName', 'like', "%$query%")->orderBy('publishTime', 'DESC')->get();
-        } else {
-            $sort = $request->input('sort', 'publishTime');
-            switch ($sort) {
-                case 'publishTime_asc':
-                    $order = 'asc';
-                    $orderBy = 'publishTime';
-                    break;
-                case 'price_asc':
-                    $order = 'asc';
-                    $orderBy = 'price';
-                    break;
-                case 'price_desc':
-                    $order = 'desc';
-                    $orderBy = 'price';
-                    break;
-                default:
-                    $order = 'desc';
-                    $orderBy = 'publishTime';
-                    break;
-            }
-
-            $books = Book::orderBy($orderBy, $order)->get();
-        }
-
-        return view('book.index', compact('books'));
+    if ($request->has('query')) {
+        $search = $request->input('query');
+        $query->where('bookName', 'like', "%{$search}%")
+              ->orWhere('author', 'like', "%{$search}%")
+              ->orWhere('type', 'like', "%{$search}%")
+              ->orWhere('description', 'like', "%{$search}%");
     }
+
+    if ($request->has('sort')) {
+        switch ($request->input('sort')) {
+            case 'publishTime':
+                $query->orderBy('publishTime', 'DESC');
+                break;
+            case 'publishTime_asc':
+                $query->orderBy('publishTime', 'ASC');
+                break;
+            case 'price_asc':
+                $query->orderBy('price', 'ASC');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'DESC');
+                break;
+        }
+    }
+
+    $books = $query->get();
+
+    return view('book.index', compact('books'));
+}
 
 
     // }

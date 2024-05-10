@@ -73,7 +73,7 @@
                             <option value="{{ $availableStock }}">{{ $availableStock }}</option>
                         @endfor
                     </select>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold uppercase py-2 px-4 rounded">
                         add to cart
                     </button>
                 </form>

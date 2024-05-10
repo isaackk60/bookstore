@@ -255,3 +255,10 @@ footer {
 .detailImage img{
     height:370px;
 }
+.line {
+    display: block;  
+    width: 100%;     
+    height: 2px;     
+    background-color: #DDE6ED;  
+    margin: 30px 0;  
+}
