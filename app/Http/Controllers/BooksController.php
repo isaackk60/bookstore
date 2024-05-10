@@ -65,6 +65,7 @@ class BooksController extends Controller
             $query->where('bookName', 'like', "%{$search}%")
                 ->orWhere('author', 'like', "%{$search}%")
                 ->orWhere('type', 'like', "%{$search}%")
+                ->orWhere('price','like',"%{$search}")
                 ->orWhere('description', 'like', "%{$search}%");
         }
 
