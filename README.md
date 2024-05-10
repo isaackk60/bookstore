@@ -31,7 +31,8 @@ This web application is made using Laravel framework and runs as an online books
 6. [Contact](#Contact)
 7. [Reference](#Reference)
 8. [Contributing](#Contributing)
-9. [License](#License)
+9. [About Laravel](#about-laravel)
+10. [License](#License)
 
 
 
