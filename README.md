@@ -54,18 +54,21 @@ php artisan key:generate
 php artisan cache:clear && php artisan config:clear
 php artisan serve
 
-```
+
 + Open your terminal and install a laravel framework first <br>
 
 + Create your project
+```
 composer create-project laravel/laravel my-project
 cd my-project
 
 + Install Tailwind CSS
+```
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
 + Configure your template paths
+```
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -80,11 +83,13 @@ export default {
 }
 
 + Add the Tailwind directives to your CSS
+```
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 + Start your build process
+```
 npm run dev
 
 
