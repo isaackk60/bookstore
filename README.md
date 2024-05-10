@@ -1,5 +1,14 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
+## Welcome to the Bookstore Laravel Project!
+This web application is made using Laravel framework and runs as an online bookstore. Our platform facilitates the browsing and purchase of books, however, support for transactions is currently lacking as a virtual account system has not been implemented. But the amount of the simulated checkout will be displayed in the database. Below is a detailed description of the entire project:
+
+•	Author: Jianfeng Han(SD2A) and Kim Fui Leung(SD2A) <br>
+•	Student Number: D00251825(Jianfeng Han) and D00234545(Kim Fui Leung)<br>
+
+
+
+
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
