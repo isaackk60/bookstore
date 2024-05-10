@@ -44,13 +44,15 @@
 
                 @foreach ($cartItems as $cartItem)
                 
-                    @if ($cartItem->quantity < $cartItem->book->stock)
+                    @if ($cartItem->quantity <= $cartItem->book->stock)
                         {{-- <div class="flex flex-col md:flex-row justify-center py-5 border-b border-gray-200"> --}}
                         <div class="flex flex-col md:flex-row justify-center items-center py-5 border-b border-gray-200">
+                            <a href="/book/{{ $cartItem->book->slug }}">
                             <div class="w-32 h-48 overflow-hidden aspect-w-3 aspect-h-4 mb-4 md:mb-0">
                                 <img src="{{ asset('images/' . $cartItem->book->image_path) }}"
                                     alt="{{ $cartItem->book->bookName }}" class="w-full h-full object-cover">
                             </div>
+                        </a>
                             <div class="w-3/5 ml-8 text-center md:text-left">
                                 <h1 class="text-3xl font-bold text-gray-700 mb-5">
                                     {{ $cartItem->book->bookName }}
@@ -63,19 +65,19 @@
                                 </p>
 
                                 <div class="flex items-center mt-4">
-                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST"
-                                        class="flex items-center updateForm">
+                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" class="updateForm">
                                         @csrf
                                         @method('PUT')
-                                        <button type="button"
-                                            class="text-lg px-3 py-1 border rounded-l-md border-gray-300 bg-gray-200 hover:bg-gray-300"
-                                            onclick="changeQuantity(false, '{{ $cartItem->id }}', {{ $cartItem->book->stock }})">-</button>
-                                        <input type="text" name="quantity" value="{{ $cartItem->quantity }}"
-                                            class="w-12 text-center border-t border-b border-gray-300"
-                                            id="quantity-{{ $cartItem->id }}" readonly>
-                                        <button type="button"
-                                            class="text-lg px-3 py-1 border rounded-r-md border-gray-300 bg-gray-200 hover:bg-gray-300"
-                                            onclick="changeQuantity(true, '{{ $cartItem->id }}', {{ $cartItem->book->stock }})">+</button>
+                                        <label>Quantity: </label>
+                                        <select name="quantity" class="form-select w-full mb-8 text-xl"
+                                            onchange="updateTotalPrice(this,{{ $cartItem->book->price }})"  id="quantity">
+                                            @for ($availableStock = 1; $availableStock <= min(10, $cartItem->book->stock); $availableStock++)
+                                                <option value="{{ $availableStock }}"
+                                                    {{ $cartItem->quantity == $availableStock ? 'selected' : '' }}>
+                                                    {{ $availableStock }}
+                                                </option>
+                                            @endfor
+                                        </select>
                                         <input type="hidden" name="total_price" class="total_price"
                                             value="{{ $cartItem->book->price * $cartItem->quantity }}">
                                     </form>
@@ -115,10 +117,12 @@
                     @else
                         <div
                             class="flex flex-col md:flex-row justify-center items-center py-5 border-b border-gray-200 soldOutBg">
+                            <a href="/book/{{ $cartItem->book->slug }}">
                             <div class="w-32 h-48 overflow-hidden aspect-w-3 aspect-h-4 mb-4 md:mb-0">
                                 <img src="{{ asset('images/' . $cartItem->book->image_path) }}"
                                     alt="{{ $cartItem->book->bookName }}" class="w-full h-full object-cover">
                             </div>
+                            </a>
                             <div class="w-3/5 ml-8 text-center md:text-left">
                                 <h1 class="text-3xl font-bold text-gray-700 mb-5">
                                     {{ $cartItem->book->bookName }}
@@ -130,9 +134,16 @@
                                     Price: <span class="font-medium">€
                                         {{ number_format($cartItem->book->price, 2) }}</span>
                                 </p>
+                                @if($cartItem->book->stock==0)
                                 <div class="mt-5">
                                     <span class="font-medium">Out of Stock</span>
                                 </div>
+                                @else
+                                <div class="mt-5">
+                                    <span class="font-medium">Only {{ $cartItem->book->stock }} left</span>
+                                </div>
+                                @endif
+
                                 @php  $totalPrice +=0; @endphp
                             </div>
 
@@ -169,7 +180,7 @@
 
                 <input type="hidden" name="books" value="{{ json_encode($cartItemsArray) }}">
 
-                <input type="hidden" name="order_price" value="{{ number_format($totalPrice, 2) }}">
+                <input type="hidden" name="order_price" value="{{ $totalPrice }}">
 
                 <div class="flex justify-center">
                     <button type="submit"
@@ -191,22 +202,22 @@
         form.submit();
     }
 
-    function changeQuantity(isIncrement, id, maxStock) {
-        const quantityInput = document.getElementById('quantity-' + id);
-        let currentQuantity = parseInt(quantityInput.value);
-        if (isIncrement && currentQuantity < maxStock) {
-            currentQuantity++;
-        } else if (!isIncrement && currentQuantity > 1) {
-            currentQuantity--;
-        }
-        quantityInput.value = currentQuantity;
+    // function changeQuantity(isIncrement, id, maxStock) {
+    //     const quantityInput = document.getElementById('quantity-' + id);
+    //     let currentQuantity = parseInt(quantityInput.value);
+    //     if (isIncrement && currentQuantity < maxStock) {
+    //         currentQuantity++;
+    //     } else if (!isIncrement && currentQuantity > 1) {
+    //         currentQuantity--;
+    //     }
+    //     quantityInput.value = currentQuantity;
 
-        // Update the total price before submitting
-        const totalPriceInput = quantityInput.closest('.updateForm').querySelector('.total_price');
-        const pricePerItem = totalPriceInput.value /
-            currentQuantity; // Adjust this if your price per item calculation differs
-        totalPriceInput.value = pricePerItem * currentQuantity;
+    //     // Update the total price before submitting
+    //     const totalPriceInput = quantityInput.closest('.updateForm').querySelector('.total_price');
+    //     const pricePerItem = totalPriceInput.value /
+    //         currentQuantity; // Adjust this if your price per item calculation differs
+    //     totalPriceInput.value = pricePerItem * currentQuantity;
 
-        quantityInput.closest('.updateForm').submit(); // Automatically submit the form
-    }
+    //     quantityInput.closest('.updateForm').submit(); // Automatically submit the form
+    // }
 </script>
