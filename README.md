@@ -22,16 +22,25 @@ This web application is made using Laravel framework and runs as an online books
     **D00251825** (Jianfeng Han) and **D00234545** (Kim Fui Leung)<br>
 
 ## Table Of Contents
-1. [Technologies / Programming Languages Used](#technologies--programming-languages-used)
-2. [Requirements](#Requirements)
-3. [Web Description And Features](#web-page-description-and-function-introduction)
-4. [Screenshots](#ScreenShots)
-5. [Installation](#installation)
+- [Welcome to the Bookstore Laravel Project!](#welcome-to-the-bookstore-laravel-project)
+- [Table Of Contents](#table-of-contents)
+- [Technologies / Programming Languages Used](#technologies--programming-languages-used)
+- [Requirements](#requirements)
+- [Web page description and function introduction](#web-page-description-and-function-introduction)
+- [ScreenShots](#screenshots)
+- [Installation](#installation)
 - [Before Starting](#before-starting)
-6. [Contact](#Contact)
-7. [Reference](#Reference)
-8. [Contributing](#Contributing)
-9. [License](#License)
+- [Contact](#contact)
+- [Reference](#reference)
+- [Contributing](#contributing)
+- [About Laravel](#about-laravel)
+- [Learning Laravel](#learning-laravel)
+- [Laravel Sponsors](#laravel-sponsors)
+  - [Premium Partners](#premium-partners)
+- [Contributing](#contributing-1)
+- [Code of Conduct](#code-of-conduct)
+- [Security Vulnerabilities](#security-vulnerabilities)
+- [License](#license)
 
 
 ## Technologies / Programming Languages Used
@@ -75,21 +84,21 @@ To run the **Book Store Laravel** project on your local machine, follow these st
     ```
 
 2. **Install Laravel**
-    - Open your terminal and install the Laravel framework first:<br>
+    - Open your terminal and install the Laravel framework first:
     ```bash
     composer create-project laravel/laravel my-project
     cd my-project
     ```
 
 3. **Install Tailwind CSS**
-    - Add Tailwind CSS to your project:<br>
+    - Add Tailwind CSS to your project:
     ```bash
     npm install -D tailwindcss postcss autoprefixer
     npx tailwindcss init -p
     ```
 
 4. **Configure your template paths**
-    - Update your `tailwind.config.js` file to include the paths to all of your template files:<br>
+    - Update your `tailwind.config.js` file to include the paths to all of your template files:
     ```javascript
     /** @type {import('tailwindcss').Config} */
     export default {
@@ -106,7 +115,7 @@ To run the **Book Store Laravel** project on your local machine, follow these st
     ```
 
 5. **Add Tailwind Directives to Your CSS**
-    - Insert the following Tailwind directives at the top of your CSS file:<br>
+    - Insert the following Tailwind directives at the top of your CSS file:
     ```css
     @tailwind base;
     @tailwind components;
@@ -114,7 +123,7 @@ To run the **Book Store Laravel** project on your local machine, follow these st
     ```
 
 6. **Start Your Build Process**
-    - Run the following command to process your CSS with Tailwind:<br>
+    - Run the following command to process your CSS with Tailwind:
     ```bash
     npm run dev
     ```
@@ -123,7 +132,9 @@ To run the **Book Store Laravel** project on your local machine, follow these st
     + This Starter Kit is referenced from [Laravel starter kits website](https://laravel.com/docs/11.x/starter-kits).
     + This video is tell you how to download and install this Starter kits [This YouTube video](https://www.youtube.com/watch?v=f1hCx-NXbek).
 
-    ## Before Starting
+
+
+## Before Starting
 Create a database <br>
 ```
 mysql
@@ -150,10 +161,12 @@ php artisan migrate
 
 ## Contact
 
-For any questions, suggestions, or conspiracy theories you'd like to share, feel free to reach out to us at:<br/>
-Email: (kimfuileung@gmail.com) (Kim Fui Leung)
+
 
 ## Reference
++ We use this video to download and install this Starter kits [This YouTube video](https://www.youtube.com/watch?v=f1hCx-NXbek).
++ We use this video to design the reviews rating star css [This YouTube video](https://youtu.be/lW8-w66v9CQ?si=HZWD5t_TrYWVhVQx).
+
 
 
 ## Contributing
