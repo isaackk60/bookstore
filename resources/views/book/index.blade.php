@@ -68,8 +68,13 @@
     <div class="mb-20">
         <div class="sm:grid grid-cols-4 gap-10 w-4/5 mx-auto py-15">
             @foreach ($books as $book)
+            @if($book->stock==0 && isset(Auth::user()->id) && Auth::user()->isAdmin())
+            <div
+            class="each_book_container bg-red-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            @else         
                 <div
                     class="each_book_container bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                    @endif
                     <a href="/book/{{ $book->slug }}"
                         class="no-underline hover:no-underline flex flex-col justify-between p-4">
                         <div class="flex flex-col justify-center items-center">
