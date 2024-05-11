@@ -55,6 +55,7 @@
     </div>
     <div class="w-4/5 m-auto">
         <div class="grid grid-cols-3 gap-4 ">
+            {{-- sorted by updated_at --}}
             @foreach ($books->take(6) as $book)
                 <a href="/book/{{ $book->slug }}" class="book-item">
                     <img src="{{ asset('images/' . $book->image_path) }}" alt="{{ $book->bookName }}" class="book-image">
