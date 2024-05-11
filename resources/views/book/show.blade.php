@@ -79,7 +79,7 @@
                         </button>
                     </form>
                 @elseif($book->stock <= 0)
-                    <h3>The book is sold out</h3>
+                    <p class="text-2xl font-semibold font text-orange-600 pt-2">This book is sold out</p>
                 @endif
             </div>
         </div>
