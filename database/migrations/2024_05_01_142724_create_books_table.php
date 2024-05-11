@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('bookName');
             $table->string('author');
             $table->date('publishTime');
-            $table->integer('stock');
+            $table->unsignedInteger('stock');
             $table->string('type');
-            $table->integer('pages');
+            $table->unsignedInteger('pages');
             $table->longText('description');
+            $table->decimal('price', 10, 2);
             $table->string('image_path');
             $table->timestamps();
         });

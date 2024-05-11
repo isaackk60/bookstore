@@ -44,4 +44,26 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function isAdmin(): bool
+{
+    $adminEmails = ['admin@admin.com', 'admin2@admin2.com']; 
+
+    return in_array($this->email, $adminEmails);// if email container in adminEmails array return true
+}
+
+    public function cartItems()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 }

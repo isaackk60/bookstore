@@ -1,96 +1,121 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
-@section('content') --}}
-<div class="w-4/5 m-auto text-center">
-    <div class="py-15 border-b border-gray-200">
-        <h1 class="text-6xl uppercase text-blue-800 font-semibold">
-            tech news
-        </h1>
+@section('content')
+    <div class="w-4/5 m-auto text-center">
+        <div class="border-b border-gray-200">
+            <h1 class="page_title text-blue-800 text-4xl font-semibold uppercase" style="font-family: 'Merriweather', serif;">
+                All Books
+            </h1>
+        </div>
     </div>
-</div>
 
-@if (session()->has('message'))
-    <div class="w-4/5 m-auto mt-10 pl-2">
-        <p class="px-5 w-2/6 mb-4 text-gray-50 bg-green-500 rounded-2xl py-4">
-            {{ session()->get('message') }}
-        </p>
+    @if (session()->has('message'))
+        <div class="w-4/5 m-auto mt-10 pl-2">
+            <p class="px-5 w-2/6 mb-4 text-gray-50 bg-green-500 rounded-2xl py-4">
+                {{ session()->get('message') }}
+            </p>
+        </div>
+    @endif
+
+    <div class="w-4/5 m-auto mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
+        <img src="https://www.bookstation.ie/wp-content/uploads/2024/03/BTHP-2403.jpg" alt="Book Cover"
+            class="rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <img src="https://www.bookstation.ie/wp-content/uploads/2024/04/The-Trial.jpg" alt="Book Cover"
+            class="rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
     </div>
-@endif
+    <span class="line"></span>
 
-@if (Auth::check())
-    <div class="pt-15 w-4/5 m-auto">
-        <a href="/book/create"
-            class="button-color uppercase bg-transparent text-gray-100 text-xs font-extrabold py-3 px-5 rounded-3xl">
-            Create post
-        </a>
+    @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
+        <div class="my-10 w-4/5 m-auto">
+            <a href="/book/create" class="create_book_button">
+                Create Book
+            </a>
+        </div>
+    @endif
+
+    <div class="w-4/5 mx-auto my-10 flex justify-between items-center">
+        <form action="/book" method="GET">
+            <label>Sort by:</label>
+            <select name="sort" onchange="this.form.submit()"
+                class="ml-3 cursor-pointer pl-2 pr-8 border-2 border-gray-500">
+                <option value="publishTime" {{ request()->get('sort') == 'publishTime' ? 'selected' : '' }}>Most Recent
+                </option>
+                <option value="publishTime_asc" {{ request()->get('sort') == 'publishTime_asc' ? 'selected' : '' }}>Oldest
+                    First</option>
+                <option value="price_asc" {{ request()->get('sort') == 'price_asc' ? 'selected' : '' }}>Price Low to High
+                </option>
+                <option value="price_desc" {{ request()->get('sort') == 'price_desc' ? 'selected' : '' }}>Price High to Low
+                </option>
+                <option value="rating_asc" {{ request()->get('sort') == 'rating_asc' ? 'selected' : '' }}>Rating
+                    Low to High</option>
+                <option value="rating_desc" {{ request()->get('sort') == 'rating_desc' ? 'selected' : '' }}>
+                    Rating High to Low</option>
+            </select>
+            <input type="hidden" name="query" value="{{ request()->get('query') }}">
+        </form>
+
+        <form action="/book" method="GET">
+            <input type="hidden" name="sort" value="{{ request()->get('sort') }}">
+            <input type="text" name="query" value="{{ request()->get('query') }}" placeholder="Search"
+                class="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500">
+            <button type="submit" class="ml-2 px-4 py-2.5 create_book_button text-white rounded-md hover:bg-blue-600">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
     </div>
-@endif
 
-<div class="w-4/5 mx-auto pt-15">
-    <form action="/book" method="GET">
-        <label for="sort">Sort by</label>
-        <select name="sort" onchange="this.form.submit()"
-            class="ml-3 cursor-pointer pl-2 pr-5 border-2 border-gray-500">
-            <option value="updated_at" <?php if (isset($_GET['sort']) && $_GET['sort'] == 'updated_at') {
-                echo 'selected';
-            } ?>>Most Recent</option>
-            <option value="updated_at_asc" <?php if (isset($_GET['sort']) && $_GET['sort'] == 'updated_at_asc') {
-                echo 'selected';
-            } ?>>Oldest First</option>
-            <option value="like" <?php if (isset($_GET['sort']) && $_GET['sort'] == 'like') {
-                echo 'selected';
-            } ?>>Most Liked</option>
-            <option value="like_asc" <?php if (isset($_GET['sort']) && $_GET['sort'] == 'like_asc') {
-                echo 'selected';
-            } ?>>Least Liked</option>
-        </select>
-    </form>
-</div>
-<div class="mb-20">
-    @foreach ($books as $book)
-        <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
-            <div class="image-padding">
-                <img src="{{ asset('images/' . $book->image_path) }}" alt="">
-            </div>
-            <div>
-                <h2 class="text-gray-700 font-bold text-2xl pb-4">
-                    {{ $book->title }}
-                </h2>
 
-                <span class="text-gray-500">
-                    By <span class="font-bold italic text-gray-800">{{ $book->user->name }}</span>, Created on
-                    {{ date('jS M Y', strtotime($book->updated_at)) }}
-                </span>
+    <div class="mb-20">
+        <div class="sm:grid grid-cols-4 gap-10 w-4/5 mx-auto py-15">
+            @foreach ($books as $book)
+                <div
+                    class="each_book_container bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <a href="/book/{{ $book->slug }}"
+                        class="no-underline hover:no-underline flex flex-col justify-between p-4">
+                        <div class="flex flex-col justify-center items-center">
+                            <img src="{{ asset('images/' . $book->image_path) }}" alt="{{ $book->bookName }}"
+                                class="max-h-52 rounded">
+                        </div>
+                        <div>
+                            <h2 class="text-gray-700 font-bold text-xl mt-4 text-center">
+                                {{ $book->bookName }}
+                            </h2>
 
-                {{-- <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light">
-            {{ $book->description }}
-        </p> --}}
-                <?php
-                $wordCount = str_word_count($book->description);
-                
-                if ($wordCount > 40) {
-                    $words = explode(' ', $book->description);
-                    $shortDescription = implode(' ', array_slice($words, 0, 40));
-                    $shortDescription .= ' ...';
-                } else {
-                    $shortDescription = $book->description;
-                }
-                
-                echo "<p class='text-base text-gray-700 pt-2 mb-3 leading-6 font-light'>$shortDescription</p>";
-                ?>
-                <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                        <a href="/book/{{ $book->slug }}"
-                            class="uppercase button-color text-gray-100 text-lg font-extrabold py-3.5 px-8 rounded-2xl">
-                            Read More
-                        </a>
-                    </div>
+                            <p class="text-gray-500 mt-2 text-center">
+                                By <span class="font-bold text-gray-800">{{ $book->author }}</span>
+                            </p>
+                            @if ($book->reviews->isNotEmpty())
+                                @php
+                                    $averageRating = $book->reviews->avg('rating');
+                                @endphp
 
-                    @if (isset(Auth::user()->id) && Auth::user()->id == $book->user_id)
-                        <div class="sm:flex sm:h-20 sm:flex-row sm:items-center sm:justify-between">
+                                <div class="star-icon-display text-center mt-2  ">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $averageRating)
+                                            <span class="fa fa-star"></span>
+                                        @elseif ($i - 1 < $averageRating && $i > $averageRating)
+                                            <span class="fa-solid fa-star-half halfStar"></span>
+                                        @endif
+                                    @endfor
+                                </div>
+                            @endif
+
+
+
+                            <p class="text-gray-500 text-center mt-2">
+                                Type: <span class="font-bold italic text-gray-800 ">{{ $book->type }}</span>
+                            </p>
+                            <p class="text-gray-500 font-bold text-lg mt-2 text-center">
+                                €{{ $book->price }}
+                            </p>
+                        </div>
+                    </a>
+
+                    @if (isset(Auth::user()->id) && Auth::user()->isAdmin())
+                        <div class="flex flex-row items-center justify-evenly mb-6">
                             <div>
                                 <a href="/book/{{ $book->slug }}/edit"
-                                    class="text-white mr-3 edit-button-color px-3 py-2.5 rounded">
+                                    class="uppercase text-sm font-extrabold py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">
                                     Edit
                                 </a>
                             </div>
@@ -99,17 +124,17 @@
                                     @csrf
                                     @method('delete')
 
-                                    <button class="text-white delete-button-color p-3 rounded" type="submit">
+                                    <button
+                                        class="uppercase text-sm font-extrabold py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300"
+                                        type="submit">
                                         Delete
                                     </button>
-
                                 </form>
                             </div>
                         </div>
                     @endif
                 </div>
-            </div>
+            @endforeach
         </div>
-    @endforeach
-</div>
-{{-- @endsection --}}
+    </div>
+@endsection
